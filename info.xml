@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<extension key="de.systopia.mutualaid" type="module">
+  <file>mutualaid</file>
+  <name>Mutual Aid Coordination</name>
+  <description>Fight Corona by organising mutual aid in your neighbourhood with this CiviCRM Extension!</description>
+  <license>AGPL-3.0</license>
+  <maintainer>
+    <author>B. Endres</author>
+    <email>endres@systopia.de</email>
+  </maintainer>
+  <urls>
+    <url desc="Main Extension Page">https://github.com/systopia/de.systopia.mutualaid</url>
+    <url desc="Documentation">https://github.com/systopia/de.systopia.mutualaid</url>
+    <url desc="Support">https://github.com/systopia/de.systopia.mutualaid/issues</url>
+    <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
+  </urls>
+  <releaseDate></releaseDate>
+  <version>0.1-dev</version>
+  <develStage>dev</develStage>
+  <compatibility>
+    <ver>5.0</ver>
+  </compatibility>
+  <comments></comments>
+  <classloader>
+    <psr4 prefix="Civi\" path="Civi"/>
+  </classloader>
+  <requires>
+    <ext>de.systopia.xcm</ext>
+  </requires>
+  <civix>
+    <namespace>CRM/Mutualaid</namespace>
+  </civix>
+</extension>
