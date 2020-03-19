@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/mutualaid/request-help</path>
+    <page_callback>CRM_Mutualaid_Form_RequestHelp</page_callback>
+    <title>RequestHelp</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/mutualaid/offer-help</path>
+    <page_callback>CRM_Mutualaid_Form_OfferHelp</page_callback>
+    <title>OfferHelp</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>
