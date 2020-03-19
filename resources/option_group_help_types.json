@@ -1,0 +1,46 @@
+{
+  "_lookup": ["name"],
+  "_translate": ["title"],
+  "name": "mutualaid_help_types",
+  "title": "Mutual Aid Help Types",
+  "is_reserved": "1",
+  "is_active": "1",
+  "_values": [
+    {
+      "_lookup": ["name"],
+      "_translate": ["label"],
+      "name": "General",
+      "label": "General",
+      "filter": "0",
+      "is_reserved": "1",
+      "is_active": "1"
+    },
+    {
+      "_lookup": ["name"],
+      "_translate": ["label"],
+      "name": "Shopping",
+      "label": "Shopping",
+      "filter": "0",
+      "is_reserved": "1",
+      "is_active": "0"
+    },
+    {
+      "_lookup": ["name"],
+      "_translate": ["label"],
+      "name": "Walk_Dog",
+      "label": "Walk the Dog",
+      "filter": "0",
+      "is_reserved": "1",
+      "is_active": "0"
+    },
+    {
+      "_lookup": ["name"],
+      "_translate": ["label"],
+      "name": "Pick_up_Parcels",
+      "label": "Pick up Parcels",
+      "filter": "0",
+      "is_reserved": "1",
+      "is_active": "0"
+    }
+  ]
+}

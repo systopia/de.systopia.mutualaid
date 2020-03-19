@@ -1,0 +1,18 @@
+{
+  "entity": "RelationshipType",
+  "_entities": [
+    {
+      "_lookup": ["name_a_b", "name_b_a"],
+      "_translate": ["label_a_b", "label_b_a"],
+      "name_a_b": "mutualaid_provides_for",
+      "label_a_b": "Provides Mutual Aid for",
+      "name_b_a": "mutualaid_provided_by",
+      "label_b_a": "Is provided Mutual Aid by",
+      "description": "Mutual Aid",
+      "contact_type_a": "Individual",
+      "contact_type_b": "Individual",
+      "is_active": "1",
+      "is_reserved": "1"
+    }
+  ]
+}
