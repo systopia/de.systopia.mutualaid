@@ -27,7 +27,7 @@ return array(
     'is_domain' => 1,
     'is_contact' => 0,
     'description' => E::ts('If enabled, languages spoken will be collected from people offering and requesting help, and taken into account when matching requests with offers.'),
-    `settings_pages` => ['mutualaid' => ['weight' => 10]]
+    'settings_pages' => ['mutualaid' => ['weight' => 10]]
   ),
   'mutualaid_distance_unit' => array(
     'name' => 'mutualaid_distance_unit',
@@ -38,6 +38,6 @@ return array(
     'is_domain' => 1,
     'is_contact' => 0,
     'description' => E::ts('Unit for distance values, used for collecting max. distance in forms and for calculating proximity.'),
-    `settings_pages` => ['mutualaid' => ['weight' => 20]]
+    'settings_pages' => ['mutualaid' => ['weight' => 20]]
   ),
 );
