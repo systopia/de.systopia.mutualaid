@@ -2,7 +2,7 @@
   "_lookup": ["name"],
   "_translate": ["title"],
   "name": "mutualaid_help_status",
-  "title": "Mutual Aid Help Status",
+  "title": "Mutual Aid - Help Status",
   "is_reserved": "1",
   "is_active": "1",
   "_values": [
