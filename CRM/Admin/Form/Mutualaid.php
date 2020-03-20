@@ -48,6 +48,10 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
         ),
       );
     }
+
+    // TODO: Add configurtation element for scheduled job frequency.
+
+
   }
 
 }
