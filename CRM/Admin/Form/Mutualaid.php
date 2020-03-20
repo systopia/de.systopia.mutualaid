@@ -39,6 +39,9 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
         'id',
         'msg_title',
       ),
+      'options' => array(
+        'limit' => 0,
+      ),
     ));
     foreach ($templates['values'] as $template) {
       $email_confirmation_template->_options[$template['id']] = array(
