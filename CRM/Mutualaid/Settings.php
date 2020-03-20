@@ -63,6 +63,20 @@ class CRM_Mutualaid_Settings
   }
 
   /**
+   * Retrieves all extension settings.
+   *
+   * @return array
+   *   An array of extension settings.
+   */
+  public static function getAll($filter = array()) {
+    $settings = array_filter(Civi::settings()->all(), function($setting) {
+      return strpos($setting, 'mutualaid_') === 0;
+    }, ARRAY_FILTER_USE_KEY);
+
+    return $settings;
+  }
+
+  /**
    * Retrieves an extension setting from the CiviCRM settings.
    *
    * @param $setting
