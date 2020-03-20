@@ -83,19 +83,28 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
     $type,
     $name,
     $label = '',
-    $attributes = '',
+    $attributes = array(),
     $required = FALSE,
-    $extra = NULL,
+    $extra = array(),
     $info = array()
   )
   {
     $this->element_info[$name] = $info;
 
-    // Make all elements "huge" (doesn't work for select and select2 types).
-    $classes = explode(' ', (isset($attributes['class']) ? $attributes['class'] : ''));
+    // Make all elements "huge".
+    if (in_array($type, array(
+      'select',
+      'select2',
+    ))) {
+      $attr_to_alter = &$extra;
+    }
+    else {
+      $attr_to_alter = &$attributes;
+    }
+    $classes = explode(' ', (isset($attr_to_alter['class']) ? $attr_to_alter['class'] : ''));
     if (!in_array('huge', $classes)) {
       $classes[] = 'huge';
-      $attributes['class'] = implode(' ', array_filter($classes));
+      $attr_to_alter['class'] = implode(' ', array_filter($classes));
     }
 
     return $this->add($type, $name, $label, $attributes, $required, $extra);
@@ -144,9 +153,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
     $this->addWithInfo(
       'text',
       'im_whatsapp',
-      E::ts('WhatsApp'),
-      array(),
-      true
+      E::ts('WhatsApp')
     );
     $this->addWithInfo(
       'text',
@@ -176,7 +183,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
       array(),
       false
     );
-    if (CRM_Mutualaid_Settings::get('language')) {
+    if (CRM_Mutualaid_Settings::get('languages_enabled')) {
       // TODO: This can't be required without a default; Take into account to
       //       also match people without language
       $this->addWithInfo(

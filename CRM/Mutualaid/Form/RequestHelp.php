@@ -26,6 +26,8 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
   public function buildQuickForm()
   {
     // TODO.
+    // Add contact form fields.
+    $this->addContactFormFields();
 
     $this->addButtons(array(
       array(
