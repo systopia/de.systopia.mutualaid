@@ -98,7 +98,7 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
         $this->_errors['max_distance'] = E::ts('Please provide an integer value for the maximum distance you would like to offer help in.');
     }
 
-    return !empty($this->_errors) && parent::validate();
+    return parent::validate();
   }
 
   /**
