@@ -100,7 +100,10 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
     ))) {
       $attr_to_alter = &$extra;
     }
-    else {
+    elseif (!in_array($type, array(
+      'checkbox',
+      'radio',
+    ))) {
       $attr_to_alter = &$attributes;
     }
     $classes = explode(' ', (isset($attr_to_alter['class']) ? $attr_to_alter['class'] : ''));
@@ -189,11 +192,14 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
       // TODO: This can't be required without a default; Take into account to
       //       also match people without language
       $this->addWithInfo(
-        'text',
+        'select',
         'languages',
         E::ts('Languages spoken'),
-        array(),
-        false
+        CRM_Mutualaid_Settings::getLanguages(),
+        false,
+        array(
+          'class' => 'crm-select2 crm-form-select2 huge',
+        )
       );
     }
   }

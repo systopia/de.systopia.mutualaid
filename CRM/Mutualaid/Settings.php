@@ -21,6 +21,41 @@ use CRM_Mutualaid_ExtensionUtil as E;
  */
 class CRM_Mutualaid_Settings
 {
+
+  /**
+   * Retrieves all languages configured in CiviCRM.
+   *
+   * @param bool $associate
+   *   Whether to return an array with values as keys and labels as values. If
+   *   set to false, all properties of the option values will be returned, keyed
+   *   by their ID.
+   *
+   * @return array
+   *   An array of all available languages.
+   */
+  public static function getLanguages($associate = true)
+  {
+    $help_types = array();
+    CRM_Core_OptionValue::getValues(
+      array('name' => 'languages'),
+      $help_types,
+      'weight',
+      true
+    );
+
+    // Return value-label pairs when requested.
+    if ($associate) {
+      foreach ($help_types as $help_type) {
+        $return[$help_type['value']] = $help_type['label'];
+      }
+    }
+    else {
+      $return = $help_types;
+    }
+
+    return $return;
+  }
+
   /**
    * Retrieves all configured help types from the option group.
    *
@@ -61,7 +96,8 @@ class CRM_Mutualaid_Settings
    * @return array
    *   An array of extension settings.
    */
-  public static function getAll($filter = array()) {
+  public static function getAll($filter = array())
+  {
     $settings = array_filter(Civi::settings()->all(), function($setting) {
       return strpos($setting, 'mutualaid_') === 0;
     }, ARRAY_FILTER_USE_KEY);
@@ -95,7 +131,8 @@ class CRM_Mutualaid_Settings
    *
    * @return \Civi\Core\SettingsBag
    */
-  public static function set($setting, $value) {
+  public static function set($setting, $value)
+  {
     return Civi::settings()->set(E::SHORT_NAME . '_' . $setting, $value);
   }
 }

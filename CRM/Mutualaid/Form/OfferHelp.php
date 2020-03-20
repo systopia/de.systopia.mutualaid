@@ -23,6 +23,8 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
 {
   public function buildQuickForm()
   {
+    $this->setTitle(E::ts('Offer Help'));
+
     // Add contact form fields.
     $this->addContactFormFields();
 
@@ -52,7 +54,7 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
       true,
       array(),
       array(
-        'suffix' => E::ts('persons'),
+        'field_suffix' => E::ts('persons'),
       )
     );
     $this->addWithInfo(
@@ -63,7 +65,27 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
       true,
       null,
       array(
-        'suffix' => CRM_Mutualaid_Settings::get('distance_unit'),
+        'field_suffix' => CRM_Mutualaid_Settings::get('distance_unit'),
+      )
+    );
+
+    if (CRM_Mutualaid_Settings::get('comments_enabled')) {
+      $this->addWithInfo(
+        'textarea',
+        'comment',
+        E::ts('Notes/Comments')
+      );
+    }
+
+    $this->addWithInfo(
+      'checkbox',
+      'terms_conditions_consent',
+      E::ts('Terms and Conditions'),
+      E::ts('I understand and accept the terms and conditions for using this service.'),
+      true,
+      null,
+      array(
+        'prefix' => CRM_Mutualaid_Settings::get('terms_conditions'),
       )
     );
 
