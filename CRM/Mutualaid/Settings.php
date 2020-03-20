@@ -35,7 +35,21 @@ class CRM_Mutualaid_Settings
   public static function getHelpTypes($associate = true)
   {
     $help_types = array();
-    CRM_Core_OptionValue::getValues(array('name' => 'mutualaid_help_types'), $help_types);
+    CRM_Core_OptionValue::getValues(
+      array('name' => 'mutualaid_help_types'),
+      $help_types,
+      'weight',
+      true
+    );
+
+    // If there's more than one active option, remove the "General" option.
+    if (count($help_types) > 1) {
+      $help_types = array_filter($help_types, function($help_type) {
+        return $help_type['name'] != 'General';
+      });
+    }
+
+    // Return value-label pairs when requested.
     if ($associate) {
       foreach ($help_types as $help_type) {
         $return[$help_type['value']] = $help_type['label'];
@@ -52,8 +66,8 @@ class CRM_Mutualaid_Settings
    * Retrieves an extension setting from the CiviCRM settings.
    *
    * @param $setting
-   *   The name of the setting. This will be prefixed with the extension's short
-   *   name.
+   *   The internal name of the setting. This will be prefixed with the
+   *   extension's short name for identification within the CiviCRM settings.
    *
    * @return mixed
    *   The value of the requested setting.
