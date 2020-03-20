@@ -12,7 +12,7 @@
       "name": "General",
       "label": "General",
       "filter": "0",
-      "is_reserved": "1",
+      "is_reserved": "0",
       "is_active": "1"
     },
     {

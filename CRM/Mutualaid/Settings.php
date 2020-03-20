@@ -42,13 +42,6 @@ class CRM_Mutualaid_Settings
       true
     );
 
-    // If there's more than one active option, remove the "General" option.
-    if (count($help_types) > 1) {
-      $help_types = array_filter($help_types, function($help_type) {
-        return $help_type['name'] != 'General';
-      });
-    }
-
     // Return value-label pairs when requested.
     if ($associate) {
       foreach ($help_types as $help_type) {
