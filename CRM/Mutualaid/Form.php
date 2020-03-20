@@ -37,6 +37,8 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
     $this->assign('elementNames', $this->getRenderableElementNames());
     $this->assign('elementInfo', $this->element_info);
 
+    $this->assign('terms_conditions', CRM_Mutualaid_Settings::get('terms_conditions'));
+
     parent::buildQuickForm();
   }
 

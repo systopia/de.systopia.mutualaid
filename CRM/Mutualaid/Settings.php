@@ -90,4 +90,19 @@ class CRM_Mutualaid_Settings
   {
     return Civi::settings()->get(E::SHORT_NAME . '_' . $setting);
   }
+
+  /**
+   * Persists an extension setting in the CiviCRM settings.
+   *
+   * @param $setting
+   *   The internal name of the setting. This will be prefixed with the
+   *   extension's short name for identification within the CiviCRM settings.
+   * @param $value
+   *   The value to set the setting to.
+   *
+   * @return \Civi\Core\SettingsBag
+   */
+  public static function set($setting, $value) {
+    return Civi::settings()->set(E::SHORT_NAME . '_' . $setting, $value);
+  }
 }

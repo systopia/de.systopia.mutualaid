@@ -49,9 +49,27 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
       );
     }
 
-    // TODO: Add configurtation element for scheduled job frequency.
+    // TODO: Add configuration element for scheduled job frequency.
 
+  }
 
+  public function validate() {
+    $values = $this->exportValues();
+
+    // TODO: Validate setting values.
+
+    return parent::validate();
+  }
+
+  public function postProcess() {
+    parent::postProcess();
+    $values = $this->exportValues();
+
+    // Store the terms_conditions setting again, since it contains HTML, which
+    // is being filtered when savin via the base class, since that uses a
+    // Setting.create API call, which encodes input parameters.
+    // We're using Civi::settings()->set() instead.
+    CRM_Mutualaid_Settings::set('terms_conditions', $values[E::SHORT_NAME . '_terms_conditions']);
   }
 
 }
