@@ -69,18 +69,6 @@ function mutualaid_civicrm_uninstall() {
  */
 function mutualaid_civicrm_enable() {
   _mutualaid_civix_civicrm_enable();
-
-  $customData = new CRM_Mutualaid_CustomData(E::LONG_NAME);
-
-  $customData->syncOptionGroup(E::path('resources/option_group_help_status.json'));
-  $customData->syncOptionGroup(E::path('resources/option_group_help_types.json'));
-
-  $customData->syncEntities(E::path('resources/relationship_types.json'));
-  $customData->syncCustomGroup(E::path('resources/custom_group_relationship_mutualaid.json'));
-
-  $customData->syncCustomGroup(E::path('resources/custom_group_individual_language.json'));
-  $customData->syncCustomGroup(E::path('resources/custom_group_individual_needs_help.json'));
-  $customData->syncCustomGroup(E::path('resources/custom_group_individual_offers_help.json'));
 }
 
 /**

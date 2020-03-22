@@ -1,0 +1,66 @@
+{
+  "is_default": 0,
+  "options": {
+    "fill_address": "2",
+    "fill_fields_multivalue": null,
+    "fill_details": [
+      "email",
+      "phone"
+    ],
+    "fill_details_primary": null,
+    "override_details": [],
+    "override_details_primary": null,
+    "default_location_type": "1",
+    "primary_phone_type": "1",
+    "secondary_phone_type": "2",
+    "picker": "min",
+    "duplicates_activity": "0",
+    "duplicates_subject": "",
+    "diff_handler": "none",
+    "diff_activity": "1",
+    "diff_activity_subject": "",
+    "diff_processing": "0",
+    "diff_current_location_type": "1",
+    "diff_old_location_type": "0",
+    "fill_fields": [
+      "first_name",
+      "last_name",
+      "middle_name",
+      "prefix_id",
+      "birth_date",
+      "gender_id",
+      "formal_title"
+    ],
+    "override_fields": [],
+    "case_insensitive": "1",
+    "match_contact_id": null
+  },
+  "rules": {
+    "rule_1": "CRM_Xcm_Matcher_EmailFullNameMatcher",
+    "rule_2": "CRM_Xcm_Matcher_PhoneFullNameMatcher",
+    "rule_3": "CRM_Xcm_Matcher_NameAddressMatcher",
+    "rule_4": "CRM_Xcm_Matcher_EmailFirstnameMatcher",
+    "rule_5": "CRM_Xcm_Matcher_PhoneFirstnameMatcher",
+    "rule_6": "CRM_Xcm_Matcher_FirstNameAddressMatcher",
+    "rule_7": "0",
+    "rule_8": "0",
+    "rule_9": "0"
+  },
+  "postprocessing": {
+    "matched_add_group": "0",
+    "matched_add_tag": "0",
+    "matched_add_activity": "0",
+    "matched_add_activity_subject": "",
+    "matched_add_activity_template": "0",
+    "matched_add_activity_status": "1",
+    "matched_add_activity_campaign": "",
+    "created_add_group": "0",
+    "created_add_tag": "0",
+    "created_add_activity": "0",
+    "created_add_activity_subject": "",
+    "created_add_activity_template": "0",
+    "created_add_activity_status": "1",
+    "created_add_activity_campaign": ""
+  },
+  "label": "Mutual Aid Submissions"
+}
