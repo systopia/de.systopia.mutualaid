@@ -59,7 +59,8 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base {
       Civi::settings()->set('xcm_config_profiles', $profile_data);
     }
 
-
+    // install reports
+    $this->installReport('mutualhelp_unconfirmed', file_get_contents(E::path('resources/report_unconfirmed.json')));
 
     // finally: run some tests
     $geo_coder = Civi::settings()->get('geoProvider');
@@ -94,4 +95,63 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base {
     return TRUE;
   } // */
 
+
+  /**
+   * Install a new report (unless already there)
+   *
+   * @param $name string
+   *    report name
+   *
+   * @param $raw_json_data string
+   *    unparsed json data (needs some string replacement)
+   */
+  protected function installReport($name, $raw_json_data) {
+    // first: check if already installed
+    $existing_reports = civicrm_api3('ReportInstance', 'get', [
+      'name'   => $name,
+      'return' => 'id'
+    ]);
+    if ($existing_reports['count'] > 0) {
+      // report already installed
+      return;
+    }
+
+    // to some ID lookups in the string
+    $custom_field_id_help_status = CRM_Mutualaid_CustomData::getCustomField('mutualaid', 'help_status');
+    $raw_json_data = preg_replace('/%%custom_field_id_help_status%%/', $custom_field_id_help_status['id'], $raw_json_data);
+
+    $report_data = json_decode($raw_json_data, true);
+    // translations (top-level only)
+    foreach (array_keys($report_data) as $key) {
+      if (substr($key, 0, 3) == 'ts_') {
+        $report_data[substr($key, 3)] = E::ts($report_data[$key]);
+        unset($report_data[$key]);
+      }
+    }
+    civicrm_api3('ReportInstance', 'create', $report_data);
+  }
+
+  /**
+   * Get the URL for a given report name
+   *
+   * @param $report_name string
+   *  name of the report
+   *
+   * @return string|null
+   *  URL of the report, or null if not found
+   */
+  public static function getReportURL($report_name) {
+    // look up report
+    $existing_reports = civicrm_api3('ReportInstance', 'get', [
+      'name'   => $report_name,
+      'return' => 'id'
+    ]);
+
+    // return URL
+    if (isset($existing_reports['id'])) {
+      return CRM_Utils_System::url("civicrm/report/instance/{$existing_reports['id']}", "reset=1");
+    } else {
+      return null;
+    }
+  }
 }

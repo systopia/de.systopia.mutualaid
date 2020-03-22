@@ -170,15 +170,58 @@ function mutualaid_civicrm_preProcess($formName, &$form) {
  * Implements hook_civicrm_navigationMenu().
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_navigationMenu
- *
+ */
 function mutualaid_civicrm_navigationMenu(&$menu) {
-  _mutualaid_civix_insert_navigation_menu($menu, 'Mailings', array(
-    'label' => E::ts('New subliminal message'),
-    'name' => 'mailing_subliminal_message',
-    'url' => 'civicrm/mailing/subliminal',
-    'permission' => 'access CiviMail',
+  // add top level node
+  $menu[] = [
+    'attributes' => [
+      'label' => E::ts('Mutual Help'),
+      'name' => 'MutualHelp',
+      'permission' => 'access CiviCRM',
+      'url' => null,
+      'icon' => 'crm-i fa-handshake-o',
+      'weight' => 100,
+      'operator' => '',
+      'separator' => null,
+      'parentID' => null,
+      'active' => "1"
+    ]
+  ];
+
+  // add reports
+  $mutualhelp_unconfirmed_url = CRM_Mutualaid_Upgrader::getReportURL('mutualhelp_unconfirmed');
+  if ($mutualhelp_unconfirmed_url) {
+    _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
+      'label' => E::ts("Unconfirmed Matches"),
+      'name' => 'mutualhelp_unconfirmed',
+      'url' => $mutualhelp_unconfirmed_url,
+      'permission' => 'access CiviCRM',
+      'icon' => 'crm-i fa-list-alt',
+      'operator' => 'OR',
+      'separator' => 0,
+    ]);
+  }
+
+  // add form links
+  _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
+    'label' => E::ts('Help Offer Form'),
+    'name' => 'mutualhelp_help_offer_form',
+    'url' => CRM_Utils_System::url('civicrm/mutualaid/offer-help', 'reset=1'),
+    'permission' => 'access CiviCRM',
+    'icon' => 'crm-i fa-file-o',
     'operator' => 'OR',
     'separator' => 0,
-  ));
+  ]);
+
+  _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
+    'label' => E::ts('Help Request Form'),
+    'name' => 'mutualhelp_help_request_form',
+    'url' => CRM_Utils_System::url('civicrm/mutualaid/request-help', 'reset=1'),
+    'permission' => 'access CiviCRM',
+    'icon' => 'crm-i fa-file-o',
+    'operator' => 'OR',
+    'separator' => 0,
+  ]);
+
   _mutualaid_civix_navigationMenu($menu);
-} // */
+}

@@ -7,46 +7,51 @@
   "is_active": "1",
   "_values": [
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Assigned",
       "label": "Assigned",
+      "value": "1",
       "filter": "0",
       "is_reserved": "1",
       "is_active": "1"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Confirmed",
       "label": "Confirmed",
+      "value": "2",
       "filter": "0",
       "is_reserved": "1",
       "is_active": "1"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Communicated",
       "label": "Communicated",
+      "value": "3",
       "filter": "0",
       "is_reserved": "1",
       "is_active": "1"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Completed",
       "label": "Completed",
+      "value": "4",
       "filter": "0",
       "is_reserved": "1",
       "is_active": "1"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Cancelled",
       "label": "Cancelled",
+      "value": "4",
       "filter": "0",
       "is_reserved": "1",
       "is_active": "1"

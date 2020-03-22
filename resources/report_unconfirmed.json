@@ -1,0 +1,77 @@
+{
+  "ts_title": "Unconfirmed Matches (Mutual Help)",
+  "name": "mutualhelp_unconfirmed",
+  "report_id": "contact/relationship",
+  "ts_description": "These matches still need to be confirmed",
+  "permission": "access CiviReport",
+  "is_active": 1,
+  "ts_header": "<html><head><title>CiviCRM Report</title></head><body>",
+  "ts_footer": "</body></html>",
+  "form_values": {
+    "fields": {
+      "sort_name_a": "1",
+      "sort_name_b": "1",
+      "label_a_b": "1",
+      "custom_%%custom_field_id_help_status%%": "1"
+    },
+    "sort_name_a_op": "has",
+    "sort_name_a_value": "",
+    "contact_type_a_op": "in",
+    "contact_type_a_value": [],
+    "sort_name_b_op": "has",
+    "sort_name_b_value": "",
+    "contact_type_b_op": "in",
+    "contact_type_b_value": [],
+    "is_active_op": "eq",
+    "is_active_value": "",
+    "is_valid_op": "eq",
+    "is_valid_value": "",
+    "relationship_type_id_op": "in",
+    "relationship_type_id_value": [],
+    "start_date_relative": "",
+    "start_date_from": "",
+    "start_date_to": "",
+    "end_date_relative": "",
+    "end_date_from": "",
+    "end_date_to": "",
+    "active_period_date_relative": "",
+    "active_period_date_from": "",
+    "active_period_date_to": "",
+    "is_permission_a_b_op": "in",
+    "is_permission_a_b_value": [],
+    "is_permission_b_a_op": "in",
+    "is_permission_b_a_value": [],
+    "country_id_op": "in",
+    "country_id_value": [],
+    "state_province_id_op": "in",
+    "state_province_id_value": [],
+    "tagid_op": "in",
+    "tagid_value": [],
+    "gid_op": "in",
+    "gid_value": [],
+    "custom_%%custom_field_id_help_status%%_op": "in",
+    "custom_%%custom_field_id_help_status%%_value": [
+      "1"
+    ],
+    "order_bys": {
+      "1": {
+        "column": "sort_name_a",
+        "order": "ASC"
+      },
+      "2": {
+        "column": "sort_name_b",
+        "order": "ASC"
+      }
+    },
+    "email_subject": "",
+    "email_to": "",
+    "email_cc": "",
+    "row_count": "",
+    "view_mode": "view",
+    "cache_minutes": "60",
+    "parent_id": "",
+    "radio_ts": "",
+    "groups": "",
+    "instance_id": null
+  }
+}

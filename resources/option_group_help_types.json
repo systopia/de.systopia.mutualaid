@@ -7,37 +7,41 @@
   "is_active": "1",
   "_values": [
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Any",
       "label": "Any",
+      "value": "1",
       "filter": "0",
       "is_reserved": "0",
       "is_active": "1"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Shopping",
       "label": "Shopping",
+      "value": "2",
       "filter": "0",
       "is_reserved": "0",
       "is_active": "0"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Walk_Dog",
       "label": "Walk the Dog",
+      "value": "3",
       "filter": "0",
       "is_reserved": "0",
       "is_active": "0"
     },
     {
-      "_lookup": ["name"],
+      "_lookup": ["value"],
       "_translate": ["label"],
       "name": "Pick_up_Parcels",
       "label": "Pick up Parcels",
+      "value": "4",
       "filter": "0",
       "is_reserved": "0",
       "is_active": "0"
