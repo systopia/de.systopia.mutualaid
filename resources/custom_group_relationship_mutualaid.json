@@ -16,7 +16,7 @@
       "_lookup": ["column_name", "custom_group_id"],
       "_translate": ["label"],
       "weight": "1",
-      "name": "help_type",
+      "name": "help_type_provided",
       "column_name": "help_type",
       "label": "Help Type",
       "data_type": "String",

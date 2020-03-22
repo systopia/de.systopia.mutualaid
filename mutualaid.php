@@ -80,7 +80,7 @@ function mutualaid_civicrm_enable() {
 
   $customData->syncCustomGroup(E::path('resources/custom_group_individual_language.json'));
   $customData->syncCustomGroup(E::path('resources/custom_group_individual_needs_help.json'));
-  $customData->syncCustomGroup(E::path('resources/custom_group_individual_provides_help.json'));
+  $customData->syncCustomGroup(E::path('resources/custom_group_individual_offers_help.json'));
 }
 
 /**
