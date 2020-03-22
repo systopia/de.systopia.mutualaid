@@ -4,7 +4,7 @@
   "name": "mutualaid",
   "title": "Mutual Aid",
   "extends": "Relationship",
-  "extends_entity_column_value": ["mutualaid_provides_for","mutualaid_provided_by"],
+  "extends_entity_column_value": ["mutualaid_provides_for"],
   "collapse_display": "0",
   "is_active": "1",
   "is_multiple": "0",

@@ -14,7 +14,7 @@
 | written permission from the original author(s).        |
 +--------------------------------------------------------*/
 
-define('CUSTOM_DATA_HELPER_VERSION', '0.6');
+define('CUSTOM_DATA_HELPER_VERSION', '0.7-dev');
 define('CUSTOM_DATA_HELPER_LOG_LEVEL', 0);
 
 // log levels
@@ -135,15 +135,32 @@ class CRM_Mutualaid_CustomData {
 
     // if extends_entity_column_value, make sure it's sensible data
     if (isset($data['extends_entity_column_value'])) {
-      $force_update = TRUE; // this doesn't get returned by the API, so differences couldn't be detected
+      $force_update = true; // this doesn't get returned by the API, so differences couldn't be detected
       if ($data['extends'] == 'Activity') {
-        $extends_list = array();
-        foreach ($data['extends_entity_column_value'] as $activity_type) {
-          if (!is_numeric($activity_type)) {
-            $activity_type = CRM_Core_OptionGroup::getValue('activity_type', $activity_type, 'name');
+          $extends_list = array();
+          foreach ($data['extends_entity_column_value'] as $activity_type) {
+              if (!is_numeric($activity_type)) {
+                  $activity_type = CRM_Core_OptionGroup::getValue('activity_type', $activity_type, 'name');
+              }
+              if ($activity_type) {
+                  $extends_list[] = $activity_type;
+              }
           }
-          if ($activity_type) {
-            $extends_list[] = $activity_type;
+          $data['extends_entity_column_value'] = $extends_list;
+      } elseif ($data['extends'] == 'Relationship') {
+        $extends_list = [];
+        foreach ($data['extends_entity_column_value'] as $relationship_id) {
+          if (!is_numeric($relationship_id)) {
+            try {
+              $relationship_id = civicrm_api3('RelationshipType', 'getvalue', [
+                    'name_a_b' => $relationship_id,
+                    'return'   => 'id'
+                ]
+              );
+              $extends_list[]  = $relationship_id;
+            } catch (Exception $ex) {
+              $this->log(CUSTOM_DATA_HELPER_LOG_ERROR, "Couldn't find relationship type '{$relationship_id}': " . $ex->getMessage());
+            }
           }
         }
         $data['extends_entity_column_value'] = $extends_list;
@@ -153,7 +170,6 @@ class CRM_Mutualaid_CustomData {
         $data['extends_entity_column_value'] = CRM_Utils_Array::implodePadded($data['extends_entity_column_value']);
       }
     }
-
 
     // first: find or create custom group
     $this->translateStrings($data);
