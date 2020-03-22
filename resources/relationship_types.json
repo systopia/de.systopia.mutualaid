@@ -12,7 +12,7 @@
       "contact_type_a": "Individual",
       "contact_type_b": "Individual",
       "is_active": "1",
-      "is_reserved": "1"
+      "is_reserved": "0"
     }
   ]
 }
