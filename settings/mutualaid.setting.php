@@ -48,7 +48,7 @@ return array(
   E::SHORT_NAME . '_distance_unit' => array(
     'name' => E::SHORT_NAME . '_distance_unit',
     'type' => 'String',
-    'default' => 'km',
+    'default' => '1000',
     'html_type' => 'select',
     'options' => array(
       '1' => E::ts('Meters'),

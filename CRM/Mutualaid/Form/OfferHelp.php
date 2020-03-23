@@ -68,7 +68,7 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
           true,
           null,
           array(
-            'field_suffix' => CRM_Mutualaid_Settings::get('distance_unit'),
+            'field_suffix' => CRM_Mutualaid_Settings::getDistanceUnit(true),
           )
         );
 

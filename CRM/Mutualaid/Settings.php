@@ -90,8 +90,31 @@ class CRM_Mutualaid_Settings
         return $return;
     }
 
-    public static function getDistanceUnit()
+    /**
+     * Retrieves the configured distance unit setting.
+     *
+     * @param bool $label
+     *   Whether to return the option label for the setting value.
+     *
+     * @return mixed
+     */
+    public static function getDistanceUnit($label = false)
     {
+        $setting = Civi::settings()->get(E::SHORT_NAME . '_distance_unit');
+
+        if ($label) {
+            $metadata = civicrm_api3(
+              'Setting',
+              'getfields',
+              array(
+                'api_action' => 'get',
+                'name' => 'mutualaid_distance_unit',
+              )
+            );
+            $setting = $metadata['values'][E::SHORT_NAME . '_distance_unit']['options'][$setting];
+        }
+
+        return $setting;
     }
 
     /**
