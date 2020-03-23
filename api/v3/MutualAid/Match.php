@@ -17,33 +17,37 @@
 /**
  * Assign the unmatched help requests to the offered help
  */
-function civicrm_api3_mutual_aid_match($params) {
-  try {
-    $matcher = new CRM_Mutualaid_Matcher($params);
-    $matcher->assignOpenRequests();
-    $stats = $matcher->getStats();
-    //$matcher->cleanup();
-    return civicrm_api3_create_success($stats);
-  } catch(Exception $ex) {
-    return civicrm_api3_create_error("Matching failed: " . $ex->getMessage());
-  }
+function civicrm_api3_mutual_aid_match($params)
+{
+    try {
+        $matcher = new CRM_Mutualaid_Matcher($params);
+        $matcher->assignOpenRequests();
+        $stats = $matcher->getStats();
+        //$matcher->cleanup();
+        return civicrm_api3_create_success($stats);
+    } catch (Exception $ex) {
+        return civicrm_api3_create_error(
+          "Matching failed: " . $ex->getMessage()
+        );
+    }
 }
 
 /**
  * API3 action specs
  */
-function _civicrm_api3_mutual_aid_match_spec(&$params) {
-  $params['contact_type'] = array(
-      'name'         => 'contact_type',
-      'api.default'  => 'Individual',
-      'type'         => CRM_Utils_Type::T_STRING,
-      'title'        => 'Contact Type',
-  );
-  $params['xcm_profile'] = array(
-      'name'         => 'xcm_profile',
+function _civicrm_api3_mutual_aid_match_spec(&$params)
+{
+    $params['contact_type'] = array(
+      'name' => 'contact_type',
+      'api.default' => 'Individual',
+      'type' => CRM_Utils_Type::T_STRING,
+      'title' => 'Contact Type',
+    );
+    $params['xcm_profile'] = array(
+      'name' => 'xcm_profile',
       'api.required' => 0,
-      'type'         => CRM_Utils_Type::T_STRING,
-      'title'        => 'Which profile should be used for matching?',
-  );
+      'type' => CRM_Utils_Type::T_STRING,
+      'title' => 'Which profile should be used for matching?',
+    );
 }
 

@@ -15,15 +15,17 @@
 +--------------------------------------------------------*/
 
 require_once 'mutualaid.civix.php';
+
 use CRM_Mutualaid_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_config().
  *
- * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_config/ 
+ * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_config/
  */
-function mutualaid_civicrm_config(&$config) {
-  _mutualaid_civix_civicrm_config($config);
+function mutualaid_civicrm_config(&$config)
+{
+    _mutualaid_civix_civicrm_config($config);
 }
 
 /**
@@ -31,8 +33,9 @@ function mutualaid_civicrm_config(&$config) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_xmlMenu
  */
-function mutualaid_civicrm_xmlMenu(&$files) {
-  _mutualaid_civix_civicrm_xmlMenu($files);
+function mutualaid_civicrm_xmlMenu(&$files)
+{
+    _mutualaid_civix_civicrm_xmlMenu($files);
 }
 
 /**
@@ -40,8 +43,9 @@ function mutualaid_civicrm_xmlMenu(&$files) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_install
  */
-function mutualaid_civicrm_install() {
-  _mutualaid_civix_civicrm_install();
+function mutualaid_civicrm_install()
+{
+    _mutualaid_civix_civicrm_install();
 }
 
 /**
@@ -49,8 +53,9 @@ function mutualaid_civicrm_install() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_postInstall
  */
-function mutualaid_civicrm_postInstall() {
-  _mutualaid_civix_civicrm_postInstall();
+function mutualaid_civicrm_postInstall()
+{
+    _mutualaid_civix_civicrm_postInstall();
 }
 
 /**
@@ -58,8 +63,9 @@ function mutualaid_civicrm_postInstall() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_uninstall
  */
-function mutualaid_civicrm_uninstall() {
-  _mutualaid_civix_civicrm_uninstall();
+function mutualaid_civicrm_uninstall()
+{
+    _mutualaid_civix_civicrm_uninstall();
 }
 
 /**
@@ -67,8 +73,9 @@ function mutualaid_civicrm_uninstall() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_enable
  */
-function mutualaid_civicrm_enable() {
-  _mutualaid_civix_civicrm_enable();
+function mutualaid_civicrm_enable()
+{
+    _mutualaid_civix_civicrm_enable();
 }
 
 /**
@@ -76,8 +83,9 @@ function mutualaid_civicrm_enable() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_disable
  */
-function mutualaid_civicrm_disable() {
-  _mutualaid_civix_civicrm_disable();
+function mutualaid_civicrm_disable()
+{
+    _mutualaid_civix_civicrm_disable();
 }
 
 /**
@@ -85,8 +93,9 @@ function mutualaid_civicrm_disable() {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_upgrade
  */
-function mutualaid_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _mutualaid_civix_civicrm_upgrade($op, $queue);
+function mutualaid_civicrm_upgrade($op, CRM_Queue_Queue $queue = null)
+{
+    return _mutualaid_civix_civicrm_upgrade($op, $queue);
 }
 
 /**
@@ -97,8 +106,9 @@ function mutualaid_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_managed
  */
-function mutualaid_civicrm_managed(&$entities) {
-  _mutualaid_civix_civicrm_managed($entities);
+function mutualaid_civicrm_managed(&$entities)
+{
+    _mutualaid_civix_civicrm_managed($entities);
 }
 
 /**
@@ -110,8 +120,9 @@ function mutualaid_civicrm_managed(&$entities) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_caseTypes
  */
-function mutualaid_civicrm_caseTypes(&$caseTypes) {
-  _mutualaid_civix_civicrm_caseTypes($caseTypes);
+function mutualaid_civicrm_caseTypes(&$caseTypes)
+{
+    _mutualaid_civix_civicrm_caseTypes($caseTypes);
 }
 
 /**
@@ -124,8 +135,9 @@ function mutualaid_civicrm_caseTypes(&$caseTypes) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_angularModules
  */
-function mutualaid_civicrm_angularModules(&$angularModules) {
-  _mutualaid_civix_civicrm_angularModules($angularModules);
+function mutualaid_civicrm_angularModules(&$angularModules)
+{
+    _mutualaid_civix_civicrm_angularModules($angularModules);
 }
 
 /**
@@ -133,8 +145,9 @@ function mutualaid_civicrm_angularModules(&$angularModules) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_alterSettingsFolders
  */
-function mutualaid_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _mutualaid_civix_civicrm_alterSettingsFolders($metaDataFolders);
+function mutualaid_civicrm_alterSettingsFolders(&$metaDataFolders = null)
+{
+    _mutualaid_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
 /**
@@ -144,15 +157,17 @@ function mutualaid_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_entityTypes
  */
-function mutualaid_civicrm_entityTypes(&$entityTypes) {
-  _mutualaid_civix_civicrm_entityTypes($entityTypes);
+function mutualaid_civicrm_entityTypes(&$entityTypes)
+{
+    _mutualaid_civix_civicrm_entityTypes($entityTypes);
 }
 
 /**
  * Implements hook_civicrm_thems().
  */
-function mutualaid_civicrm_themes(&$themes) {
-  _mutualaid_civix_civicrm_themes($themes);
+function mutualaid_civicrm_themes(&$themes)
+{
+    _mutualaid_civix_civicrm_themes($themes);
 }
 
 // --- Functions below this ship commented out. Uncomment as required. ---
@@ -162,66 +177,87 @@ function mutualaid_civicrm_themes(&$themes) {
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_preProcess
  *
-function mutualaid_civicrm_preProcess($formName, &$form) {
-
-} // */
+ * function mutualaid_civicrm_preProcess($formName, &$form) {
+ *
+ * } // */
 
 /**
  * Implements hook_civicrm_navigationMenu().
  *
  * @link https://docs.civicrm.org/dev/en/latest/hooks/hook_civicrm_navigationMenu
  */
-function mutualaid_civicrm_navigationMenu(&$menu) {
-  // add top level node
-  $menu[] = [
-    'attributes' => [
-      'label' => E::ts('Mutual Help'),
-      'name' => 'MutualHelp',
-      'permission' => 'access CiviCRM',
-      'url' => null,
-      'icon' => 'crm-i fa-handshake-o',
-      'weight' => 100,
-      'operator' => '',
-      'separator' => null,
-      'parentID' => null,
-      'active' => "1"
-    ]
-  ];
+function mutualaid_civicrm_navigationMenu(&$menu)
+{
+    // add top level node
+    $menu[] = [
+      'attributes' => [
+        'label' => E::ts('Mutual Help'),
+        'name' => 'MutualHelp',
+        'permission' => 'access CiviCRM',
+        'url' => null,
+        'icon' => 'crm-i fa-handshake-o',
+        'weight' => 100,
+        'operator' => '',
+        'separator' => null,
+        'parentID' => null,
+        'active' => "1",
+      ],
+    ];
 
-  // add reports
-  $mutualhelp_unconfirmed_url = CRM_Mutualaid_Upgrader::getReportURL('mutualhelp_unconfirmed');
-  if ($mutualhelp_unconfirmed_url) {
-    _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
-      'label' => E::ts("Unconfirmed Matches"),
-      'name' => 'mutualhelp_unconfirmed',
-      'url' => $mutualhelp_unconfirmed_url,
-      'permission' => 'access CiviCRM',
-      'icon' => 'crm-i fa-list-alt',
-      'operator' => 'OR',
-      'separator' => 0,
-    ]);
-  }
+    // add reports
+    $mutualhelp_unconfirmed_url = CRM_Mutualaid_Upgrader::getReportURL(
+      'mutualhelp_unconfirmed'
+    );
+    if ($mutualhelp_unconfirmed_url) {
+        _mutualaid_civix_insert_navigation_menu(
+          $menu,
+          'MutualHelp',
+          [
+            'label' => E::ts("Unconfirmed Matches"),
+            'name' => 'mutualhelp_unconfirmed',
+            'url' => $mutualhelp_unconfirmed_url,
+            'permission' => 'access CiviCRM',
+            'icon' => 'crm-i fa-list-alt',
+            'operator' => 'OR',
+            'separator' => 0,
+          ]
+        );
+    }
 
-  // add form links
-  _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
-    'label' => E::ts('Help Offer Form'),
-    'name' => 'mutualhelp_help_offer_form',
-    'url' => CRM_Utils_System::url('civicrm/mutualaid/offer-help', 'reset=1'),
-    'permission' => 'access CiviCRM',
-    'icon' => 'crm-i fa-file-o',
-    'operator' => 'OR',
-    'separator' => 0,
-  ]);
+    // add form links
+    _mutualaid_civix_insert_navigation_menu(
+      $menu,
+      'MutualHelp',
+      [
+        'label' => E::ts('Help Offer Form'),
+        'name' => 'mutualhelp_help_offer_form',
+        'url' => CRM_Utils_System::url(
+          'civicrm/mutualaid/offer-help',
+          'reset=1'
+        ),
+        'permission' => 'access CiviCRM',
+        'icon' => 'crm-i fa-file-o',
+        'operator' => 'OR',
+        'separator' => 0,
+      ]
+    );
 
-  _mutualaid_civix_insert_navigation_menu($menu, 'MutualHelp', [
-    'label' => E::ts('Help Request Form'),
-    'name' => 'mutualhelp_help_request_form',
-    'url' => CRM_Utils_System::url('civicrm/mutualaid/request-help', 'reset=1'),
-    'permission' => 'access CiviCRM',
-    'icon' => 'crm-i fa-file-o',
-    'operator' => 'OR',
-    'separator' => 0,
-  ]);
+    _mutualaid_civix_insert_navigation_menu(
+      $menu,
+      'MutualHelp',
+      [
+        'label' => E::ts('Help Request Form'),
+        'name' => 'mutualhelp_help_request_form',
+        'url' => CRM_Utils_System::url(
+          'civicrm/mutualaid/request-help',
+          'reset=1'
+        ),
+        'permission' => 'access CiviCRM',
+        'icon' => 'crm-i fa-file-o',
+        'operator' => 'OR',
+        'separator' => 0,
+      ]
+    );
 
-  _mutualaid_civix_navigationMenu($menu);
+    _mutualaid_civix_navigationMenu($menu);
 }

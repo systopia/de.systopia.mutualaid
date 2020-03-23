@@ -20,26 +20,30 @@ return array(
   E::SHORT_NAME . '_languages_enabled' => array(
     'name' => E::SHORT_NAME . '_languages_enabled',
     'type' => 'Boolean',
-    'default' => FALSE,
+    'default' => false,
     'html_type' => 'radio',
     'quick_form_type' => 'YesNo',
     'title' => E::ts('Languages enabled'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('If enabled, languages spoken will be collected from people offering and requesting help, and taken into account when matching requests with offers.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 10]]
+    'description' => E::ts(
+      'If enabled, languages spoken will be collected from people offering and requesting help, and taken into account when matching requests with offers.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 10]],
   ),
   E::SHORT_NAME . '_comments_enabled' => array(
     'name' => E::SHORT_NAME . '_comments_enabled',
     'type' => 'Boolean',
-    'default' => FALSE,
+    'default' => false,
     'html_type' => 'radio',
     'quick_form_type' => 'YesNo',
     'title' => E::ts('Comments enabled'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('If enabled, comments will be collected from people offering and requesting help.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 20]]
+    'description' => E::ts(
+      'If enabled, comments will be collected from people offering and requesting help.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 20]],
   ),
   E::SHORT_NAME . '_distance_unit' => array(
     'name' => E::SHORT_NAME . '_distance_unit',
@@ -54,19 +58,23 @@ return array(
     'title' => E::ts('Distance unit'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Unit for distance values, used for collecting max. distance in forms and for calculating proximity.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 30]]
+    'description' => E::ts(
+      'Unit for distance values, used for collecting max. distance in forms and for calculating proximity.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 30]],
   ),
   E::SHORT_NAME . '_terms_conditions' => array(
     'name' => E::SHORT_NAME . '_terms_conditions',
     'type' => 'String',
-    'default' => FALSE,
+    'default' => false,
     'html_type' => 'textarea',
     'title' => E::ts('Terms & Conditions'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('HTML content containing Terms and Conditions to display on forms.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 40]]
+    'description' => E::ts(
+      'HTML content containing Terms and Conditions to display on forms.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 40]],
   ),
   E::SHORT_NAME . '_email_confirmation_template' => array(
     'name' => E::SHORT_NAME . '_email_confirmation_template',
@@ -79,8 +87,10 @@ return array(
     ),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('HTML content containing Terms and Conditions to display on forms.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 50]]
+    'description' => E::ts(
+      'HTML content containing Terms and Conditions to display on forms.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 50]],
   ),
   E::SHORT_NAME . '_max_helpers' => array(
     'name' => E::SHORT_NAME . '_max_helpers',
@@ -90,8 +100,10 @@ return array(
     'title' => E::ts('Maximum helpers per requesting person'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Maximum number of persons providing help per person requesting help.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 70]]
+    'description' => E::ts(
+      'Maximum number of persons providing help per person requesting help.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 70]],
   ),
   E::SHORT_NAME . '_matching_weight_help_types' => array(
     'name' => E::SHORT_NAME . '_matching_weight_help_types',
@@ -101,8 +113,10 @@ return array(
     'title' => E::ts('Matching Weight: Help Types'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Weight for matching help types when calculating matches between persons.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 80]]
+    'description' => E::ts(
+      'Weight for matching help types when calculating matches between persons.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 80]],
   ),
   E::SHORT_NAME . '_matching_weight_distance' => array(
     'name' => E::SHORT_NAME . '_matching_weight_distance',
@@ -112,8 +126,10 @@ return array(
     'title' => E::ts('Matching Weight: Distance'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Weight for distance when calculating matches between persons.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 90]]
+    'description' => E::ts(
+      'Weight for distance when calculating matches between persons.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 90]],
   ),
   E::SHORT_NAME . '_matching_weight_workload' => array(
     'name' => E::SHORT_NAME . '_matching_weight_workload',
@@ -123,8 +139,10 @@ return array(
     'title' => E::ts('Matching Weight: Workload'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Weight for workload of persons providing help when calculating matches between persons.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 100]]
+    'description' => E::ts(
+      'Weight for workload of persons providing help when calculating matches between persons.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 100]],
   ),
   E::SHORT_NAME . '_matching_weight_small_distance_preference' => array(
     'name' => E::SHORT_NAME . '_matching_weight_small_distance_preference',
@@ -134,7 +152,9 @@ return array(
     'title' => E::ts('Matching Weight: Small Distance Preference'),
     'is_domain' => 1,
     'is_contact' => 0,
-    'description' => E::ts('Weight for preference of persons providing help in small distances when calculating matches between persons.'),
-    'settings_pages' => ['mutualaid' => ['weight' => 110]]
+    'description' => E::ts(
+      'Weight for preference of persons providing help in small distances when calculating matches between persons.'
+    ),
+    'settings_pages' => ['mutualaid' => ['weight' => 110]],
   ),
 );
