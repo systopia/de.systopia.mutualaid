@@ -1,6 +1,6 @@
 {
   "ts_title": "Unconfirmed Matches (Mutual Help)",
-  "name": "mutualhelp_unconfirmed",
+  "name": "mutualaid_unconfirmed",
   "report_id": "contact/relationship",
   "ts_description": "These matches still need to be confirmed",
   "permission": "access CiviReport",
