@@ -1,4 +1,4 @@
-## Corona Hilfe CiviCRM Erweiterung
+# de.systopia.mutualaid - Corona Hilfe CiviCRM Erweiterung
 ## Einführung
 Die Coronakrise und die damit einhergehende Schutzmaßnahmen wie soziale Distanzierung und Quarantäne stellen uns alle vor große Herausforderungen. Wir alle müssen Bedürftigen Menschen helfen und CiviCRM ist die optimale Plattform diese Hilfe zu organisieren und Hilfsbedürftige mit Freiwilligen in verbindung zu setzen.
 
