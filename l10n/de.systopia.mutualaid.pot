@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-03-22 09:38+0100\n"
+"POT-Creation-Date: 2020-03-23 17:21+0100\n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,12 +60,8 @@ msgstr ""
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
-"Please provide an integer value for the maximum distance you would like to "
+"Please provide a numeric value for the maximum distance you would like to "
 "offer help in."
-msgstr ""
-
-#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
-msgid "You picked color \"%1\""
 msgstr ""
 
 #: CRM/Mutualaid/Form/RequestHelp.php
@@ -78,6 +74,10 @@ msgstr ""
 
 #: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Select what kind of help you are requesting."
+msgstr ""
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "You picked color \"%1\""
 msgstr ""
 
 #: CRM/Mutualaid/Form.php
@@ -124,6 +124,52 @@ msgstr ""
 msgid "Languages spoken"
 msgstr ""
 
+#: CRM/Mutualaid/Upgrader/Base.php
+msgid "Upgrade %1 to revision %2"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Your system doesn't have a GeoCoder service configured. A GeoCoder can "
+"assign geo coordinates to a given address.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"This is really important for this extension, since it is needed to calculate "
+"the distance between two people.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Please configure your GeoCoder <a href=\"%1\">HERE</a>.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"If you don't want to use the built-in ones we recommend <a href="
+"\"%1\">OpenStreetMap</a>.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "No GeoCoder configured"
+msgstr ""
+
+#: mutualaid.php
+msgid "Mutual Help"
+msgstr ""
+
+#: mutualaid.php
+msgid "Unconfirmed Matches"
+msgstr ""
+
+#: mutualaid.php
+msgid "Help Offer Form"
+msgstr ""
+
+#: mutualaid.php
+msgid "Help Request Form"
+msgstr ""
+
 #: settings/mutualaid.setting.php
 msgid "Languages enabled"
 msgstr ""
@@ -142,6 +188,10 @@ msgstr ""
 msgid ""
 "If enabled, comments will be collected from people offering and requesting "
 "help."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Meters"
 msgstr ""
 
 #: settings/mutualaid.setting.php
@@ -221,129 +271,4 @@ msgstr ""
 msgid ""
 "Weight for preference of persons providing help in small distances when "
 "calculating matches between persons."
-msgstr ""
-
-#: resources/custom_group_individual_languages.php
-msgid ""
-"Languages (MutualAid)"
-msgstr ""
-
-#: resources/custom_group_individual_languages.php
-msgid ""
-"Speaks Languages"
-msgstr ""
-
-#: resources/custom_group_individual_needs_help.php
-msgid ""
-"Help Needed (Mutual Aid)"
-msgstr ""
-
-#: resources/custom_group_individual_needs_help.php
-msgid ""
-"Personal Contact Possible"
-msgstr ""
-
-#: resources/custom_group_individual_needs_help.php
-msgid ""
-"Help Needed"
-msgstr ""
-
-#: resources/custom_group_individual_offers_help.php
-msgid ""
-"Help Offered (Mutual Aid)"
-msgstr ""
-
-#: resources/custom_group_individual_offers_help.php
-msgid ""
-"Help offered for max. Persons"
-msgstr ""
-
-#: resources/custom_group_individual_offers_help.php
-msgid ""
-"Help offered within"
-msgstr ""
-
-#: resources/custom_group_relationship_mutualaid.php
-msgid ""
-"Mutual Aid"
-msgstr ""
-
-#: resources/custom_group_relationship_mutualaid.php
-msgid ""
-"Help Type"
-msgstr ""
-
-#: resources/custom_group_relationship_mutualaid.php
-msgid ""
-"Language"
-msgstr ""
-
-#: resources/custom_group_relationship_mutualaid.php
-msgid ""
-"Help Status"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Mutual Aid - Help Status"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Assigned"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Confirmed"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Communicated"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Completed"
-msgstr ""
-
-#: resources/option_group_help_status.php
-msgid ""
-"Cancelled"
-msgstr ""
-
-#: resources/option_group_help_types.php
-msgid ""
-"Mutual Aid - Help Types"
-msgstr ""
-
-#: resources/option_group_help_types.php
-msgid ""
-"Any"
-msgstr ""
-
-#: resources/option_group_help_types.php
-msgid ""
-"Shopping"
-msgstr ""
-
-#: resources/option_group_help_types.php
-msgid ""
-"Walk the Dog"
-msgstr ""
-
-#: resources/option_group_help_types.php
-msgid ""
-"Pick up Parcels"
-msgstr ""
-
-#: resources/relationship_types.php
-msgid ""
-"Provides Mutual Aid for"
-msgstr ""
-
-#: resources/relationship_types.php
-msgid ""
-"Is provided Mutual Aid by"
 msgstr ""
