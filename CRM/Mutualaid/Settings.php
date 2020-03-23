@@ -135,4 +135,39 @@ class CRM_Mutualaid_Settings
   {
     return Civi::settings()->set(E::SHORT_NAME . '_' . $setting, $value);
   }
+
+  /**
+   * Get a list of all help provided status IDs that mean the the help is active
+   */
+  public static function getActiveHelpStatusList()
+  {
+    return [2,3];
+  }
+
+  /**
+   * Get a list of all help provided status IDs that mean the the help is active
+   */
+  public static function getUnconfirmedHelpStatusList()
+  {
+    return [1];
+  }
+  /**
+   * Get the ID of the help provided relationship type ID
+   *
+   * @return integer
+   *   relationship type ID
+   *
+   * @throws Exception
+   *   if the type doesn't exist
+   */
+  public static function getHelpProvidedRelationshipTypeID()
+  {
+    static $relationship_type_id = NULL;
+    if ($relationship_type_id === NULL) {
+      $relationship_type_id = civicrm_api3('RelationshipType', 'getvalue', [
+        'return' => 'id',
+        'name_a_b' => 'mutualaid_provides_for']);
+    }
+    return (int) $relationship_type_id;
+  }
 }
