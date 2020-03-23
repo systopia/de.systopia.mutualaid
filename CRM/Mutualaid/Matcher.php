@@ -72,7 +72,8 @@ class CRM_Mutualaid_Matcher
       $request_data = [
         'contact_id' => $request->contact_id,
         'location'   => [$request->longitude, $request->latitude],
-        'types'      => CRM_Utils_Array::explodePadded($request->type_of_help)
+        'types'      => CRM_Utils_Array::explodePadded($request->type_of_help),
+        // TODO: languages
       ];
 
       // identify potential helpers (apply hard criteria) using SQL query on the helper table
@@ -136,7 +137,18 @@ class CRM_Mutualaid_Matcher
       $HELP_OFFERED_TYPE = $HELP_OFFERED_FIELD['column_name'];
 
       // build selects for individual help offers
-      $HELP_OFFERED_SELECTS = ''; // TODO
+      $help_types = CRM_Mutualaid_Settings::getHelpTypes();
+      $HELP_OFFERED_SELECT_LIST = [];
+      foreach ($help_types as $help_type => $help_name) {
+        // TODO: use LOCATE instead of LIKE?
+        $help_type_value = (int) $help_type;
+        $token = CRM_Utils_Array::implodePadded([$help_type_value]);
+        $HELP_OFFERED_SELECT_LIST[] = "(LOCATE('$token', ) > 0) AS offers_help_{$help_type_value}";
+      }
+      $HELP_OFFERED_SELECTS = implode(';\n        ', $HELP_OFFERED_SELECT_LIST);
+
+      // build languages spoken
+      $HELP_LANGUAGES_SPOKEN = ''; // TODO
 
       // compile query to build the table
       $table_query = "
@@ -145,6 +157,7 @@ class CRM_Mutualaid_Matcher
         (help_offered.{$MAX_JOBS_COLUMN} - COUNT(help_provided_data.id))      
                                      AS open_spots,
         {$HELP_OFFERED_SELECTS}
+        {$HELP_LANGUAGES_SPOKEN}
         address.geo_code_1           AS latitude,
         address.geo_code_2           AS longitude
       FROM civicrm_contact contact
