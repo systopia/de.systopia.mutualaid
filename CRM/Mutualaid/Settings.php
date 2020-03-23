@@ -90,6 +90,11 @@ class CRM_Mutualaid_Settings
     return $return;
   }
 
+  public static function getDistanceUnit()
+  {
+
+  }
+
   /**
    * Retrieves all extension settings.
    *

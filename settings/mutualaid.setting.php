@@ -47,8 +47,9 @@ return array(
     'default' => 'km',
     'html_type' => 'select',
     'options' => array(
-      'km' => E::ts('Kilometers'),
-      'mi' => E::ts('Miles')
+      '1' => E::ts('Meters'),
+      '1000' => E::ts('Kilometers'),
+      '1609.34' => E::ts('Miles'),
     ),
     'title' => E::ts('Distance unit'),
     'is_domain' => 1,

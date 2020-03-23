@@ -116,8 +116,8 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
     }
 
     // Require integer values for max_distance.
-    if (!is_int($values['max_distance']) && !ctype_digit($values['max_distance'])) {
-        $this->_errors['max_distance'] = E::ts('Please provide an integer value for the maximum distance you would like to offer help in.');
+    if (!is_numeric($values['max_distance'])) {
+        $this->_errors['max_distance'] = E::ts('Please provide a numeric value for the maximum distance you would like to offer help in.');
     }
 
     return parent::validate();
