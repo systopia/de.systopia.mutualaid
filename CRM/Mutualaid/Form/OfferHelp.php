@@ -141,16 +141,37 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
      */
     public function postProcess()
     {
-        $values = $this->exportValues();
-        $options = $this->getColorOptions();
-        CRM_Core_Session::setStatus(
-          E::ts(
-            'You picked color "%1"',
-            array(
-              1 => $options[$values['favorite_color']],
-            )
-          )
-        );
         parent::postProcess();
+
+        $values = $this->exportValues();
+
+        // TODO: Get or create contact using XCM with the mutualaid profile.
+        //       - Add comment as contact note.
+
+        // Set default for help types, if only one is active.
+        if (count($help_types = CRM_Mutualaid_Settings::getHelpTypes()) == 1) {
+            $values['help_types'] = array_keys($help_types);
+        }
+
+        // Calculate distance in meters.
+        if (($distance_unit = CRM_Mutualaid_Settings::getDistanceUnit()) != 1) {
+            $values['max_distance'] *= $distance_unit;
+        }
+
+        // Resolve custom fields.
+        $custom_field_mapping = array(
+            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
+            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
+            'help_types' => 'mutualaid_offers_help.mutualaid_help_offered',
+        );
+        foreach ($custom_field_mapping as $element_name => $custom_field_name) {
+            if (isset($values[$element_name])) {
+                $values[$custom_field_name] = $values[$element_name];
+                unset($values[$element_name]);
+            }
+        }
+        CRM_Mutualaid_CustomData::resolveCustomFields($values);
+
+        // TODO: Pass contact data to XCM with mutualaid profile.
     }
 }

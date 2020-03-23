@@ -200,8 +200,8 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
           false
         );
         if (CRM_Mutualaid_Settings::get('languages_enabled')) {
-            // TODO: This can't be required without a default; Take into account to
-            //       also match people without language
+            // This will default to self::getDefaultLanguage, even if the field
+            // is not added.
             $this->addWithInfo(
               'select',
               'languages',
@@ -210,8 +210,53 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
               false,
               array(
                 'class' => 'crm-select2 crm-form-select2 huge',
+                  'multiple' => true,
               )
             );
         }
+    }
+
+    /**
+     * Sets default values for form elements.
+     *
+     * @return array|NULL
+     */
+    public function setDefaultValues()
+    {
+        $defaults = array(
+            'languages' => array(
+                self::getDefaultLanguage(),
+            ),
+        );
+
+        return $defaults;
+    }
+
+    /**
+     * Processes valid form submissions.
+     */
+    public function postProcess()
+    {
+        // Set default value for language, if not set.
+        if (empty($this->_submitValues['languages'])) {
+            $this->_submitValues['languages'] = array(
+                self::getDefaultLanguage(),
+            );
+        }
+    }
+
+    /**
+     * Retrieves the system's default language.
+     *
+     * @return string | null
+     *   Either the configured default language, or null, if none is defined.
+     */
+    public static function getDefaultLanguage()
+    {
+        if ($default_language = CRM_Core_I18n::getContactDefaultLanguage()) {
+            $default_language = substr($default_language, 0, 2);
+        }
+
+        return $default_language;
     }
 }
