@@ -149,77 +149,78 @@ class CRM_Mutualaid_Matcher
             $HELP_TABLE = CRM_Mutualaid_CustomData::getGroupTable(
               'mutualaid_offers_help'
             );
-            $HELP_PROVIDED_TYPE = CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(
-            );
+            $HELP_PROVIDED_TYPE = CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID();
             $HELP_PROVIDED_STATUS = CRM_Mutualaid_CustomData::getCustomField(
               'mutualaid',
-              'help_status'
-            );
+              'help_status');
             $HELP_PROVIDED_STATUS_COLUMN = $HELP_PROVIDED_STATUS['column_name'];
-            $HELP_PROVIDED_TABLE = CRM_Mutualaid_CustomData::getGroupTable(
-              'mutualaid'
-            );
+            $HELP_PROVIDED_TABLE = CRM_Mutualaid_CustomData::getGroupTable('mutualaid');
             $HELP_OFFERED_FIELD = CRM_Mutualaid_CustomData::getCustomField(
               'mutualaid_offers_help',
-              'mutualaid_help_offered'
-            );
+              'mutualaid_help_offered');
             $HELP_OFFERED_TYPE = $HELP_OFFERED_FIELD['column_name'];
 
             // build selects for individual help offers
             $help_types = CRM_Mutualaid_Settings::getHelpTypes();
             $HELP_OFFERED_SELECT_LIST = [];
             foreach ($help_types as $help_type => $help_name) {
-                // TODO: use LOCATE instead of LIKE?
                 $help_type_value = (int)$help_type;
-                $token = CRM_Utils_Array::implodePadded([$help_type_value]);
-                $HELP_OFFERED_SELECT_LIST[] = "(LOCATE('$token', ) > 0) AS offers_help_{$help_type_value}";
+                $token = "CONCAT(0x01, '{$help_type_value}', 0x01)";
+                $HELP_OFFERED_SELECT_LIST[] = "(LOCATE({$token}, help_offered.{$HELP_OFFERED_TYPE}) > 0) AS offers_help_{$help_type_value}";
             }
-            $HELP_OFFERED_SELECTS = implode(
-              ';\n        ',
-              $HELP_OFFERED_SELECT_LIST
-            );
+            $HELP_OFFERED_SELECTS = implode(';\n              ', $HELP_OFFERED_SELECT_LIST);
+            if (!empty($HELP_OFFERED_SELECTS)) {
+              $HELP_OFFERED_SELECTS .= ',';
+            }
 
             // build languages spoken
             $HELP_LANGUAGES_SPOKEN = ''; // TODO
 
             // compile query to build the table
             $table_query = "
-      SELECT
-        contact.id                   AS contact_id,
-        (help_offered.{$MAX_JOBS_COLUMN} - COUNT(help_provided_data.id))      
-                                     AS open_spots,
-        {$HELP_OFFERED_SELECTS}
-        {$HELP_LANGUAGES_SPOKEN}
-        address.geo_code_1           AS latitude,
-        address.geo_code_2           AS longitude
-      FROM civicrm_contact contact
-      LEFT JOIN civicrm_address address                   
-             ON address.contact_id = contact.id 
-             AND address.is_primary = 1  
-      LEFT JOIN {$HELP_TABLE}  help_offered              
-             ON help_offered.entity_id = contact.id
-      LEFT JOIN civicrm_relationship  help_provided        
-             ON help_provided.contact_id_b = contact.id 
-             AND help_provided.relationship_type_id = {$HELP_PROVIDED_TYPE}
-      LEFT JOIN {$HELP_PROVIDED_TABLE}  help_provided_data 
-             ON help_provided_data.entity_id = help_provided.id
-             AND help_provided_data.{$HELP_PROVIDED_STATUS_COLUMN} IN ({$HELP_PROVIDED_ACTIVE_STATUS_LIST}) 
-      WHERE (contact.is_deleted IS NULL OR contact.is_deleted = 0)
-        AND address.geo_code_1 IS NOT NULL
-        AND address.geo_code_2 IS NOT NULL
-        AND help_provided_data.id IS NOT NULL  -- only count active help_provided relationships
-        AND help_offered.{$HELP_OFFERED_TYPE} IS NOT NULL
-      GROUP BY contact.id
-      HAVING open_spots > 0
-      ";
+              SELECT
+                contact.id                   AS contact_id,
+                (help_offered.{$MAX_JOBS_COLUMN} - COUNT(help_provided_data.id))      
+                                             AS open_spots,
+                {$HELP_OFFERED_SELECTS}
+                {$HELP_LANGUAGES_SPOKEN}
+                address.geo_code_1           AS latitude,
+                address.geo_code_2           AS longitude
+              FROM civicrm_contact contact
+              LEFT JOIN civicrm_address address                   
+                     ON address.contact_id = contact.id 
+                     AND address.is_primary = 1  
+              LEFT JOIN {$HELP_TABLE}  help_offered              
+                     ON help_offered.entity_id = contact.id
+              LEFT JOIN civicrm_relationship  help_provided        
+                     ON help_provided.contact_id_b = contact.id 
+                     AND help_provided.relationship_type_id = {$HELP_PROVIDED_TYPE}
+              LEFT JOIN {$HELP_PROVIDED_TABLE}  help_provided_data 
+                     ON help_provided_data.entity_id = help_provided.id
+                     AND help_provided_data.{$HELP_PROVIDED_STATUS_COLUMN} IN ({$HELP_PROVIDED_ACTIVE_STATUS_LIST}) 
+              WHERE (contact.is_deleted IS NULL OR contact.is_deleted = 0)
+                AND address.geo_code_1 IS NOT NULL
+                AND address.geo_code_2 IS NOT NULL
+                AND help_provided_data.id IS NOT NULL  -- only count active help_provided relationships
+                AND help_offered.{$HELP_OFFERED_TYPE} IS NOT NULL 
+                AND help_offered.{$HELP_OFFERED_TYPE} <> ''
+              GROUP BY contact.id
+              HAVING open_spots > 0
+              ";
 
             // build the table
             $this->helper_table = CRM_Utils_SQL_TempTable::build();
             $this->helper_table->createWithQuery($table_query);
 
             // add indexes
-            // TODO
-
+            $helper_table_name = $this->helper_table->getName();
+            CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX contact_id(contact_id)");
+            CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX latitude(latitude)");
+            CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX longitude(longitude)");
+            foreach ($help_types as $help_type => $help_name) {
+                $help_type_value = (int) $help_type;
+                CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX offers_help_{$help_type_value}(offers_help_{$help_type_value})");
+            }
         }
         return $this->helper_table->getName();
     }
@@ -267,12 +268,12 @@ class CRM_Mutualaid_Matcher
         );
 
         $delete_all_query = "
-        DELETE help_provided
-        FROM civicrm_relationship help_provided
-        LEFT JOIN {$HELP_PROVIDED_TABLE} help_provided_data ON help_provided_data.entity_id = help_provided.id
-        WHERE help_provided.relationship_type_id = {$HELP_PROVIDED_TYPE}
-          AND help_provided_data.{$HELP_PROVIDED_STATUS_COLUMN} IN ({$HELP_PROVIDED_UNCONFIRMED_STATUS_LIST})
-     ";
+          DELETE help_provided
+          FROM civicrm_relationship help_provided
+          LEFT JOIN {$HELP_PROVIDED_TABLE} help_provided_data ON help_provided_data.entity_id = help_provided.id
+          WHERE help_provided.relationship_type_id = {$HELP_PROVIDED_TYPE}
+            AND help_provided_data.{$HELP_PROVIDED_STATUS_COLUMN} IN ({$HELP_PROVIDED_UNCONFIRMED_STATUS_LIST})
+       ";
         CRM_Core_DAO::executeQuery($delete_all_query);
     }
 
