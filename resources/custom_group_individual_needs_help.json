@@ -19,7 +19,7 @@
       "column_name": "help_type",
       "label": "Help Needed",
       "data_type": "String",
-      "html_type": "Select",
+      "html_type": "Multi-Select",
       "option_group_id": "mutualaid_help_types",
       "is_required": "1",
       "is_searchable": "1",

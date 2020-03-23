@@ -19,7 +19,7 @@
       "column_name": "languages",
       "label": "Speaks Languages",
       "data_type": "String",
-      "html_type": "Select",
+      "html_type": "Multi-Select",
       "option_group_id": "languages",
       "is_required": "0",
       "is_searchable": "1",
