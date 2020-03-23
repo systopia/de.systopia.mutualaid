@@ -109,13 +109,91 @@ class CRM_Mutualaid_Matcher
     }
 
     /**
+     * Select/pick the best suited helper for the help request
+     *
+     * @param array $help_request
+     *      help request with fields 'contact_id', 'location', 'types', 'languages'
+     *
+     * @param array $potential_helpers
+     *      list of helper structures, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     *
+     * @return array|null best suiting helper
+     *      helper structure, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     */
+    protected function getBestMatchingHelper($help_request, $potential_helpers)
+    {
+        $best_helper = null;
+        $best_helper_score = -1.0;
+        foreach ($potential_helpers as $potential_helper) {
+            // some basic checks
+            /*if ($help_request['contact_id'] == $potential_helper['contact_id']) {
+                continue;
+            }*/
+
+            $distance = $this->calculateDistance($help_request['location'], $potential_helper['location']);
+            if ($potential_helper['max_distance'] < $distance) {
+                continue;
+            }
+
+            // score the helper
+            $helper_score = 0.0;
+
+            // score 1: total distance
+            // TODO: implement
+
+            // score 2: relative distance
+            // TODO: implement
+
+            // score 3: help request/offer overlap
+            // TODO: implement
+
+            // score 4: helper workload
+            // TODO: implement
+
+            if ($helper_score > $best_helper_score) {
+                $best_helper_score = $helper_score;
+                $best_helper = $potential_helper;
+            }
+        }
+
+        return $best_helper;
+    }
+
+    /**
+     * Assign the given helper to the person that requested help
+     *
+     * @param array $help_request
+     *      help request with fields 'contact_id', 'location', 'types', 'languages'
+     *
+     * @param array $helper
+     *      helper structure, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     */
+    protected function assignHelper($help_request, $helper)
+    {
+        // TODO: work with unconfirmed requests, when implemented properly
+        // TODO: extend existing, communicated help?
+
+        // create a new relationship
+        $new_relationship = [
+            'relationship_type_id'         => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
+            'contact_id_a'                 => $helper['contact_id'],
+            'contact_id_b'                 => $help_request['contact_id'],
+            'start_date'                   => date('YmdHis'),
+            'mutualaid.help_status'        => 1, // assigned
+            'mutualaid.help_type_provided' => array_intersect($helper['offers_help'], $help_request['types'])
+        ];
+        CRM_Mutualaid_CustomData::resolveCustomFields($new_relationship);
+        civicrm_api3('Relationship', 'create', $new_relationship);
+    }
+
+    /**
      * Find a list of potential helpers for the given help request
      *
      * @param array $help_request
      *      help request with fields 'contact_id', 'location', 'types', 'languages'
      *
      * @return array
-     *      list of helper structures, containing the fields 'contact_id', 'location', 'types', 'languages'
+     *      list of helper structures, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
      */
     protected function getPotentialHelpers($help_request)
     {
@@ -168,7 +246,7 @@ class CRM_Mutualaid_Matcher
                 'contact_id'   => $potential_helper->contact_id,
                 'max_distance' => $potential_helper->max_distance,
                 'location'     => [$potential_helper->longitude, $potential_helper->latitude],
-                'offers_help'  => explode(',', trim($this->offers_help, ',)'))
+                'offers_help'  => explode(',', trim($potential_helper->offers_help, ',)'))
             ];
         }
 
@@ -307,7 +385,7 @@ class CRM_Mutualaid_Matcher
               $HELP_OFFERED_SELECTS .= ',';
             }
 
-            // TODO: calculate proper min/max factors (meters per degree)
+            // TODO: don't use approximation (min/max factors in meters per degree)
             $LATITUDE_FACTOR  = 111000.1;
             $LONGITUDE_FACTOR = 73000.1;
 
@@ -386,6 +464,7 @@ class CRM_Mutualaid_Matcher
     public static function calculateDistance($point1, $point2)
     {
         // TODO
+        return 0.0;
     }
 
     /**
