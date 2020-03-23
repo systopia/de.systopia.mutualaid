@@ -64,23 +64,15 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
      */
     public function enable()
     {
-        // make sure the 'mutual_help' profile is there
-        $profile_list = CRM_Xcm_Configuration::getProfileList();
-        if (!isset($profile_list['mutual_help'])) {
-            // not here? create!
-            $profile_data = Civi::settings()->get('xcm_config_profiles');
-            $mutual_help_profile = json_decode(
-              file_get_contents(E::path('resources/xcm_matching_profile.json')),
-              true
-            );
-            $mutual_help_profile['label'] = E::ts("Mutual Aid Submissions");
-            $profile_data['mutual_help'] = $mutual_help_profile;
-            Civi::settings()->set('xcm_config_profiles', $profile_data);
-        }
+        // Make sure the "mutual_help" XCM profile exists.
+        $this->installXcmProfile(
+          'mutualaid',
+          file_get_contents(E::path('resources/xcm_profile_mutualaid.json'))
+        );
 
         // install reports
         $this->installReport(
-          'mutualhelp_unconfirmed',
+          'mutualaid_unconfirmed',
           file_get_contents(
             E::path('resources/report_unconfirmed.json')
           )
@@ -176,6 +168,40 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
             }
         }
         civicrm_api3('ReportInstance', 'create', $report_data);
+    }
+
+    /**
+     * Installs an XCM profile, if it does not exist.
+     *
+     * @param $name
+     *   The XCM profile name.
+     * @param $raw_json_data
+     *   The XCM profile data in JSON format.
+     */
+    protected function installXcmProfile($name, $raw_json_data)
+    {
+        $profile_list = CRM_Xcm_Configuration::getProfileList();
+        if (!isset($profile_list[$name])) {
+            // not here? create!
+            $profile_data = Civi::settings()->get('xcm_config_profiles');
+            $profile = json_decode(
+              $raw_json_data,
+              true
+            );
+
+            // Resolve custom field names.
+            foreach (array(
+              'fill_fields',
+                'override_fields',
+                     ) as $fields) {
+                $definition = array_flip($profile['options'][$fields]);
+                CRM_Mutualaid_CustomData::resolveCustomFields($definition);
+                $profile['options'][$fields] = array_flip($definition);
+            }
+
+            $profile_data[$name] = $profile;
+            Civi::settings()->set('xcm_config_profiles', $profile_data);
+        }
     }
 
     /**

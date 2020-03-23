@@ -29,7 +29,12 @@
       "prefix_id",
       "birth_date",
       "gender_id",
-      "formal_title"
+      "formal_title",
+      "mutualaid_needs_help.mutualaid_help_needed",
+      "mutualaid_needs_help.mutualaid_personal_contact",
+      "mutualaid_offers_help.mutualaid_help_offered",
+      "mutualaid_offers_help.mutualaid_max_persons",
+      "mutualaid_offers_help.mutualaid_max_distance"
     ],
     "override_fields": [],
     "case_insensitive": "1",
