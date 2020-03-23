@@ -15,7 +15,7 @@
       "_lookup": ["column_name", "custom_group_id"],
       "_translate": ["label"],
       "weight": "1",
-      "name": "mutualaid_help_provided",
+      "name": "mutualaid_help_offered",
       "column_name": "help_type",
       "label": "Help Offered",
       "data_type": "String",
