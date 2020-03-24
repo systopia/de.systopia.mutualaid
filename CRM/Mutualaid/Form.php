@@ -154,22 +154,17 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
         );
         $this->addWithInfo(
           'text',
-          'phone_landline',
+          'phone',
           E::ts('Phone (Landline)'),
           array(),
           true
         );
         $this->addWithInfo(
           'text',
-          'phone_mobile',
+          'phone2',
           E::ts('Phone (Mobile)'),
           array(),
           true
-        );
-        $this->addWithInfo(
-          'text',
-          'im_whatsapp',
-          E::ts('WhatsApp')
         );
         $this->addWithInfo(
           'text',
