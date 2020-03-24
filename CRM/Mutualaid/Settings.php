@@ -23,6 +23,137 @@ class CRM_Mutualaid_Settings
 {
 
     /**
+     * Retrieves fields available for being made active on forms.
+     *
+     * @return array
+     *   A list of fields that are available as set in the CiviCRM preferences.
+     */
+    public static function getAvailableFields()
+    {
+        return array_merge(
+            self::getContactFields(),
+            array(
+                'max_distance',
+                'max_persons',
+                'help_types',
+            )
+        );
+    }
+
+    /**
+     * @param $params
+     *
+     * @param $all
+     */
+    public static function resolveCustomFields(&$params, $all = false)
+    {
+        $custom_field_mapping = array(
+            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
+            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
+            'help_types' => 'mutualaid_offers_help.mutualaid_help_offered',
+        );
+        foreach ($custom_field_mapping as $element_name => $custom_field_name) {
+            if (isset($params[$element_name])) {
+                $params[$custom_field_name] = $params[$element_name];
+                unset($params[$element_name]);
+            }
+        }
+
+        CRM_Mutualaid_CustomData::resolveCustomFields($params);
+    }
+
+    /**
+     * @return array
+     */
+    public static function getCustomFields()
+    {
+        $params = array(
+            'max_distance' => true,
+            'max_persons' => true,
+            'help_types' => true,
+        );
+        self::resolveCustomFields($params);
+
+        return array_keys($params);
+    }
+
+    /**
+     * Retrieves active fields for the forms to display.
+     *
+     * @return array
+     *   A list of fields activated to be shown on forms, as set in the
+     *   extension configuration.
+     */
+    public static function getFields()
+    {
+        $available_fields = self::getAvailableFields();
+
+        // TODO: Remove fields not activated in extension configuration.
+
+        return $available_fields;
+    }
+
+    /**
+     * Retrieves active contact fields from the Core option group.
+     *
+     * @return array
+     *   An array of active individual contact field names.
+     */
+    public static function getContactFields()
+    {
+        // Retrieve all available individual contact fields.
+        $contact_fields = CRM_Core_BAO_Setting::valueOptions(
+            CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME,
+            'contact_edit_options',
+            true,
+            null,
+            false,
+            'name',
+            false,
+            'AND v.filter = 2' // Individual
+        );
+
+        // Filter for active individual contact fields.
+        $contact_fields = array_keys(array_filter($contact_fields));
+
+        // Copied from CRM_Contact_Form_Edit_Individual::buildQuickForm(),
+        // including the comment.
+        // Fixme: dear god why? these come out in a format that is NOT the name
+        //        of the fields.
+        foreach ($contact_fields as &$fix) {
+            $fix = str_replace(' ', '_', strtolower($fix));
+            if ($fix == 'prefix' || $fix == 'suffix') {
+                // God, why god?
+                $fix .= '_id';
+            }
+        }
+
+        // Retrieve all available address fields.
+        $address_fields = CRM_Core_BAO_Setting::valueOptions(
+            CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME,
+            'address_options'
+        );
+
+        // Filter for active address fields.
+        $address_fields = array_keys(array_filter($address_fields));
+
+        // Add Pseudo-contact fields for details that XCM can handle.
+        $extra_fields = array(
+            'email', // "Email" detail entity
+            'phone', // "Phone" detail entity for primary phone.
+            'phone2', // "Phone" detail entity for secondary phone.
+            'url', // "Website" detail entity
+        );
+
+        return array_merge(
+            $contact_fields,
+            self::getCustomFields(),
+            $address_fields,
+            $extra_fields
+        );
+    }
+
+    /**
      * Retrieves all languages configured in CiviCRM.
      *
      * @param bool $associate
@@ -38,10 +169,10 @@ class CRM_Mutualaid_Settings
     {
         $help_types = array();
         CRM_Core_OptionValue::getValues(
-          array('name' => 'languages'),
-          $help_types,
-          'weight',
-          true
+            array('name' => 'languages'),
+            $help_types,
+            'weight',
+            true
         );
 
         // Return value-label pairs when requested.
@@ -72,10 +203,10 @@ class CRM_Mutualaid_Settings
     {
         $help_types = array();
         CRM_Core_OptionValue::getValues(
-          array('name' => 'mutualaid_help_types'),
-          $help_types,
-          'weight',
-          true
+            array('name' => 'mutualaid_help_types'),
+            $help_types,
+            'weight',
+            true
         );
 
         // Return value-label pairs when requested.
@@ -104,12 +235,12 @@ class CRM_Mutualaid_Settings
 
         if ($label) {
             $metadata = civicrm_api3(
-              'Setting',
-              'getfields',
-              array(
-                'api_action' => 'get',
-                'name' => 'mutualaid_distance_unit',
-              )
+                'Setting',
+                'getfields',
+                array(
+                    'api_action' => 'get',
+                    'name' => 'mutualaid_distance_unit',
+                )
             );
             $setting = $metadata['values'][E::SHORT_NAME . '_distance_unit']['options'][$setting];
         }
@@ -126,11 +257,11 @@ class CRM_Mutualaid_Settings
     public static function getAll($filter = array())
     {
         $settings = array_filter(
-          Civi::settings()->all(),
-          function ($setting) {
-              return strpos($setting, 'mutualaid_') === 0;
-          },
-          ARRAY_FILTER_USE_KEY
+            Civi::settings()->all(),
+            function ($setting) {
+                return strpos($setting, 'mutualaid_') === 0;
+            },
+            ARRAY_FILTER_USE_KEY
         );
 
         return $settings;
@@ -199,12 +330,12 @@ class CRM_Mutualaid_Settings
         static $relationship_type_id = null;
         if ($relationship_type_id === null) {
             $relationship_type_id = civicrm_api3(
-              'RelationshipType',
-              'getvalue',
-              [
-                'return' => 'id',
-                'name_a_b' => 'mutualaid_provides_for',
-              ]
+                'RelationshipType',
+                'getvalue',
+                [
+                    'return' => 'id',
+                    'name_a_b' => 'mutualaid_provides_for',
+                ]
             );
         }
         return (int)$relationship_type_id;
