@@ -259,5 +259,22 @@ function mutualaid_civicrm_navigationMenu(&$menu)
       ]
     );
 
+    _mutualaid_civix_insert_navigation_menu(
+        $menu,
+        'MutualHelp',
+        [
+            'label' => E::ts('Configuration'),
+            'name' => 'mutualhelp_configuration',
+            'url' => CRM_Utils_System::url(
+                'civicrm/admin/setting/mutualaid',
+                'reset=1'
+            ),
+            'permission' => 'administer CiviCRM',
+            'icon' => 'crm-i fa-cog',
+            'operator' => 'OR',
+            'separator' => 0,
+        ]
+    );
+
     _mutualaid_civix_navigationMenu($menu);
 }

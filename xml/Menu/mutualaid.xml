@@ -20,5 +20,8 @@
     <title>Mutual Aid Coordination Settings</title>
     <adminGroup>System Settings</adminGroup>
     <access_arguments>administer CiviCRM</access_arguments>
+    <desc>Configure the MutualAid System</desc>
+    <adminGroup>Communications</adminGroup>
+    <icon>admin/duplicate_matching.png</icon>
   </item>
 </menu>
