@@ -37,7 +37,7 @@
       "label": "Personal Contact Possible",
       "data_type": "Boolean",
       "html_type": "Radio",
-      "is_required": "1",
+      "is_required": "0",
       "is_searchable": "1",
       "is_search_range": "0",
       "is_active": "1",
