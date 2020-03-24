@@ -276,5 +276,19 @@ function mutualaid_civicrm_navigationMenu(&$menu)
         ]
     );
 
+    _mutualaid_civix_insert_navigation_menu(
+        $menu,
+        'MutualHelp',
+        [
+            'label' => E::ts('Match Now'),
+            'name' => 'mutualhelp_configuration',
+            'url' => CRM_Utils_System::url('civicrm/mutualaid/matchnow'),
+            'permission' => 'access CiviCRM',
+            'icon' => 'crm-i fa-users',
+            'operator' => 'OR',
+            'separator' => 0,
+        ]
+    );
+
     _mutualaid_civix_navigationMenu($menu);
 }

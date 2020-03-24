@@ -24,7 +24,8 @@ function civicrm_api3_mutual_aid_match($params)
         $matcher->assignOpenRequests();
         $stats = $matcher->getStats();
         //$matcher->cleanup();
-        return civicrm_api3_create_success($stats);
+        $null = null;
+        return civicrm_api3_create_success([], $params, $entity = 'MutualAid', $action = 'match', $null, $stats);
     } catch (Exception $ex) {
         return civicrm_api3_create_error(
           "Matching failed: " . $ex->getMessage()

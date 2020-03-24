@@ -28,6 +28,9 @@ class CRM_Mutualaid_Matcher
     /** @var string database table storing available helpers */
     protected $helper_table = null;
 
+    /** @var array matching statistics */
+    protected $stats = null;
+
     /**
      * Generate a new matcher object
      *
@@ -40,6 +43,10 @@ class CRM_Mutualaid_Matcher
         $this->params = $params;
         // TODO: implement
 
+        $this->stats = [
+            'matched' => 0
+        ];
+
         // do some caching
         CRM_Mutualaid_CustomData::cacheCustomGroups(
           [
@@ -48,6 +55,18 @@ class CRM_Mutualaid_Matcher
             'mutualaid_offers_help',
           ]
         );
+    }
+
+    /**
+     * Return a list of stats from the current match run
+     *
+     * @return array
+     *      statistics about the run
+     */
+    public function getStats()
+    {
+        // TODO: implement
+        return $this->stats;
     }
 
     /**
@@ -90,6 +109,7 @@ class CRM_Mutualaid_Matcher
 
             if ($helper_data) {
                 // there is a helper!
+                $this->stats['matched'] += 1;
                 $this->assignHelper($request_data, $helper_data);
                 $this->updateUnconfirmedRequestsWithMatch(
                   $request_data,
@@ -148,6 +168,9 @@ class CRM_Mutualaid_Matcher
             // TODO: implement
 
             // score 4: helper workload
+            // TODO: implement
+
+            // score 5: rarity of help match
             // TODO: implement
 
             if ($helper_score > $best_helper_score) {

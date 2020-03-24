@@ -24,4 +24,10 @@
     <adminGroup>Communications</adminGroup>
     <icon>admin/duplicate_matching.png</icon>
   </item>
+  <item>
+    <path>civicrm/mutualaid/matchnow</path>
+    <page_callback>CRM_Mutualaid_Page_MatchNow</page_callback>
+    <title>Match MutualAid requests to offers</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>
