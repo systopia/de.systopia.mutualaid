@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-03-22 09:38+0100\n"
+"POT-Creation-Date: 2020-03-23 17:21+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -30,15 +30,15 @@ msgstr "Wähle, wobei Du helfen kannst."
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid "I am offering help for max."
-msgstr ""
+msgstr "Ich biete Hilfe für maximal"
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid "persons"
-msgstr ""
+msgstr "Person(en)"
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid "I am offering help in a max. proximity of"
-msgstr ""
+msgstr "Ich biete Hilfe in einem maximalen Umkreis von"
 
 #: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
 msgid "Notes/Comments"
@@ -52,278 +52,318 @@ msgstr "Bedingungen"
 msgid ""
 "I understand and accept the terms and conditions for using this service."
 msgstr ""
+"Ich verstehe und akzeptiere die Bedingungen für die Nutzung dieses Services."
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid "Offer help"
-msgstr ""
+msgstr "Hilfe anbieten"
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
 "Please provide an integer value for the maximum number of persons you would "
 "like to offer help for."
 msgstr ""
+"Bitte geben Sie eine gültige Zahl für die maximale Anzahl an Personen ein, "
+"die Sie unterstützen können."
 
 #: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
-"Please provide an integer value for the maximum distance you would like to "
+"Please provide a numeric value for the maximum distance you would like to "
 "offer help in."
 msgstr ""
-
-#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
-msgid "You picked color \"%1\""
-msgstr ""
+"Bitte geben Sie eine gültige Zahl ein für die maximale Entfernung in der Sie "
+"Hilfe anbieten können."
 
 #: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Request Help"
-msgstr ""
+msgstr "Hilfegesuch absenden"
 
 #: CRM/Mutualaid/Form/RequestHelp.php
 msgid "I am requesting help for"
-msgstr ""
+msgstr "Ich benötige Hilfe bei"
 
 #: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Select what kind of help you are requesting."
-msgstr ""
+msgstr "Wählen Sie die Art der benötigten Hilfe aus."
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "You picked color \"%1\""
+msgstr "Farbe \"%1\" ausgewählt"
 
 #: CRM/Mutualaid/Form.php
 msgid "First name"
-msgstr ""
+msgstr "Vorname"
 
 #: CRM/Mutualaid/Form.php
 msgid "Last name"
-msgstr ""
+msgstr "Nachname"
 
 #: CRM/Mutualaid/Form.php
 msgid "E-Mail Address"
-msgstr ""
+msgstr "E-Mail-Adresse"
 
 #: CRM/Mutualaid/Form.php
 msgid "Phone (Landline)"
-msgstr ""
+msgstr "Telefon (Festnetz)"
 
 #: CRM/Mutualaid/Form.php
 msgid "Phone (Mobile)"
-msgstr ""
+msgstr "Telefon (Mobil)"
 
 #: CRM/Mutualaid/Form.php
 msgid "WhatsApp"
-msgstr ""
+msgstr "WhatsApp"
 
 #: CRM/Mutualaid/Form.php
 msgid "Street Address"
-msgstr ""
+msgstr "Straße"
 
 #: CRM/Mutualaid/Form.php
 msgid "Postal Code"
-msgstr ""
+msgstr "Postleitzahl"
 
 #: CRM/Mutualaid/Form.php
 msgid "City"
-msgstr ""
+msgstr "Ort"
 
 #: CRM/Mutualaid/Form.php
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #: CRM/Mutualaid/Form.php
 msgid "Languages spoken"
+msgstr "Beherrschte Sprachen"
+
+#: CRM/Mutualaid/Upgrader/Base.php
+msgid "Upgrade %1 to revision %2"
+msgstr "Aktualisiere %1 auf Revision %2"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Your system doesn't have a GeoCoder service configured. A GeoCoder can "
+"assign geo coordinates to a given address.<br/>"
 msgstr ""
+"In CiviCRM ist derzeit kein Dienstleister für Geokodierung konfiguriert. "
+"Dieser wird benötigt, um eingegebenen Adressen Geokoordinatenzuzuordnen.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"This is really important for this extension, since it is needed to calculate "
+"the distance between two people.<br/>"
+msgstr ""
+"Dies ist für diese Erweiterung erforderlich, um die Entfernung zwischen zwei "
+"Personen berechnen zu können.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Please configure your GeoCoder <a href=\"%1\">HERE</a>.<br/>"
+msgstr "Bitte konfigurieren Sie die Geokodierung <a href=\"%1\">hier</a>.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"If you don't want to use the built-in ones we recommend <a href="
+"\"%1\">OpenStreetMap</a>.<br/>"
+msgstr ""
+"Falls Sie die integrierten Services für Geokodierung nicht nutzen möchten "
+"empfehlen wir die Nutzung von <a href=\"%1\">OpenStreetMap</a>.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "No GeoCoder configured"
+msgstr "Kein Service für Geokodierung konfiguriert"
+
+#: mutualaid.php
+#, fuzzy
+#| msgid "Mutual Aid"
+msgid "Mutual Help"
+msgstr "Nachbarschaftshilfe"
+
+#: mutualaid.php
+msgid "Unconfirmed Matches"
+msgstr "Unbestätigte Zuordnungen"
+
+#: mutualaid.php
+msgid "Help Offer Form"
+msgstr "Formular \"Biete Hilfe\""
+
+#: mutualaid.php
+msgid "Help Request Form"
+msgstr "Formular \"Benötige Hilfe\""
 
 #: settings/mutualaid.setting.php
 msgid "Languages enabled"
-msgstr ""
+msgstr "Sprachen aktivieren"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "If enabled, languages spoken will be collected from people offering and "
 "requesting help, and taken into account when matching requests with offers."
 msgstr ""
+"Falls aktiviert werden beherrschte Sprachen der Hilfesuchenden und Helfenden "
+"abgefragt und bei der Zuordnung berücksichtigt."
 
 #: settings/mutualaid.setting.php
 msgid "Comments enabled"
-msgstr ""
+msgstr "Kommentare aktiviert"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "If enabled, comments will be collected from people offering and requesting "
 "help."
 msgstr ""
+"Falls aktiviert wird Hilfesuchenden und Helfenden die Möglichkeit gegeben, "
+"einen Kommenar hinzuzufügen."
+
+#: settings/mutualaid.setting.php
+msgid "Meters"
+msgstr "Meter"
 
 #: settings/mutualaid.setting.php
 msgid "Kilometers"
-msgstr ""
+msgstr "Kilometer"
 
 #: settings/mutualaid.setting.php
 msgid "Miles"
-msgstr ""
+msgstr "Meilen"
 
 #: settings/mutualaid.setting.php
 msgid "Distance unit"
-msgstr ""
+msgstr "Maßeinheit für Entfernung"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "Unit for distance values, used for collecting max. distance in forms and for "
 "calculating proximity."
 msgstr ""
+"Maßeinheit die für die Abfrage der maximalen \"Hilfsentfernung\" sowie die "
+"Zuordnung von Personen genutzt wird."
 
 #: settings/mutualaid.setting.php
 msgid "Terms & Conditions"
-msgstr ""
+msgstr "Nutzungsbedingungen"
 
 #: settings/mutualaid.setting.php
 msgid "HTML content containing Terms and Conditions to display on forms."
 msgstr ""
+"HTML-formatierte Nutzungsbedingungen die im öffentlichen Formular angezeigt "
+"werden."
 
 #: settings/mutualaid.setting.php
 msgid "E-Mail Confirmation Template"
-msgstr ""
+msgstr "Vorlage für Bestätigungs-E-Mail"
 
 #: settings/mutualaid.setting.php
 msgid "- Do not send confirmation e-mails -"
-msgstr ""
+msgstr "- Keine Bestätigungd-E-Mail versenden -"
 
 #: settings/mutualaid.setting.php
 msgid "Maximum helpers per requesting person"
-msgstr ""
+msgstr "Maximale Anzahl Helfender pro Hilfesuchender Person"
 
 #: settings/mutualaid.setting.php
 msgid "Maximum number of persons providing help per person requesting help."
-msgstr ""
+msgstr "Maximale Anzahl Helfender pro hilfesuchender Person."
 
 #: settings/mutualaid.setting.php
 msgid "Matching Weight: Help Types"
-msgstr ""
+msgstr "Gewichtung: Art der Unterstützung"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "Weight for matching help types when calculating matches between persons."
 msgstr ""
+"Gewichtung der Art der benötigten Hilfe bei der Zuordnung von Personen."
 
 #: settings/mutualaid.setting.php
 msgid "Matching Weight: Distance"
-msgstr ""
+msgstr "Gewichtung: Entfernung"
 
 #: settings/mutualaid.setting.php
 msgid "Weight for distance when calculating matches between persons."
-msgstr ""
+msgstr "Gewichtung der Entfernung der Personen bei der Zuordnung."
 
 #: settings/mutualaid.setting.php
 msgid "Matching Weight: Workload"
-msgstr ""
+msgstr "Gewichtung: Auslastung"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "Weight for workload of persons providing help when calculating matches "
 "between persons."
 msgstr ""
+"Gewichtung der Auslastung der Helfenden (Anzahl der unterstützten Personen) "
+"bei der Zuordnung."
 
 #: settings/mutualaid.setting.php
 msgid "Matching Weight: Small Distance Preference"
-msgstr ""
+msgstr "Gewichtung: Kurze Entfernung"
 
 #: settings/mutualaid.setting.php
 msgid ""
 "Weight for preference of persons providing help in small distances when "
 "calculating matches between persons."
-msgstr ""
+msgstr "Gewichtung kurzer Entfernungen bei der Zuordnung von Personen."
 
-#: resources/custom_group_individual_languages.php
-msgid "Languages (MutualAid)"
-msgstr "Sprachen (Nachbarschaftshilfe)"
+#~ msgid "Languages (MutualAid)"
+#~ msgstr "Sprachen (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_languages.php
-msgid "Speaks Languages"
-msgstr "Spricht"
+#~ msgid "Speaks Languages"
+#~ msgstr "Spricht"
 
-#: resources/custom_group_individual_needs_help.php
-msgid "Help Needed (Mutual Aid)"
-msgstr "Hilfe Angefragt (Nachbarschaftshilfe)"
+#~ msgid "Help Needed (Mutual Aid)"
+#~ msgstr "Hilfe Angefragt (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_needs_help.php
-msgid "Personal Contact Possible"
-msgstr "Persönlicher Kontakt Möglich"
+#~ msgid "Personal Contact Possible"
+#~ msgstr "Persönlicher Kontakt Möglich"
 
-#: resources/custom_group_individual_needs_help.php
-msgid "Help Needed"
-msgstr ""
+#~ msgid "Help Offered (Mutual Aid)"
+#~ msgstr "Hilfe Angeboten (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_offers_help.php
-msgid "Help Offered (Mutual Aid)"
-msgstr "Hilfe Angeboten (Nachbarschaftshilfe)"
+#~ msgid "Help offered for max. Persons"
+#~ msgstr "Hilfe für maximal (Personen)"
 
-#: resources/custom_group_individual_offers_help.php
-msgid "Help offered for max. Persons"
-msgstr "Hilfe für maximal (Personen)"
+#~ msgid "Help offered within"
+#~ msgstr "Hilfe im Radius von"
 
-#: resources/custom_group_individual_offers_help.php
-msgid "Help offered within"
-msgstr "Hilfe im Radius von"
+#~ msgid "Help Type"
+#~ msgstr "Hilfsart"
 
-#: resources/custom_group_relationship_mutualaid.php
-msgid "Mutual Aid"
-msgstr "Nachbarschaftshilfe"
+#~ msgid "Language"
+#~ msgstr "Sprache"
 
-#: resources/custom_group_relationship_mutualaid.php
-msgid "Help Type"
-msgstr "Hilfsart"
+#~ msgid "Help Status"
+#~ msgstr "Status"
 
-#: resources/custom_group_relationship_mutualaid.php
-msgid "Language"
-msgstr "Sprache"
+#~ msgid "Assigned"
+#~ msgstr "Zugewiesen"
 
-#: resources/custom_group_relationship_mutualaid.php
-msgid "Help Status"
-msgstr "Status"
+#~ msgid "Confirmed"
+#~ msgstr "Bestätigt"
 
-#: resources/option_group_help_status.php
-msgid "Mutual Aid - Help Status"
-msgstr ""
+#~ msgid "Communicated"
+#~ msgstr "Vermittelt"
 
-#: resources/option_group_help_status.php
-msgid "Assigned"
-msgstr "Zugewiesen"
+#~ msgid "Completed"
+#~ msgstr "Abgeschlossen"
 
-#: resources/option_group_help_status.php
-msgid "Confirmed"
-msgstr "Bestätigt"
+#~ msgid "Cancelled"
+#~ msgstr "Abgebrochen"
 
-#: resources/option_group_help_status.php
-msgid "Communicated"
-msgstr "Vermittelt"
+#~ msgid "Mutual Aid - Help Types"
+#~ msgstr "Nachbarschaftshilfe - Hilfsarten"
 
-#: resources/option_group_help_status.php
-msgid "Completed"
-msgstr "Abgeschlossen"
+#~ msgid "Any"
+#~ msgstr "Hilfe"
 
-#: resources/option_group_help_status.php
-msgid "Cancelled"
-msgstr "Abgebrochen"
+#~ msgid "Shopping"
+#~ msgstr "Einkaufen"
 
-#: resources/option_group_help_types.php
-msgid "Mutual Aid - Help Types"
-msgstr "Nachbarschaftshilfe - Hilfsarten"
+#~ msgid "Walk the Dog"
+#~ msgstr "Hund Ausführen"
 
-#: resources/option_group_help_types.php
-msgid "Any"
-msgstr "Hilfe"
+#~ msgid "Pick up Parcels"
+#~ msgstr "Päckchen Abholen"
 
-#: resources/option_group_help_types.php
-msgid "Shopping"
-msgstr "Einkaufen"
+#~ msgid "Provides Mutual Aid for"
+#~ msgstr "Hilft (Nachbarschaftshilfe)"
 
-#: resources/option_group_help_types.php
-msgid "Walk the Dog"
-msgstr "Hund Ausführen"
-
-#: resources/option_group_help_types.php
-msgid "Pick up Parcels"
-msgstr "Päckchen Abholen"
-
-#: resources/relationship_types.php
-msgid "Provides Mutual Aid for"
-msgstr "Hilft (Nachbarschaftshilfe)"
-
-#: resources/relationship_types.php
-msgid "Is provided Mutual Aid by"
-msgstr "Wird geholfen von (Nachbarschaftshilfe)"
+#~ msgid "Is provided Mutual Aid by"
+#~ msgstr "Wird geholfen von (Nachbarschaftshilfe)"
