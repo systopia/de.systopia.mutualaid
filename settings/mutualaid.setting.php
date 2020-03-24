@@ -16,7 +16,8 @@
 
 use CRM_Mutualaid_ExtensionUtil as E;
 
-return array(
+$weight = 0;
+$mutualaid_settings = array(
     E::SHORT_NAME . '_languages_enabled' => array(
         'name' => E::SHORT_NAME . '_languages_enabled',
         'type' => 'Boolean',
@@ -29,7 +30,7 @@ return array(
         'description' => E::ts(
             'If enabled, languages spoken will be collected from people offering and requesting help, and taken into account when matching requests with offers.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 10]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 10]],
     ),
     E::SHORT_NAME . '_comments_enabled' => array(
         'name' => E::SHORT_NAME . '_comments_enabled',
@@ -43,7 +44,7 @@ return array(
         'description' => E::ts(
             'If enabled, comments will be collected from people offering and requesting help.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 20]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 20]],
     ),
     E::SHORT_NAME . '_distance_unit' => array(
         'name' => E::SHORT_NAME . '_distance_unit',
@@ -61,7 +62,7 @@ return array(
         'description' => E::ts(
             'Unit for distance values, used for collecting max. distance in forms and for calculating proximity.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 30]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 30]],
     ),
     E::SHORT_NAME . '_terms_conditions' => array(
         'name' => E::SHORT_NAME . '_terms_conditions',
@@ -74,7 +75,7 @@ return array(
         'description' => E::ts(
             'HTML content containing Terms and Conditions to display on forms.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 40]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 40]],
     ),
     E::SHORT_NAME . '_email_confirmation_template' => array(
         'name' => E::SHORT_NAME . '_email_confirmation_template',
@@ -90,7 +91,7 @@ return array(
         'description' => E::ts(
             'HTML content containing Terms and Conditions to display on forms.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 50]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 50]],
     ),
     E::SHORT_NAME . '_max_helpers' => array(
         'name' => E::SHORT_NAME . '_max_helpers',
@@ -103,7 +104,7 @@ return array(
         'description' => E::ts(
             'Maximum number of persons providing help per person requesting help.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 70]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 70]],
     ),
     E::SHORT_NAME . '_matching_weight_help_types' => array(
         'name' => E::SHORT_NAME . '_matching_weight_help_types',
@@ -116,7 +117,7 @@ return array(
         'description' => E::ts(
             'Weight for matching help types when calculating matches between persons.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 80]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 80]],
     ),
     E::SHORT_NAME . '_matching_weight_distance' => array(
         'name' => E::SHORT_NAME . '_matching_weight_distance',
@@ -129,7 +130,7 @@ return array(
         'description' => E::ts(
             'Weight for distance when calculating matches between persons.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 90]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 90]],
     ),
     E::SHORT_NAME . '_matching_weight_workload' => array(
         'name' => E::SHORT_NAME . '_matching_weight_workload',
@@ -142,7 +143,7 @@ return array(
         'description' => E::ts(
             'Weight for workload of persons providing help when calculating matches between persons.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 100]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 100]],
     ),
     E::SHORT_NAME . '_matching_weight_small_distance_preference' => array(
         'name' => E::SHORT_NAME . '_matching_weight_small_distance_preference',
@@ -155,6 +156,26 @@ return array(
         'description' => E::ts(
             'Weight for preference of persons providing help in small distances when calculating matches between persons.'
         ),
-        'settings_pages' => ['mutualaid' => ['weight' => 110]],
+        'settings_pages' => ['mutualaid' => ['weight' => $weight = 110]],
     ),
 );
+$weight = 200;
+foreach (CRM_Mutualaid_Settings::getContactFields() as $field_name) {
+    $mutualaid_settings[E::SHORT_NAME . '_' . $field_name . '_enabled'] = array(
+        'name' => E::SHORT_NAME . '_' . $field_name . '_enabled',
+        'type' => 'Boolean',
+        'default' => true,
+        'html_type' => 'radio',
+        'quick_form_type' => 'YesNo',
+        'title' => E::ts('Enable field %1', [1 => $field_name]),
+        'is_domain' => 1,
+        'is_contact' => 0,
+        'description' => E::ts(
+            'Whether the contact field %1 is enabled for being displayed on forms of this extension.',
+            [1 => $field_name]
+        ),
+        'settings_pages' => ['mutualaid' => ['weight' => $weight++]],
+    );
+}
+
+return $mutualaid_settings;

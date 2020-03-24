@@ -60,8 +60,13 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
               ),
             );
         }
+
         // TODO: Add configuration element for scheduled job frequency.
 
+        // TODO: Add configuration for all available fields:
+        //      - visible in forms
+        //      - required
+        //      - default value
     }
 
     public function validate()
