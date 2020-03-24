@@ -90,16 +90,14 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
 
     public function postProcess()
     {
-        $values = $this->exportValues();
-        $options = $this->getColorOptions();
-        CRM_Core_Session::setStatus(
-          E::ts(
-            'You picked color "%1"',
-            array(
-              1 => $options[$values['favorite_color']],
-            )
-          )
-        );
         parent::postProcess();
+
+        $fields = CRM_Mutualaid_Settings::getFields();
+
+        // Fetch and filter form values.
+        $values = $this->exportValues(null, true);
+        $values = array_intersect_key($values, array_fill_keys($fields, null));
+
+        $result = civicrm_api3('MutualAid', 'Request', $values);
     }
 }
