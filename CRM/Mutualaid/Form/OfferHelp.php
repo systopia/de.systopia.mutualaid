@@ -145,8 +145,10 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
 
         $fields = CRM_Mutualaid_Settings::getFields();
 
+        // Fetch and filter form values.
         $values = $this->exportValues(null, true);
-        $values = array_intersect_key($values, array_fill_keys($fields, true));
+        $values = array_intersect_key($values, array_fill_keys($fields, null));
+
         $result = civicrm_api3('MutualAid', 'Offer', $values);
     }
 }

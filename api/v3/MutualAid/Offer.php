@@ -66,7 +66,7 @@ function civicrm_api3_mutual_aid_Offer($params)
             $params,
             array_fill_keys(
                 $contact_fields,
-                true
+                null
             )
         );
 
