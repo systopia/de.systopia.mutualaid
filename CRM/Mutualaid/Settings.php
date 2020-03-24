@@ -32,30 +32,26 @@ class CRM_Mutualaid_Settings
     {
         return array_merge(
             self::getContactFields(),
-            array(
-                'max_distance',
-                'max_persons',
-                'help_types',
-            )
+            array_keys(self::getCustomFieldMapping(false))
         );
     }
 
     /**
-     * @param $params
+     * Resolves custom fields from extension-internal names.
      *
-     * @param $all
+     * @param $params
+     *   The parameters array to resolve parameter keys for.
      */
-    public static function resolveCustomFields(&$params, $all = false)
+    public static function resolveCustomFields(&$params)
     {
-        $custom_field_mapping = array(
-            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
-            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
-            'help_types' => 'mutualaid_offers_help.mutualaid_help_offered',
-        );
-        foreach ($custom_field_mapping as $element_name => $custom_field_name) {
-            if (isset($params[$element_name])) {
-                $params[$custom_field_name] = $params[$element_name];
-                unset($params[$element_name]);
+        foreach (
+            self::getCustomFieldMapping(
+                false
+            ) as $element => $custom_field
+        ) {
+            if (isset($params[$element])) {
+                $params[$custom_field] = $params[$element];
+                unset($params[$element]);
             }
         }
 
@@ -63,18 +59,29 @@ class CRM_Mutualaid_Settings
     }
 
     /**
+     * Retrieves all extension-specific custom fields, optionally resolved to
+     * "custom_X" notation.
+     *
+     * @param $resolve
+     *   Whether to resolve to "custom_X" notation or keep extension-internal
+     *   names.
+     *
      * @return array
+     *   An array of custom field names, optionally in "custom_X" notation.
      */
-    public static function getCustomFields()
+    public static function getCustomFieldMapping($resolve = true)
     {
         $params = array(
-            'max_distance' => true,
-            'max_persons' => true,
-            'help_types' => true,
+            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
+            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
+            'help_types' => 'mutualaid_offers_help.mutualaid_help_offered',
         );
-        self::resolveCustomFields($params);
 
-        return array_keys($params);
+        if ($resolve) {
+            self::resolveCustomFields($params);
+        }
+
+        return $params;
     }
 
     /**
@@ -147,7 +154,7 @@ class CRM_Mutualaid_Settings
 
         return array_merge(
             $contact_fields,
-            self::getCustomFields(),
+            array_keys(self::getCustomFieldMapping()),
             $address_fields,
             $extra_fields
         );

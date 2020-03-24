@@ -44,6 +44,11 @@ function _civicrm_api3_mutual_aid_Offer_spec(&$spec)
 function civicrm_api3_mutual_aid_Offer($params)
 {
     try {
+        // Abort when there are no active help types.
+        if (count($help_types = CRM_Mutualaid_Settings::getHelpTypes()) == 0) {
+            throw new Exception(E::ts('No help types active.'));
+        }
+
         // Set default for help types, if only one is active.
         if (count($help_types = CRM_Mutualaid_Settings::getHelpTypes()) == 1) {
             $params['help_types'] = array_keys($help_types);
@@ -55,7 +60,7 @@ function civicrm_api3_mutual_aid_Offer($params)
         // Resolve custom fields.
         CRM_Mutualaid_Settings::resolveCustomFields($params);
 
-        // Identify/create contact using XCM with mutualaid profile.
+        // Prepare data for XCM: Filter for contact data params.
         $contact_fields = CRM_Mutualaid_Settings::getContactFields();
         $contact_data = array_intersect_key(
             $params,
@@ -64,6 +69,8 @@ function civicrm_api3_mutual_aid_Offer($params)
                 true
             )
         );
+
+        // Identify/create contact using XCM with mutualaid profile.
         $contact_data['xcm_profile'] = 'mutualaid';
         $xcm_result = civicrm_api3('Contact', 'getorcreate', $contact_data);
         if ($xcm_result['is_error']) {
@@ -74,7 +81,7 @@ function civicrm_api3_mutual_aid_Offer($params)
         // TODO: Add comment as contact note.
         if (!empty($params['comment'])) {
         }
-        
+
         return civicrm_api3_create_success();
     } catch (Exception $exception) {
         return civicrm_api3_create_error($exception->getMessage());
