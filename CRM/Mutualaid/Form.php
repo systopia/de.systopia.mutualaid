@@ -191,8 +191,11 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
             'select',
             'country',
             E::ts('Country'),
-            array(),
-            false
+            CRM_Mutualaid_Settings::getCountries(),
+            false,
+            array(
+                'class' => 'crm-select2 crm-form-select2 huge',
+            )
         );
         if (CRM_Mutualaid_Settings::get('languages_enabled')) {
             // This will default to self::getDefaultLanguage, even if the field
@@ -221,6 +224,9 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
         $defaults = array(
             'languages' => array(
                 self::getDefaultLanguage(),
+            ),
+            'country' => array(
+                Civi::settings()->get('defaultContactCountry'),
             ),
         );
 

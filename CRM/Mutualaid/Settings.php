@@ -195,6 +195,17 @@ class CRM_Mutualaid_Settings
     }
 
     /**
+     * Retrieves all available countries configured in CiviCRM.
+     *
+     * @return array
+     *   An array of all available countries.
+     */
+    public static function getCountries()
+    {
+        return CRM_Admin_Form_Setting_Localization::getAvailableCountries();
+    }
+
+    /**
      * Retrieves all configured help types from the option group.
      *
      * @param bool $associate
