@@ -82,6 +82,18 @@ function civicrm_api3_mutual_aid_Offer($params)
         if (!empty($params['comment'])) {
         }
 
+        // Send confirmation e-mail when configured.
+        if ($template_id = CRM_Mutualaid_Settings::get('email_confirmation_template')) {
+            $result = civicrm_api3(
+                'MessageTemplate',
+                'send',
+                array(
+                    'id' => $template_id,
+                    'contact_id' => $contact_id,
+                )
+            );
+        }
+
         return civicrm_api3_create_success();
     } catch (Exception $exception) {
         return civicrm_api3_create_error($exception->getMessage());
