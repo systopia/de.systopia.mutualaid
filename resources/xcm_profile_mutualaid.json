@@ -36,7 +36,13 @@
       "mutualaid_offers_help.mutualaid_max_persons",
       "mutualaid_offers_help.mutualaid_max_distance"
     ],
-    "override_fields": [],
+    "override_fields": [
+      "mutualaid_needs_help.mutualaid_help_needed",
+      "mutualaid_needs_help.mutualaid_personal_contact",
+      "mutualaid_offers_help.mutualaid_help_offered",
+      "mutualaid_offers_help.mutualaid_max_persons",
+      "mutualaid_offers_help.mutualaid_max_distance"
+    ],
     "case_insensitive": "1",
     "match_contact_id": null
   },
