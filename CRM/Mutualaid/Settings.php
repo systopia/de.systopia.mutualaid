@@ -174,21 +174,21 @@ class CRM_Mutualaid_Settings
      */
     public static function getLanguages($associate = true)
     {
-        $help_types = array();
+        $languages = array();
         CRM_Core_OptionValue::getValues(
             array('name' => 'languages'),
-            $help_types,
+            $languages,
             'weight',
             true
         );
 
         // Return value-label pairs when requested.
         if ($associate) {
-            foreach ($help_types as $help_type) {
-                $return[$help_type['value']] = $help_type['label'];
+            foreach ($languages as $language) {
+                $return[$language['value']] = $language['label'];
             }
         } else {
-            $return = $help_types;
+            $return = $languages;
         }
 
         return $return;
