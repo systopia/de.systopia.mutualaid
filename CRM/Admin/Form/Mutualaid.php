@@ -68,18 +68,20 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
             'prefix_id',
             'suffix_id',
                  ) as $pseudoconstant_field) {
-            $pseudoconstant_element = $this->getElement(
-                E::SHORT_NAME . '_' . $pseudoconstant_field . '_default'
-            );
-            array_unshift(
-                $pseudoconstant_element->_options,
-                array(
-                    'text' => E::ts('- None -'),
-                    'attr' => array(
-                        'value' => 0,
-                    ),
-                )
-            );
+            if ($this->elementExists(E::SHORT_NAME . '_' . $pseudoconstant_field . '_default')) {
+                $pseudoconstant_element = $this->getElement(
+                    E::SHORT_NAME . '_' . $pseudoconstant_field . '_default'
+                );
+                array_unshift(
+                    $pseudoconstant_element->_options,
+                    array(
+                        'text' => E::ts('- None -'),
+                        'attr' => array(
+                            'value' => 0,
+                        ),
+                    )
+                );
+            }
         }
 
         // Make help type fields multivalue.
