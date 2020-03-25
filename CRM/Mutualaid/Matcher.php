@@ -343,10 +343,10 @@ class CRM_Mutualaid_Matcher
             'help_type_provided');
         $HELP_ASSIGNED_TYPES_COLUMN = $HELP_ASSIGNED_TYPES_FIELD['column_name'];
 
-        $HELP_REQUESTED_FIELD = CRM_Mutualaid_CustomData::getCustomField(
-            'mutualaid_offers_help',
-            'mutualaid_help_offered');
-        $HELP_NEEDED_COLUMN = $HELP_REQUESTED_FIELD['column_name'];
+        $HELP_NEEDED_FIELD = CRM_Mutualaid_CustomData::getCustomField(
+            'mutualaid_needs_help',
+            'mutualaid_help_needed');
+        $HELP_NEEDED_COLUMN = $HELP_NEEDED_FIELD['column_name'];
 
         // TODO: select languages
         $LANGUAGES_SPOKEN_TABLE = CRM_Mutualaid_CustomData::getGroupTable('mutualaid_language');
@@ -372,7 +372,7 @@ class CRM_Mutualaid_Matcher
           SELECT
             contact.id                                               AS contact_id,
             CONCAT(help_assigned_data.{$HELP_ASSIGNED_TYPES_COLUMN}) AS help_assigned,
-            help_requested.{$HELP_NEEDED_COLUMN}                     AS help_needed,
+            help_requested.{$HELP_NEEDED_COLUMN}                  AS help_needed,
             languages_spoken.{$LANGUAGES_SPOKEN_COLUMN}              AS languages,
             address.geo_code_1                                       AS latitude,
             address.geo_code_2                                       AS longitude
