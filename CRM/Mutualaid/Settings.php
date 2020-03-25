@@ -55,7 +55,8 @@ class CRM_Mutualaid_Settings
      * @return array
      *   An array of custom field names, optionally in "custom_X" notation.
      */
-    public static function getContactCustomFields($only_keys = true, $resolve = true) {
+    public static function getContactCustomFields($only_keys = true, $resolve = true, $custom_group = null) {
+        $fields = array();
         $resources = self::getContactCustomFieldResources();
         $customData = new CRM_Mutualaid_CustomData(E::LONG_NAME);
         foreach ($resources as $source_file) {
@@ -63,17 +64,24 @@ class CRM_Mutualaid_Settings
                 $data,
                 $customGroup
                 ) = $customData->identifyCustomGroup($source_file);
-            foreach ($data['_fields'] as $customFieldSpec) {
-                $customField = $customData->identifyCustomField(
-                    $customFieldSpec,
-                    $customGroup
-                );
-                // TODO: Get custom field labels from specification.
-                $stop = 'here';
+            if (isset($custom_group) && $customGroup['name'] == $custom_group) {
+                foreach ($data['_fields'] as $customFieldSpec) {
+                    $customField = $customData->identifyCustomField(
+                        $customFieldSpec,
+                        $customGroup
+                    );
+                    // Add custom fields with extension-internal name or in custom_X
+                    // notation as keys and labels as values.
+                    if ($resolve) {
+                        $field_name = $customGroup['name'] . '.' . $customField['name'];
+                    }
+                    else {
+                        $field_name = substr($customField['name'], strlen(E::SHORT_NAME) + 1);
+                    }
+                    $fields[$field_name] = $customField['label'];
+                }
             }
         }
-
-        $fields = self::getContactCustomFieldMapping();
 
         if ($resolve) {
             self::resolveContactCustomFields($fields);
@@ -145,7 +153,7 @@ class CRM_Mutualaid_Settings
      *   An array of active individual contact field, address field and extra
      *   field names understood by XCM.
      */
-    public static function getContactFields($only_keys = true)
+    public static function getContactFields($only_keys = true, $only_active = false)
     {
         // Retrieve all available individual contact fields.
         $contact_fields = CRM_Core_BAO_Setting::valueOptions(
@@ -158,9 +166,6 @@ class CRM_Mutualaid_Settings
             true,
             'AND v.filter = 2' // Individual
         );
-
-//        // Filter for active individual contact fields.
-//        $contact_fields = array_keys(array_filter($contact_fields));
 
         // Copied from CRM_Contact_Form_Edit_Individual::buildQuickForm(),
         // including the comment.
@@ -201,6 +206,15 @@ class CRM_Mutualaid_Settings
             $address_fields,
             $extra_fields
         );
+
+        if ($only_active) {
+            // Filter for fields activated in extension configuration.
+            foreach (array_keys($fields) as $field_name) {
+                if (!CRM_Mutualaid_Settings::get($field_name . '_enabled')) {
+                    unset($fields[$field_name]);
+                }
+            }
+        }
 
         if ($only_keys) {
             $fields = array_keys($fields);

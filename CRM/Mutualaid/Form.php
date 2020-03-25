@@ -131,9 +131,16 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
      */
     public function addContactFormFields()
     {
-        foreach (CRM_Mutualaid_Settings::getFields(false) as $field_name => $field_label) {
+        $active_contact_fields = CRM_Mutualaid_Settings::getContactFields(
+            false,
+            true
+        );
+        foreach (
+            $active_contact_fields as $field_name => $field_label
+        ) {
             switch ($field_name) {
                 case 'country':
+                    // Add country field with option values.
                     $this->addWithInfo(
                         'select',
                         'country',
