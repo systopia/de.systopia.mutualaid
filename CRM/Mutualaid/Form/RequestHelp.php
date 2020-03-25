@@ -37,7 +37,7 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
             //       required.
             $this->addWithInfo(
               'select',
-              'help_types',
+              'help_needed',
               E::ts('I am requesting help for'),
               CRM_Mutualaid_Settings::getHelpTypes(),
               true,
