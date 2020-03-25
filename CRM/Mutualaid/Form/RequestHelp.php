@@ -88,11 +88,47 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
         parent::buildQuickForm();
     }
 
+    /**
+     * Sets default values for form elements.
+     *
+     * @return array|NULL
+     */
+    public function setDefaultValues()
+    {
+        $defaults = parent::setDefaultValues();
+
+        // Set default values from settings.
+        foreach (
+            CRM_Mutualaid_Settings::getContactCustomFields(
+                true,
+                false,
+                'mutualaid_needs_help'
+            ) as $field_name
+        ) {
+            $defaults[$field_name] = CRM_Mutualaid_Settings::get($field_name . '_default');
+        }
+
+        return $defaults;
+    }
+
+    /**
+     * Validates form values.
+     *
+     * @return bool
+     *   Whether the form validates.
+     */
+    public function validate()
+    {
+        // Nothing to validate for now.
+
+        return parent::validate();
+    }
+
     public function postProcess()
     {
         parent::postProcess();
 
-        $fields = CRM_Mutualaid_Settings::getFields();
+        $fields = CRM_Mutualaid_Settings::getFields(false);
 
         // Fetch and filter form values.
         $values = $this->exportValues(null, true);

@@ -41,15 +41,9 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
           E::path('resources/custom_group_relationship_mutualaid.json')
         );
 
-        $customData->syncCustomGroup(
-          E::path('resources/custom_group_individual_language.json')
-        );
-        $customData->syncCustomGroup(
-          E::path('resources/custom_group_individual_needs_help.json')
-        );
-        $customData->syncCustomGroup(
-          E::path('resources/custom_group_individual_offers_help.json')
-        );
+        foreach (CRM_Mutualaid_Settings::getContactCustomFieldResources() as $resource) {
+            $customData->syncCustomGroup($resource);
+        }
     }
 
     /**

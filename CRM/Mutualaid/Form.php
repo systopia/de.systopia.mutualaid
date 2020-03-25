@@ -131,72 +131,102 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
      */
     public function addContactFormFields()
     {
-        $this->addWithInfo(
-            'text',
-            'first_name',
-            E::ts('First name'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'last_name',
-            E::ts('Last name'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'email',
-            E::ts('E-Mail Address'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'phone',
-            E::ts('Phone (Landline)'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'phone2',
-            E::ts('Phone (Mobile)'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'street_address',
-            E::ts('Street Address'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'postal_code',
-            E::ts('Postal Code'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'text',
-            'city',
-            E::ts('City'),
-            array(),
-            true
-        );
-        $this->addWithInfo(
-            'select',
-            'country',
-            E::ts('Country'),
-            CRM_Mutualaid_Settings::getCountries(),
+        $active_contact_fields = CRM_Mutualaid_Settings::getContactFields(
             false,
-            array(
-                'class' => 'crm-select2 crm-form-select2 huge',
-            )
+            true
         );
+        foreach (
+            $active_contact_fields as $field_name => $field_label
+        ) {
+            $required = CRM_Mutualaid_Settings::get($field_name . '_required');
+            switch ($field_name) {
+                case 'country':
+                    // Add country field with option values.
+                    $this->addWithInfo(
+                        'select',
+                        'country',
+                        E::ts($field_label),
+                        CRM_Mutualaid_Settings::getCountries(),
+                        $required,
+                        array(
+                            'class' => 'crm-select2 crm-form-select2 huge',
+                        )
+                    );
+                    break;
+                case 'state_province':
+                    // Add state/province field with option values for default
+                    // country, but only if country field is not active.
+                    if (!array_key_exists('country', $active_contact_fields)
+                        && $default_country = CRM_Mutualaid_Settings::get(
+                            'country_default'
+                        )) {
+                        $this->addWithInfo(
+                            'select',
+                            'state_province',
+                            E::ts($field_label),
+                            CRM_Mutualaid_Settings::getStateProvinces($default_country),
+                            $required,
+                            array(
+                                'class' => 'crm-select2 crm-form-select2 huge',
+                            )
+                        );
+                    }
+                    break;
+                case 'county':
+                    // Add county field and option values for default
+                    // state/province, but only if state/province and country
+                    // fields are not active.
+                    if (!array_key_exists('country', $active_contact_fields)
+                        && !array_key_exists(
+                            'state_province',
+                            $active_contact_fields
+                        )
+                        && $default_state_province = CRM_Mutualaid_Settings::get(
+                            'state_province_default'
+                        )) {
+                        $this->addWithInfo(
+                            'select',
+                            'county',
+                            E::ts($field_label),
+                            CRM_Mutualaid_Settings::getCounties($default_state_province),
+                            $required,
+                            array(
+                                'class' => 'crm-select2 crm-form-select2 huge',
+                            )
+                        );
+                    }
+                    break;
+
+                case 'prefix_id':
+                case 'suffix_id':
+                    $options = CRM_Contact_BAO_Contact::buildOptions($field_name);
+                    if (!$required) {
+                        array_unshift($options, E::ts('- None -'));
+                    }
+                    $this->addWithInfo(
+                        'select',
+                        $field_name,
+                        E::ts($field_label),
+                        $options,
+                        $required,
+                        array(
+                            'class' => 'crm-select2 crm-form-select2 huge',
+                        )
+                    );
+                    break;
+
+                default:
+                    $this->addWithInfo(
+                        'text',
+                        $field_name,
+                        E::ts($field_label),
+                        array(),
+                        $required
+                    );
+                    break;
+            }
+        }
+
         if (CRM_Mutualaid_Settings::get('languages_enabled')) {
             // This will default to self::getDefaultLanguage, even if the field
             // is not added.
@@ -225,10 +255,18 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
             'languages' => array(
                 self::getDefaultLanguage(),
             ),
-            'country' => array(
-                Civi::settings()->get('defaultContactCountry'),
-            ),
         );
+
+        foreach (
+            CRM_Mutualaid_Settings::getContactFields(
+                false,
+                false
+            ) as $field_name => $field_label
+        ) {
+            $defaults[$field_name] = CRM_Mutualaid_Settings::get(
+                $field_name . '_default'
+            );
+        }
 
         return $defaults;
     }

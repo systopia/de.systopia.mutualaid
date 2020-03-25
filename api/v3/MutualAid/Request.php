@@ -55,7 +55,7 @@ function civicrm_api3_mutual_aid_Request($params)
         }
 
         // Resolve custom fields.
-        CRM_Mutualaid_Settings::resolveCustomFields($params);
+        CRM_Mutualaid_Settings::resolveContactCustomFields($params);
 
         // Prepare data for XCM: Filter for contact data params.
         $contact_fields = CRM_Mutualaid_Settings::getContactFields();

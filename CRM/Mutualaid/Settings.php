@@ -21,33 +21,16 @@ use CRM_Mutualaid_ExtensionUtil as E;
  */
 class CRM_Mutualaid_Settings
 {
-
-    /**
-     * Retrieves fields available for being made active on forms.
-     *
-     * @return array
-     *   A list of fields that are available as set in the CiviCRM preferences.
-     */
-    public static function getAvailableFields()
-    {
-        return array_merge(
-            self::getContactFields(),
-            array_keys(self::getCustomFieldMapping(false))
-        );
-    }
-
     /**
      * Resolves custom fields from extension-internal names.
      *
      * @param $params
      *   The parameters array to resolve parameter keys for.
      */
-    public static function resolveCustomFields(&$params)
+    public static function resolveContactCustomFields(&$params)
     {
         foreach (
-            self::getCustomFieldMapping(
-                false
-            ) as $element => $custom_field
+            self::getContactCustomFieldMapping() as $element => $custom_field
         ) {
             if (isset($params[$element])) {
                 $params[$custom_field] = $params[$element];
@@ -59,41 +42,104 @@ class CRM_Mutualaid_Settings
     }
 
     /**
-     * Retrieves all extension-specific custom fields, optionally resolved to
+     * Returns all extension-specific custom fields, optionally resolved to
      * "custom_X" notation.
      *
-     * @param $resolve
+     * @param bool $only_keys
+     *   Whether to only return field names (keys) as array values.
+     *
+     * @param bool $resolve
      *   Whether to resolve to "custom_X" notation or keep extension-internal
      *   names.
      *
      * @return array
      *   An array of custom field names, optionally in "custom_X" notation.
      */
-    public static function getCustomFieldMapping($resolve = true)
-    {
-        $params = array(
-            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
-            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
-            'help_types' => 'mutualaid_offers_help.mutualaid_help_offered',
-        );
-
-        if ($resolve) {
-            self::resolveCustomFields($params);
+    public static function getContactCustomFields($only_keys = true, $resolve = true, $custom_group = null) {
+        $fields = array();
+        $resources = self::getContactCustomFieldResources();
+        $customData = new CRM_Mutualaid_CustomData(E::LONG_NAME);
+        foreach ($resources as $source_file) {
+            list(
+                $data,
+                $customGroup
+                ) = $customData->identifyCustomGroup($source_file);
+            if (!isset($custom_group) || $customGroup['name'] == $custom_group) {
+                foreach ($data['_fields'] as $customFieldSpec) {
+                    $customField = $customData->identifyCustomField(
+                        $customFieldSpec,
+                        $customGroup
+                    );
+                    // Add custom fields with extension-internal name or in custom_X
+                    // notation as keys and labels as values.
+                    if ($resolve) {
+                        $field_name = $customGroup['name'] . '.' . $customField['name'];
+                    }
+                    else {
+                        $field_name = substr($customField['name'], strlen(E::SHORT_NAME) + 1);
+                    }
+                    $fields[$field_name] = $customField['label'];
+                }
+            }
         }
 
-        return $params;
+        if ($resolve) {
+            self::resolveContactCustomFields($fields);
+        }
+
+        if ($only_keys) {
+            $fields = array_keys($fields);
+        }
+
+        return $fields;
     }
 
     /**
-     * Retrieves active fields for the forms to display.
+     * Returns a mapping of extension-specific custom fields, with their
+     * extension-internal names as keys and custom_group_name.custom_field_name
+     * as their values.
+     *
+     * @return array
+     */
+    public static function getContactCustomFieldMapping() {
+        // TODO: Read from resource files.
+        return array(
+            'max_distance' => 'mutualaid_offers_help.mutualaid_max_distance',
+            'max_persons' => 'mutualaid_offers_help.mutualaid_max_persons',
+            'help_offered' => 'mutualaid_offers_help.mutualaid_help_offered',
+            'help_needed' => 'mutualaid_needs_help.mutualaid_help_needed',
+            'language' => 'mutualaid_language.mutualaid_languages',
+        );
+    }
+
+    public static function getContactCustomFieldResources() {
+        return array(
+            E::path('resources/custom_group_individual_language.json'),
+            E::path('resources/custom_group_individual_needs_help.json'),
+            E::path('resources/custom_group_individual_offers_help.json'),
+        );
+    }
+
+    /**
+     * Retrieves active fields for the forms to display and process.
+     *
+     * @param bool $only_keys
+     *   Whether to only return field names (keys) as array values.
+     *
+     * @param bool $resolve_custom_fields
+     *   Whether to resolve to "custom_X" notation or keep extension-internal
+     *   names.
      *
      * @return array
      *   A list of fields activated to be shown on forms, as set in the
      *   extension configuration.
      */
-    public static function getFields()
+    public static function getFields($only_keys = true, $resolve_custom_fields = true)
     {
-        $available_fields = self::getAvailableFields();
+        $available_fields = array_merge(
+            self::getContactFields($only_keys),
+            self::getContactCustomFields($only_keys, $resolve_custom_fields)
+        );
 
         // TODO: Remove fields not activated in extension configuration.
 
@@ -101,12 +147,13 @@ class CRM_Mutualaid_Settings
     }
 
     /**
-     * Retrieves active contact fields from the Core option group.
+     * Retrieves active contact fields from Core preferences.
      *
      * @return array
-     *   An array of active individual contact field names.
+     *   An array of active individual contact field, address field and extra
+     *   field names understood by XCM.
      */
-    public static function getContactFields()
+    public static function getContactFields($only_keys = true, $only_active = false)
     {
         // Retrieve all available individual contact fields.
         $contact_fields = CRM_Core_BAO_Setting::valueOptions(
@@ -116,12 +163,9 @@ class CRM_Mutualaid_Settings
             null,
             false,
             'name',
-            false,
+            true,
             'AND v.filter = 2' // Individual
         );
-
-        // Filter for active individual contact fields.
-        $contact_fields = array_keys(array_filter($contact_fields));
 
         // Copied from CRM_Contact_Form_Edit_Individual::buildQuickForm(),
         // including the comment.
@@ -135,29 +179,48 @@ class CRM_Mutualaid_Settings
             }
         }
 
+        // Make field names the keys and labels the values.
+        $contact_fields = array_flip($contact_fields);
+
         // Retrieve all available address fields.
         $address_fields = CRM_Core_BAO_Setting::valueOptions(
             CRM_Core_BAO_Setting::SYSTEM_PREFERENCES_NAME,
-            'address_options'
+            'address_options',
+            true,
+            null,
+            false,
+            'name',
+            true
         );
-
-        // Filter for active address fields.
-        $address_fields = array_keys(array_filter($address_fields));
 
         // Add Pseudo-contact fields for details that XCM can handle.
         $extra_fields = array(
-            'email', // "Email" detail entity
-            'phone', // "Phone" detail entity for primary phone.
-            'phone2', // "Phone" detail entity for secondary phone.
-            'url', // "Website" detail entity
+            'email' => E::ts('E-Mail Address'), // "Email" detail entity
+            'phone' => E::ts('Primary Phone'), // "Phone" detail entity for primary phone.
+            'phone2' => E::ts('Secondary Phone'), // "Phone" detail entity for secondary phone.
+            'url' => E::ts('Website'), // "Website" detail entity
         );
 
-        return array_merge(
+        $fields = array_merge(
             $contact_fields,
-            array_keys(self::getCustomFieldMapping()),
             $address_fields,
             $extra_fields
         );
+
+        if ($only_active) {
+            // Filter for fields activated in extension configuration.
+            foreach (array_keys($fields) as $field_name) {
+                if (!CRM_Mutualaid_Settings::get($field_name . '_enabled')) {
+                    unset($fields[$field_name]);
+                }
+            }
+        }
+
+        if ($only_keys) {
+            $fields = array_keys($fields);
+        }
+
+        return $fields;
     }
 
     /**
@@ -200,9 +263,57 @@ class CRM_Mutualaid_Settings
      * @return array
      *   An array of all available countries.
      */
-    public static function getCountries()
+    public static function getCountries($include_none = true)
     {
-        return CRM_Admin_Form_Setting_Localization::getAvailableCountries();
+        $countries = array();
+        if ($include_none) {
+            $countries[0] = E::ts('- None -');
+        }
+        $countries += CRM_Admin_Form_Setting_Localization::getAvailableCountries();
+
+        return $countries;
+    }
+
+    public static function getStateProvinces($country_id = null, $include_none = true)
+    {
+        $state_provinces = array();
+        if ($include_none) {
+            $state_provinces[0] = E::ts('- None -');
+        }
+
+        if (!isset($country_id)) {
+            $country_id = CRM_Mutualaid_Settings::get('country_default');
+        }
+        // Default to system default country, if no default is set (this should
+        // only happen during settings parsing).
+        if (!isset($country_id)) {
+            $country_id = Civi::settings()->get('defaultContactCountry');
+        }
+        if ($country_id) {
+            $state_provinces += CRM_Core_PseudoConstant::stateProvinceForCountry($country_id);
+        }
+
+        return $state_provinces;
+    }
+
+    public static function getCounties($state_province_id = null, $include_none = true)
+    {
+        $counties = array();
+        if ($include_none) {
+            $counties[0] = E::ts('- None -');
+        }
+
+        if (!isset($state_province_id)) {
+            $state_province_id = CRM_Mutualaid_Settings::get(
+                'state_province_default'
+            );
+        }
+
+        if (isset($state_province_id)) {
+            $counties += CRM_Core_PseudoConstant::countyForState($state_province_id);
+        }
+
+        return $counties;
     }
 
     /**
