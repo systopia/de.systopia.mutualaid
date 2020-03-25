@@ -189,5 +189,8 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
         $values = array_intersect_key($values, array_fill_keys($fields, null));
 
         $result = civicrm_api3('MutualAid', 'Offer', $values);
+
+        $session = CRM_Core_Session::singleton();
+        $session->setStatus(E::ts('Your offer has been submitted. You will receive an e-mail confirmation shortly.'));
     }
 }

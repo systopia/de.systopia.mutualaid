@@ -117,8 +117,6 @@ function civicrm_api3_mutual_aid_Request($params)
             );
         }
 
-        // TODO: Show message.
-
         return civicrm_api3_create_success();
     } catch (Exception $exception) {
         return civicrm_api3_create_error($exception->getMessage());
