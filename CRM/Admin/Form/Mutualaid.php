@@ -53,7 +53,7 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
           )
         );
         foreach ($templates['values'] as $template) {
-            $email_confirmation_template->_options[$template['id']] = array(
+            $email_confirmation_template->_options[] = array(
               'text' => $template['msg_title'],
               'attr' => array(
                 'value' => $template['id'],
@@ -63,17 +63,38 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
 
         // TODO: Add configuration element for scheduled job frequency.
 
-        // TODO: Add configuration for all available fields:
-        //      - visible in forms
-        //      - required
-        //      - default value
+        // Add "- None -" option for help_offered and help_needed.
+        foreach (array(
+            'help_offered',
+            'help_needed',
+                 ) as $help_type_field) {
+            $help_type_element = $this->getElement(
+                E::SHORT_NAME . '_' . $help_type_field . '_default'
+            );
+            array_unshift(
+                $help_type_element->_options,
+                array(
+                    'text' => E::ts('- None -'),
+                    'attr' => array(
+                        'value' => 0,
+                    ),
+                )
+            );
+        }
     }
 
     public function validate()
     {
         $values = $this->exportValues();
 
-        // TODO: Validate setting values.
+        // TODO: Validate setting values:
+        //       - Country, State/Province, County interdependencies
+        //       - Required default values when field is inactive for:
+        //         - max_distance
+        //         - personal_contact
+        //       - Value format for:
+        //         - max_distance
+        //         - max_persons
 
         return parent::validate();
     }

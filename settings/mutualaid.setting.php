@@ -211,6 +211,83 @@ foreach (
         ),
         'settings_pages' => ['mutualaid' => ['weight' => $weight++]],
     );
+
+    // Default values settings.
+    switch ($field_name) {
+        case 'prefix_id':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'pseudoconstant' => ['optionGroupName' => 'individual_prefix'],
+            );
+            break;
+        case 'suffix_id':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'pseudoconstant' => ['optionGroupName' => 'individual_suffix'],
+            );
+            break;
+        case 'country':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'options' => CRM_Mutualaid_Settings::getCountries(),
+                'default' => Civi::settings()->get('defaultContactCountry'),
+            );
+            break;
+        case 'state_province':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'options' => CRM_Mutualaid_Settings::getStateProvinces(),
+            );
+            break;
+        case 'county':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'options' => CRM_Mutualaid_Settings::getCounties(),
+            );
+            break;
+
+        case 'help_needed':
+        case 'help_offered':
+            $type = 'Integer';
+            $html_type = 'select';
+            $extra = array(
+                'pseudoconstant' => ['optionGroupName' => 'mutualaid_help_types'],
+            );
+            break;
+
+        case 'personal_contact':
+            $type = 'Boolean';
+            $html_type = 'radio';
+            $extra = array(
+                'quick_form_type' => 'YesNo',
+            );
+            break;
+
+        default:
+            $type = 'String';
+            $html_type = 'text';
+            $extra = array();
+            break;
+    }
+    $mutualaid_settings[E::SHORT_NAME . '_' . $field_name . '_default'] = array(
+        'name' => E::SHORT_NAME . '_' . $field_name . '_default',
+        'type' => $type,
+        'default' => null,
+        'html_type' => $html_type,
+        'title' => E::ts('Default value for field %1', [1 => $field_label]),
+        'is_domain' => 1,
+        'is_contact' => 0,
+        'description' => E::ts(
+            'The default value being used as preset for the field or the option, if the field is not active.',
+            [1 => $field_label]
+        ),
+        'settings_pages' => ['mutualaid' => ['weight' => $weight++]],
+    ) + $extra;
 }
 
 return $mutualaid_settings;

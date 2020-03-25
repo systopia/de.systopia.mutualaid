@@ -263,14 +263,24 @@ class CRM_Mutualaid_Settings
      * @return array
      *   An array of all available countries.
      */
-    public static function getCountries()
+    public static function getCountries($include_none = true)
     {
-        return CRM_Admin_Form_Setting_Localization::getAvailableCountries();
+        $countries = array();
+        if ($include_none) {
+            $countries[0] = E::ts('- None -');
+        }
+        $countries += CRM_Admin_Form_Setting_Localization::getAvailableCountries();
+
+        return $countries;
     }
 
-    public static function getStateProvinces($country_id = null)
+    public static function getStateProvinces($country_id = null, $include_none = true)
     {
         $state_provinces = array();
+        if ($include_none) {
+            $state_provinces[0] = E::ts('- None -');
+        }
+
         if (!isset($country_id)) {
             $country_id = CRM_Mutualaid_Settings::get('country_default');
         }
@@ -280,15 +290,18 @@ class CRM_Mutualaid_Settings
             $country_id = Civi::settings()->get('defaultContactCountry');
         }
         if ($country_id) {
-            $state_provinces = CRM_Core_PseudoConstant::stateProvinceForCountry($country_id);
+            $state_provinces += CRM_Core_PseudoConstant::stateProvinceForCountry($country_id);
         }
 
         return $state_provinces;
     }
 
-    public static function getCounties($state_province_id = null)
+    public static function getCounties($state_province_id = null, $include_none = true)
     {
         $counties = array();
+        if ($include_none) {
+            $counties[0] = E::ts('- None -');
+        }
 
         if (!isset($state_province_id)) {
             $state_province_id = CRM_Mutualaid_Settings::get(
@@ -297,7 +310,7 @@ class CRM_Mutualaid_Settings
         }
 
         if (isset($state_province_id)) {
-            $counties = CRM_Core_PseudoConstant::countyForState($state_province_id);
+            $counties += CRM_Core_PseudoConstant::countyForState($state_province_id);
         }
 
         return $counties;
