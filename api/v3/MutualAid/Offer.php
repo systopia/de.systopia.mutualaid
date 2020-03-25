@@ -104,8 +104,17 @@ function civicrm_api3_mutual_aid_Offer($params)
         }
         $contact_id = $xcm_result['id'];
 
-        // TODO: Add comment as contact note.
+        // Add comment as contact note.
         if (!empty($params['comment'])) {
+            civicrm_api3(
+                'Note',
+                'create',
+                array(
+                    'entity_id' => $contact_id,
+                    'note' => $params['comment'],
+                    'entity_table' => 'civicrm_contact',
+                )
+            );
         }
 
         // Send confirmation e-mail when configured.
