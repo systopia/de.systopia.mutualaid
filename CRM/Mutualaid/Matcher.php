@@ -31,6 +31,9 @@ class CRM_Mutualaid_Matcher
     /** @var array matching statistics */
     protected $stats = null;
 
+    /** @var array matching weights */
+    protected $matching_weights = null;
+
     /**
      * Generate a new matcher object
      *
@@ -55,6 +58,9 @@ class CRM_Mutualaid_Matcher
             'mutualaid_offers_help',
           ]
         );
+
+        // get matching weights
+        $this->matching_weights = CRM_Mutualaid_Settings::getMatchingWeights();
     }
 
     /**
@@ -129,16 +135,18 @@ class CRM_Mutualaid_Matcher
     }
 
     /**
-     * Select/pick the best suited helper for the help request
+     * Select/pick the best suited helper for the help request, by
+     *   adding up scores between 0 and 1 of 5 criteria,
+     *   multiplied by configurable weights
      *
      * @param array $help_request
      *      help request with fields 'contact_id', 'location', 'types', 'languages'
      *
      * @param array $potential_helpers
-     *      list of helper structures, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     *      list of helper structures, containing the fields 'contact_id', 'location', 'max_distance', 'max_spots', 'offers_help'
      *
      * @return array|null best suiting helper
-     *      helper structure, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     *      helper structure containing the fields 'contact_id', 'location', 'max_distance', 'max_spots', 'offers_help'
      */
     protected function getBestMatchingHelper($help_request, $potential_helpers)
     {
@@ -146,9 +154,9 @@ class CRM_Mutualaid_Matcher
         $best_helper_score = -1.0;
         foreach ($potential_helpers as $potential_helper) {
             // some basic checks
-            /*if ($help_request['contact_id'] == $potential_helper['contact_id']) {
+            if ($help_request['contact_id'] == $potential_helper['contact_id']) {
                 continue;
-            }*/
+            }
 
             $distance = $this->calculateDistance($help_request['location'], $potential_helper['location']);
             if ($potential_helper['max_distance'] < $distance) {
@@ -158,17 +166,44 @@ class CRM_Mutualaid_Matcher
             // score the helper
             $helper_score = 0.0;
 
-            // score 1: total distance
-            // TODO: implement
+            // score 1: short range helpers should be preferred
+            if (!empty($this->matching_weights['mutualaid_matching_weight_max_distance'])) {
+                list($min_distance, $median_distance, $max_distance) = $this->getHelperMaxDistanceRange();
+                // the lower the helper's max distance, higher the store
+                if ($potential_helper['max_distance'] < $min_distance) {
+                    $max_distance_score = 0.0;
+                } elseif ($potential_helper['max_distance'] < $median_distance) {
+                    $max_distance_score = ($potential_helper['max_distance'] - $min_distance) / ($median_distance - $min_distance) / 2.0;
+                } else {
+                    $max_distance_score = ($max_distance - $potential_helper['max_distance']) / ($max_distance - $median_distance) / 2.0 + 0.5;
+                }
+                // invert and weigh
+                $max_distance_score = (1.0 - $max_distance_score) * $this->matching_weights['mutualaid_matching_weight_distance'];
+                $helper_score += $max_distance_score;
+            }
 
             // score 2: relative distance
-            // TODO: implement
+            if (!empty($this->matching_weights['mutualaid_matching_weight_distance'])) {
+                $distance_score = 1.0 - ($distance / $potential_helper['max_distance']);
+                $distance_score = $distance_score * $this->matching_weights['mutualaid_matching_weight_distance'];
+                $helper_score += $distance_score;
+            }
 
             // score 3: help request/offer overlap
-            // TODO: implement
+            if (!empty($this->matching_weights['mutualaid_matching_weight_help_types'])) {
+                $help_type_count = (float) count(CRM_Mutualaid_Settings::getHelpTypes());
+                $matched_types_count = (float) count(array_intersect($help_request['types'], $potential_helper['offers_help']));
+                $help_match_score = ($matched_types_count / $help_type_count) * $this->matching_weights['mutualaid_matching_weight_help_types'];
+                $helper_score += $help_match_score;
+            }
 
             // score 4: helper workload
-            // TODO: implement
+            if (!empty($this->matching_weights['mutualaid_matching_weight_workload'])) {
+                $spots_used = $potential_helper['max_spots'] - $potential_helper['open_spots'];
+                $helper_workload = (float) $spots_used / (float) $potential_helper['max_spots'];
+                $workload_score = (1.0 - $helper_workload) *  $this->matching_weights['mutualaid_matching_weight_workload'];
+                $helper_score += $workload_score;
+            }
 
             // score 5: rarity of help match
             // TODO: implement
@@ -189,7 +224,7 @@ class CRM_Mutualaid_Matcher
      *      help request with fields 'contact_id', 'location', 'types', 'languages'
      *
      * @param array $helper
-     *      helper structure, containing the fields 'contact_id', 'location', 'max_distance', 'offers_help'
+     *      helper structure containing the fields 'contact_id', 'location', 'max_distance', 'max_spots', 'offers_help'
      */
     protected function assignHelper($help_request, $helper)
     {
@@ -207,6 +242,11 @@ class CRM_Mutualaid_Matcher
         ];
         CRM_Mutualaid_CustomData::resolveCustomFields($new_relationship);
         civicrm_api3('Relationship', 'create', $new_relationship);
+
+        // reduce open spots
+        $helper_table = $this->getHelperTable();
+        CRM_Core_DAO::executeQuery("UPDATE {$helper_table} SET open_spots = (open_spots) - 1 WHERE contact_id = {$helper['contact_id']};");
+
     }
 
     /**
@@ -252,6 +292,8 @@ class CRM_Mutualaid_Matcher
             SELECT
               contact_id                               AS contact_id,
               max_distance                             AS max_distance,
+              max_spots                                AS max_spots,
+              open_spots                               AS open_spots,
               ((min_longitude +  max_longitude) / 2.0) AS longitude,
               ((min_latitude + max_latitude) / 2.0)    AS latitude,
               {$HELP_OFFERED}                          AS offers_help
@@ -268,6 +310,8 @@ class CRM_Mutualaid_Matcher
             $potential_helpers[] = [
                 'contact_id'   => $potential_helper->contact_id,
                 'max_distance' => $potential_helper->max_distance,
+                'open_spots'   => $potential_helper->open_spots,
+                'max_spots'    => $potential_helper->max_spots,
                 'location'     => [$potential_helper->longitude, $potential_helper->latitude],
                 'offers_help'  => explode(',', trim($potential_helper->offers_help, ',)'))
             ];
@@ -421,6 +465,8 @@ class CRM_Mutualaid_Matcher
                 contact.id                   AS contact_id,
                 (help_offered.{$MAX_JOBS_COLUMN} - COUNT(help_provided_data.id))      
                                              AS open_spots,
+                help_offered.{$MAX_JOBS_COLUMN}      
+                                             AS max_spots,
                 help_offered.{$MAX_DISTANCE_COLUMN}      
                                              AS max_distance,
                 {$HELP_OFFERED_SELECTS}
@@ -483,11 +529,60 @@ class CRM_Mutualaid_Matcher
      *
      * @return integer
      *    distance in meters
+     *
+     * @see https://www.geodatasource.com/developers/php
      */
     public static function calculateDistance($point1, $point2)
     {
-        // TODO
-        return 0.0;
+        if (($point1[1] == $point2[1]) && ($point1[0] == $point2[0])) {
+            return 0;
+        } else {
+            $theta = $point1[0] - $point2[0];
+            $dist  = sin(deg2rad($point1[1])) * sin(deg2rad($point2[1]))
+                + cos(deg2rad($point1[1])) * cos(deg2rad($point2[1])) * cos(deg2rad($theta));
+            $dist  = acos($dist);
+            $dist  = rad2deg($dist);
+            return $dist * 60.0 * 1.1515 * 1609.344; // convert to m
+        }
+    }
+
+
+    /**
+     * Get stats on the max_distance field of
+     *  the eligible helpers
+     *
+     * @return array
+     *  [minimum, median, maximum] distance in the
+     */
+    public function getHelperMaxDistanceRange()
+    {
+        static $helper_max_distance_range = null;
+        if ($helper_max_distance_range === null) {
+            $helper_max_distance_range = [];
+            $helper_table = $this->getHelperTable();
+            $min_max = CRM_Core_DAO::executeQuery("
+                SELECT 
+                 MIN(max_distance) AS min_distance,
+                 MAX(max_distance) AS max_distance
+                FROM {$helper_table}"
+            );
+            $min_max->fetch();
+
+            // based on https://stackoverflow.com/a/7263925
+            $median = CRM_Core_DAO::singleValueQuery("
+                SELECT AVG(dd.max_distance)
+                FROM (
+                    SELECT d.max_distance, @rownum:=@rownum+1 as `row_number`, @total_rows:=@rownum
+                      FROM {$helper_table} d, (SELECT @rownum:=0) r
+                      WHERE d.max_distance > 0
+                      ORDER BY d.max_distance
+                ) as dd
+                WHERE dd.row_number IN ( FLOOR((@total_rows+1)/2), FLOOR((@total_rows+2)/2) )"
+            );
+
+            $helper_max_distance_range = [((float) $min_max->min_distance - 0.1), $median, ((float) $min_max->max_distance + 0.01)];
+        }
+        return $helper_max_distance_range;
     }
 
     /**
