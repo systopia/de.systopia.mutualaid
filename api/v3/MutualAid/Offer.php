@@ -51,7 +51,7 @@ function civicrm_api3_mutual_aid_Offer($params)
 
         // Set default for help types, if only one is active.
         if (count($help_types = CRM_Mutualaid_Settings::getHelpTypes()) == 1) {
-            $params['help_types'] = array_keys($help_types);
+            $params['help_offered'] = array_keys($help_types);
         }
 
         // Calculate distance in meters.

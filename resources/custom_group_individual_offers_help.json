@@ -16,7 +16,7 @@
       "_translate": ["label"],
       "weight": "1",
       "name": "mutualaid_help_offered",
-      "column_name": "help_types",
+      "column_name": "help_offered",
       "label": "Help Offered",
       "data_type": "String",
       "html_type": "Multi-Select",
