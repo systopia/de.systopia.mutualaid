@@ -171,8 +171,6 @@ msgid "No GeoCoder configured"
 msgstr "Kein Service für Geokodierung konfiguriert"
 
 #: mutualaid.php
-#, fuzzy
-#| msgid "Mutual Aid"
 msgid "Mutual Help"
 msgstr "Nachbarschaftshilfe"
 
