@@ -363,4 +363,27 @@ class CRM_Mutualaid_Settings
         }
         return (int)$relationship_type_id;
     }
+
+    /**
+     * Get the current matching weights as floats
+     *
+     * @return array
+     *   matching weights as float values
+     */
+    public static function getMatchingWeights()
+    {
+        static $matching_weights = null;
+        if ($matching_weights === null) {
+            $matching_weights = [];
+            foreach (['mutualaid_matching_weight_max_distance', 'mutualaid_matching_weight_distance',  'mutualaid_matching_weight_help_types', 'mutualaid_matching_weight_workload'] as $key) {
+                $current_value = self::get($key);
+                if ($current_value === null) {
+                    $matching_weights[$key] = 1.0;
+                } else {
+                    $matching_weights[$key] = (float) $current_value;
+                }
+            }
+        }
+        return $matching_weights;
+    }
 }
