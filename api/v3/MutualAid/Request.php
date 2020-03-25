@@ -57,8 +57,18 @@ function civicrm_api3_mutual_aid_Request($params)
         // Resolve custom fields.
         CRM_Mutualaid_Settings::resolveContactCustomFields($params);
 
+        // Filter empty options.
+        foreach (array(
+                     'prefix_id',
+                     'suffix_id'
+                 ) as $pseudoconstant_field) {
+            if (empty($params[$pseudoconstant_field])) {
+                unset($params[$pseudoconstant_field]);
+            }
+        }
+
         // Prepare data for XCM: Filter for contact data params.
-        $contact_fields = CRM_Mutualaid_Settings::getContactFields();
+        $contact_fields = CRM_Mutualaid_Settings::getFields();
         $contact_data = array_intersect_key(
             $params,
             array_fill_keys(
@@ -90,6 +100,8 @@ function civicrm_api3_mutual_aid_Request($params)
                 )
             );
         }
+
+        // TODO: Show message.
 
         return civicrm_api3_create_success();
     } catch (Exception $exception) {
