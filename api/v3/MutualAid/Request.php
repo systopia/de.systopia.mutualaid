@@ -54,6 +54,22 @@ function civicrm_api3_mutual_aid_Request($params)
             $params['help_needed'] = array_keys($help_types);
         }
 
+        // Set defaults when empty/unset.
+        $relevant_fields = array_merge(
+            CRM_Mutualaid_Settings::getContactFields(true, true),
+            CRM_Mutualaid_Settings::getContactCustomFields(
+                true,
+                false,
+                'mutualaid_needs_help'
+            )
+        );
+        foreach ($relevant_fields as $field) {
+            $default_value = CRM_Mutualaid_Settings::get($field . '_default');
+            if (!empty($default_value) && empty($params[$field])) {
+                $params[$field] = $default_value;
+            }
+        }
+
         // Resolve custom fields.
         CRM_Mutualaid_Settings::resolveContactCustomFields($params);
 

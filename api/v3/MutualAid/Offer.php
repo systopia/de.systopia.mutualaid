@@ -57,6 +57,22 @@ function civicrm_api3_mutual_aid_Offer($params)
         // Calculate distance in meters.
         $params['max_distance'] *= CRM_Mutualaid_Settings::getDistanceUnit();
 
+        // Set defaults when empty/unset.
+        $relevant_fields = array_merge(
+            CRM_Mutualaid_Settings::getContactFields(true, true),
+            CRM_Mutualaid_Settings::getContactCustomFields(
+                true,
+                false,
+                'mutualaid_offers_help'
+            )
+        );
+        foreach ($relevant_fields as $field) {
+            $default_value = CRM_Mutualaid_Settings::get($field . '_default');
+            if (!empty($default_value) && empty($params[$field])) {
+                $params[$field] = $default_value;
+            }
+        }
+
         // Resolve custom fields.
         CRM_Mutualaid_Settings::resolveContactCustomFields($params);
 
