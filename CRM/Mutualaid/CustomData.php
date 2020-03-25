@@ -92,6 +92,108 @@ class CRM_Mutualaid_CustomData
         }
     }
 
+    public function readResource($source_file) {
+        $data = json_decode(file_get_contents($source_file), true);
+        if (empty($data)) {
+            throw new Exception(
+                "syncOptionGroup::syncOptionGroup: Invalid specs"
+            );
+        }
+        return $data;
+    }
+
+    public function identifyCustomGroup($source_file) {
+        $data = $this->readResource($source_file);
+
+        $force_update = false;
+
+        // if extends_entity_column_value, make sure it's sensible data
+        if (isset($data['extends_entity_column_value'])) {
+            $force_update = true; // this doesn't get returned by the API, so differences couldn't be detected
+            if ($data['extends'] == 'Activity') {
+                $extends_list = array();
+                foreach ($data['extends_entity_column_value'] as $activity_type) {
+                    if (!is_numeric($activity_type)) {
+                        $activity_type = CRM_Core_OptionGroup::getValue(
+                            'activity_type',
+                            $activity_type,
+                            'name'
+                        );
+                    }
+                    if ($activity_type) {
+                        $extends_list[] = $activity_type;
+                    }
+                }
+                $data['extends_entity_column_value'] = $extends_list;
+            } elseif ($data['extends'] == 'Relationship') {
+                $extends_list = [];
+                foreach ($data['extends_entity_column_value'] as $relationship_id) {
+                    if (!is_numeric($relationship_id)) {
+                        try {
+                            $relationship_id = civicrm_api3(
+                                'RelationshipType',
+                                'getvalue',
+                                [
+                                    'name_a_b' => $relationship_id,
+                                    'return' => 'id',
+                                ]
+                            );
+                            $extends_list[] = $relationship_id;
+                        } catch (Exception $ex) {
+                            $this->log(
+                                CUSTOM_DATA_HELPER_LOG_ERROR,
+                                "Couldn't find relationship type '{$relationship_id}': " . $ex->getMessage(
+                                )
+                            );
+                        }
+                    }
+                }
+                $data['extends_entity_column_value'] = $extends_list;
+            }
+
+            if (is_array($data['extends_entity_column_value'])) {
+                $data['extends_entity_column_value'] = CRM_Utils_Array::implodePadded(
+                    $data['extends_entity_column_value']
+                );
+            }
+        }
+
+        // first: find or create custom group
+        $this->translateStrings($data);
+        $customGroup = $this->identifyEntity('CustomGroup', $data);
+
+        return array($data, $customGroup, $force_update);
+    }
+
+    public function identifyCustomField($customFieldSpec, $customGroup) {
+        $this->translateStrings($customFieldSpec);
+        $customFieldSpec['custom_group_id'] = $customGroup['id'];
+        $customFieldSpec['_lookup'][] = 'custom_group_id';
+        if (!empty($customFieldSpec['option_group_id']) && !is_numeric(
+                $customFieldSpec['option_group_id']
+            )) {
+            // look up custom group id
+            $optionGroup = $this->getEntityID(
+                'OptionGroup',
+                array('name' => $customFieldSpec['option_group_id'])
+            );
+            if ($optionGroup == 'FAILED' || $optionGroup == null) {
+                $this->log(
+                    CUSTOM_DATA_HELPER_LOG_ERROR,
+                    "Couldn't identify CustomField, bad option_group: {$customFieldSpec['option_group_id']}"
+                );
+                return;
+            }
+            $customFieldSpec['option_group_id'] = $optionGroup['id'];
+        }
+        $customField = $this->identifyEntity(
+            'CustomField',
+            $customFieldSpec
+        );
+
+        return $customField;
+    }
+
     /**
      * will take a JSON source file and synchronise the
      * OptionGroup/OptionValue data in the system with
@@ -175,68 +277,12 @@ class CRM_Mutualaid_CustomData
      */
     public function syncCustomGroup($source_file)
     {
-        $force_update = false;
-        $data = json_decode(file_get_contents($source_file), true);
-        if (empty($data)) {
-            throw new Exception(
-              "CRM_Utils_CustomData::syncCustomGroup: Invalid custom specs"
-            );
-        }
+        list(
+            $data,
+            $customGroup,
+            $force_update
+            ) = $this->identifyCustomGroup($source_file);
 
-        // if extends_entity_column_value, make sure it's sensible data
-        if (isset($data['extends_entity_column_value'])) {
-            $force_update = true; // this doesn't get returned by the API, so differences couldn't be detected
-            if ($data['extends'] == 'Activity') {
-                $extends_list = array();
-                foreach ($data['extends_entity_column_value'] as $activity_type) {
-                    if (!is_numeric($activity_type)) {
-                        $activity_type = CRM_Core_OptionGroup::getValue(
-                          'activity_type',
-                          $activity_type,
-                          'name'
-                        );
-                    }
-                    if ($activity_type) {
-                        $extends_list[] = $activity_type;
-                    }
-                }
-                $data['extends_entity_column_value'] = $extends_list;
-            } elseif ($data['extends'] == 'Relationship') {
-                $extends_list = [];
-                foreach ($data['extends_entity_column_value'] as $relationship_id) {
-                    if (!is_numeric($relationship_id)) {
-                        try {
-                            $relationship_id = civicrm_api3(
-                              'RelationshipType',
-                              'getvalue',
-                              [
-                                'name_a_b' => $relationship_id,
-                                'return' => 'id',
-                              ]
-                            );
-                            $extends_list[] = $relationship_id;
-                        } catch (Exception $ex) {
-                            $this->log(
-                              CUSTOM_DATA_HELPER_LOG_ERROR,
-                              "Couldn't find relationship type '{$relationship_id}': " . $ex->getMessage(
-                              )
-                            );
-                        }
-                    }
-                }
-                $data['extends_entity_column_value'] = $extends_list;
-            }
-
-            if (is_array($data['extends_entity_column_value'])) {
-                $data['extends_entity_column_value'] = CRM_Utils_Array::implodePadded(
-                  $data['extends_entity_column_value']
-                );
-            }
-        }
-
-        // first: find or create custom group
-        $this->translateStrings($data);
-        $customGroup = $this->identifyEntity('CustomGroup', $data);
         if (empty($customGroup)) {
             // create CustomGroup
             $customGroup = $this->createEntity('CustomGroup', $data);
@@ -268,29 +314,9 @@ class CRM_Mutualaid_CustomData
 
         // now run the update for the CustomFields
         foreach ($data['_fields'] as $customFieldSpec) {
-            $this->translateStrings($customFieldSpec);
-            $customFieldSpec['custom_group_id'] = $customGroup['id'];
-            $customFieldSpec['_lookup'][] = 'custom_group_id';
-            if (!empty($customFieldSpec['option_group_id']) && !is_numeric(
-                $customFieldSpec['option_group_id']
-              )) {
-                // look up custom group id
-                $optionGroup = $this->getEntityID(
-                  'OptionGroup',
-                  array('name' => $customFieldSpec['option_group_id'])
-                );
-                if ($optionGroup == 'FAILED' || $optionGroup == null) {
-                    $this->log(
-                      CUSTOM_DATA_HELPER_LOG_ERROR,
-                      "Couldn't create/update CustomField, bad option_group: {$customFieldSpec['option_group_id']}"
-                    );
-                    return;
-                }
-                $customFieldSpec['option_group_id'] = $optionGroup['id'];
-            }
-            $customField = $this->identifyEntity(
-              'CustomField',
-              $customFieldSpec
+            $customField = $this->identifyCustomField(
+                $customFieldSpec,
+                $customGroup
             );
             if (empty($customField)) {
                 // create CustomField
@@ -323,6 +349,10 @@ class CRM_Mutualaid_CustomData
                 );
             }
         }
+    }
+
+    public function getCustomGroup($source_file) {
+
     }
 
     /**

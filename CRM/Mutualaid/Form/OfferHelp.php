@@ -143,7 +143,7 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
     {
         parent::postProcess();
 
-        $fields = CRM_Mutualaid_Settings::getFields();
+        $fields = CRM_Mutualaid_Settings::getFields(false);
 
         // Fetch and filter form values.
         $values = $this->exportValues(null, true);
