@@ -26,7 +26,7 @@ use CRM_Mutualaid_ExtensionUtil as E;
  */
 function _civicrm_api3_mutual_aid_Offer_spec(&$spec)
 {
-    // TODO: Get from configuration (available/required fields and defaults.
+    // TODO: Get from configuration (available/required fields and defaults).
 }
 
 /**
