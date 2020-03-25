@@ -268,6 +268,41 @@ class CRM_Mutualaid_Settings
         return CRM_Admin_Form_Setting_Localization::getAvailableCountries();
     }
 
+    public static function getStateProvinces($country_id = null)
+    {
+        $state_provinces = array();
+        if (!isset($country_id)) {
+            $country_id = CRM_Mutualaid_Settings::get('country_default');
+        }
+        // Default to system default country, if no default is set (this should
+        // only happen during settings parsing).
+        if (!isset($country_id)) {
+            $country_id = Civi::settings()->get('defaultContactCountry');
+        }
+        if ($country_id) {
+            $state_provinces = CRM_Core_PseudoConstant::stateProvinceForCountry($country_id);
+        }
+
+        return $state_provinces;
+    }
+
+    public static function getCounties($state_province_id = null)
+    {
+        $counties = array();
+
+        if (!isset($state_province_id)) {
+            $state_province_id = CRM_Mutualaid_Settings::get(
+                'state_province_default'
+            );
+        }
+
+        if (isset($state_province_id)) {
+            $counties = CRM_Core_PseudoConstant::countyForState($state_province_id);
+        }
+
+        return $counties;
+    }
+
     /**
      * Retrieves all configured help types from the option group.
      *

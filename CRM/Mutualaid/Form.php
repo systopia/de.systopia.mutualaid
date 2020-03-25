@@ -152,6 +152,49 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                         )
                     );
                     break;
+                case 'state_province':
+                    // Add state/province field with option values for default
+                    // country, but only if country field is not active.
+                    if (!array_key_exists('country', $active_contact_fields)
+                        && $default_country = CRM_Mutualaid_Settings::get(
+                            'country_default'
+                        )) {
+                        $this->addWithInfo(
+                            'select',
+                            'state_province',
+                            E::ts($field_label),
+                            CRM_Mutualaid_Settings::getStateProvinces($default_country),
+                            false,
+                            array(
+                                'class' => 'crm-select2 crm-form-select2 huge',
+                            )
+                        );
+                    }
+                    break;
+                case 'county':
+                    // Add county field and option values for default
+                    // state/province, but only if state/province and country
+                    // fields are not active.
+                    if (!array_key_exists('country', $active_contact_fields)
+                        && !array_key_exists(
+                            'state_province',
+                            $active_contact_fields
+                        )
+                        && $default_state_province = CRM_Mutualaid_Settings::get(
+                            'state_province_default'
+                        )) {
+                        $this->addWithInfo(
+                            'select',
+                            'county',
+                            E::ts($field_label),
+                            CRM_Mutualaid_Settings::getCounties($default_state_province),
+                            false,
+                            array(
+                                'class' => 'crm-select2 crm-form-select2 huge',
+                            )
+                        );
+                    }
+                    break;
                 default:
                     $this->addWithInfo(
                         'text',
@@ -191,9 +234,6 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
         $defaults = array(
             'languages' => array(
                 self::getDefaultLanguage(),
-            ),
-            'country' => array(
-                Civi::settings()->get('defaultContactCountry'),
             ),
         );
 
