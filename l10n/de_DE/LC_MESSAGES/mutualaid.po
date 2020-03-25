@@ -250,7 +250,7 @@ msgstr "Vorlage für Bestätigungs-E-Mail"
 
 #: settings/mutualaid.setting.php
 msgid "- Do not send confirmation e-mails -"
-msgstr "- Keine Bestätigungd-E-Mail versenden -"
+msgstr "- Keine Bestätigungs-E-Mail versenden -"
 
 #: settings/mutualaid.setting.php
 msgid "Maximum helpers per requesting person"
