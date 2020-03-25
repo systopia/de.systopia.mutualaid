@@ -64,7 +64,7 @@ class CRM_Mutualaid_Settings
                 $data,
                 $customGroup
                 ) = $customData->identifyCustomGroup($source_file);
-            if (isset($custom_group) && $customGroup['name'] == $custom_group) {
+            if (!isset($custom_group) || $customGroup['name'] == $custom_group) {
                 foreach ($data['_fields'] as $customFieldSpec) {
                     $customField = $customData->identifyCustomField(
                         $customFieldSpec,

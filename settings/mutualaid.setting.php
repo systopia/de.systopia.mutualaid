@@ -160,7 +160,24 @@ $mutualaid_settings = array(
     ),
 );
 $weight = 200;
-foreach (CRM_Mutualaid_Settings::getContactFields(false) as $field_name => $field_label) {
+foreach (
+    array_merge(
+        CRM_Mutualaid_Settings::getContactFields(
+            false,
+            false
+        ),
+        CRM_Mutualaid_Settings::getContactCustomFields(
+            false,
+            false,
+            'mutualaid_needs_help'
+        ),
+        CRM_Mutualaid_Settings::getContactCustomFields(
+            false,
+            false,
+            'mutualaid_offers_help'
+        )
+    ) as $field_name => $field_label
+) {
     // Enabled/Disabled setting.
     $mutualaid_settings[E::SHORT_NAME . '_' . $field_name . '_enabled'] = array(
         'name' => E::SHORT_NAME . '_' . $field_name . '_enabled',

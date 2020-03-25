@@ -29,15 +29,16 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
         // Add contact form fields.
         $this->addContactFormFields();
 
-        if (count(CRM_Mutualaid_Settings::getHelpTypes()) > 1) {
-            // TODO: This needs a default for the "General" option, since it's
-            //       required.
+        if (
+            CRM_Mutualaid_Settings::get('help_offered_enabled')
+            && count(CRM_Mutualaid_Settings::getHelpTypes()) > 1
+        ) {
             $this->addWithInfo(
               'select',
               'help_offered',
               E::ts('I am offering help for'),
               CRM_Mutualaid_Settings::getHelpTypes(),
-              true,
+              CRM_Mutualaid_Settings::get('help_offered_required'),
               array(
                 'class' => 'crm-select2 crm-form-select2 huge',
                 'multiple' => 'multiple',
@@ -49,28 +50,34 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
               )
             );
         }
-        $this->addWithInfo(
-          'text',
-          'max_persons',
-          E::ts('I am offering help for max.'),
-          array(),
-          true,
-          array(),
-          array(
-            'field_suffix' => E::ts('persons'),
-          )
-        );
-        $this->addWithInfo(
-          'text',
-          'max_distance',
-          E::ts('I am offering help in a max. proximity of'),
-          array(),
-          true,
-          null,
-          array(
-            'field_suffix' => CRM_Mutualaid_Settings::getDistanceUnit(true),
-          )
-        );
+
+        if (CRM_Mutualaid_Settings::get('max_persons_enabled')) {
+            $this->addWithInfo(
+                'text',
+                'max_persons',
+                E::ts('I am offering help for max.'),
+                array(),
+                CRM_Mutualaid_Settings::get('max_persons_required'),
+                array(),
+                array(
+                    'field_suffix' => E::ts('persons'),
+                )
+            );
+        }
+
+        if (CRM_Mutualaid_Settings::get('max_distance_enabled')) {
+            $this->addWithInfo(
+                'text',
+                'max_distance',
+                E::ts('I am offering help in a max. proximity of'),
+                array(),
+                CRM_Mutualaid_Settings::get('max_distance_required'),
+                null,
+                array(
+                    'field_suffix' => CRM_Mutualaid_Settings::getDistanceUnit(true),
+                )
+            );
+        }
 
         if (CRM_Mutualaid_Settings::get('comments_enabled')) {
             $this->addWithInfo(

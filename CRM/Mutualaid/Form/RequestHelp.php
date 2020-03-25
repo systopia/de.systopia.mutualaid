@@ -88,6 +88,19 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
         parent::buildQuickForm();
     }
 
+    /**
+     * Validates form values.
+     *
+     * @return bool
+     *   Whether the form validates.
+     */
+    public function validate()
+    {
+        // Nothing to validate for now.
+
+        return parent::validate();
+    }
+
     public function postProcess()
     {
         parent::postProcess();
