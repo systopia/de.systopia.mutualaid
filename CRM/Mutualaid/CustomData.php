@@ -165,7 +165,7 @@ class CRM_Mutualaid_CustomData
         return array($data, $customGroup, $force_update);
     }
 
-    public function identifyCustomField($customFieldSpec, $customGroup) {
+    public function identifyCustomField(&$customFieldSpec, &$customGroup) {
         $this->translateStrings($customFieldSpec);
         $customFieldSpec['custom_group_id'] = $customGroup['id'];
         $customFieldSpec['_lookup'][] = 'custom_group_id';

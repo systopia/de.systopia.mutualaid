@@ -42,9 +42,7 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
         );
 
         foreach (CRM_Mutualaid_Settings::getContactCustomFieldResources() as $resource) {
-            $customData->syncCustomGroup(
-                E::path($resource)
-            );
+            $customData->syncCustomGroup($resource);
         }
     }
 
