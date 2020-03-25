@@ -219,15 +219,20 @@ class CRM_Mutualaid_Settings
      */
     public static function getHelpTypes($associate = true)
     {
-        $help_types = array();
-        CRM_Core_OptionValue::getValues(
-            array('name' => 'mutualaid_help_types'),
-            $help_types,
-            'weight',
-            true
-        );
+        static $help_types = null; // cache result
+
+        if ($help_types === null) {
+            $help_types = [];
+            CRM_Core_OptionValue::getValues(
+                array('name' => 'mutualaid_help_types'),
+                $help_types,
+                'weight',
+                true
+            );
+        }
 
         // Return value-label pairs when requested.
+        $return = [];
         if ($associate) {
             foreach ($help_types as $help_type) {
                 $return[$help_type['value']] = $help_type['label'];
