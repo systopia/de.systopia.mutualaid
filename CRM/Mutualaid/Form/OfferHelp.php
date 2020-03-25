@@ -157,16 +157,21 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
         $values = $this->exportValues();
 
         // Require integer values for max_persons.
-        if (!is_int($values['max_persons']) && !ctype_digit(
-            $values['max_persons']
-          )) {
+        if (
+            !empty($values['max_persons'])
+            && !is_int($values['max_persons'])
+            && !ctype_digit($values['max_persons'])
+        ) {
             $this->_errors['max_persons'] = E::ts(
               'Please provide an integer value for the maximum number of persons you would like to offer help for.'
             );
         }
 
         // Require integer values for max_distance.
-        if (!is_numeric($values['max_distance'])) {
+        if (
+            !empty($values['max_distance'])
+            && !is_numeric($values['max_distance'])
+        ) {
             $this->_errors['max_distance'] = E::ts(
               'Please provide a numeric value for the maximum distance you would like to offer help in.'
             );
