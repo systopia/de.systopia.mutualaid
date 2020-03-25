@@ -63,16 +63,16 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
 
         // TODO: Add configuration element for scheduled job frequency.
 
-        // Add "- None -" option for help_offered and help_needed.
+        // Add "- None -" option for pseudoconstant fields.
         foreach (array(
-            'help_offered',
-            'help_needed',
-                 ) as $help_type_field) {
-            $help_type_element = $this->getElement(
-                E::SHORT_NAME . '_' . $help_type_field . '_default'
+            'prefix_id',
+            'suffix_id',
+                 ) as $pseudoconstant_field) {
+            $pseudoconstant_element = $this->getElement(
+                E::SHORT_NAME . '_' . $pseudoconstant_field . '_default'
             );
             array_unshift(
-                $help_type_element->_options,
+                $pseudoconstant_element->_options,
                 array(
                     'text' => E::ts('- None -'),
                     'attr' => array(
@@ -80,6 +80,29 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
                     ),
                 )
             );
+        }
+
+        // Make help type fields multivalue.
+        foreach (array(
+            'help_offered',
+            'help_needed'
+                 ) as $help_type_field) {
+            $help_type_element = $this->getElement(
+                E::SHORT_NAME . '_' . $help_type_field . '_default'
+            );
+            $class_attribute = $help_type_element->getAttribute('class');
+            $classes = array_filter(explode(
+                ' ',
+                (isset($class_attribute) ? $class_attribute : '')
+            ));
+            $classes += array_diff(array(
+                'crm-select2',
+                'crm-form-select2'
+            ), $classes);
+            $class_attribute = implode(' ', $classes);
+            $help_type_element->setAttribute('class', $class_attribute);
+
+            $help_type_element->setAttribute('multiple', 'multiple');
         }
     }
 

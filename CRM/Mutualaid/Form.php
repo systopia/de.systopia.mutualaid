@@ -196,6 +196,25 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                         );
                     }
                     break;
+
+                case 'prefix_id':
+                case 'suffix_id':
+                    $options = CRM_Contact_BAO_Contact::buildOptions($field_name);
+                    if (!$required) {
+                        array_unshift($options, E::ts('- None -'));
+                    }
+                    $this->addWithInfo(
+                        'select',
+                        $field_name,
+                        E::ts($field_label),
+                        $options,
+                        $required,
+                        array(
+                            'class' => 'crm-select2 crm-form-select2 huge',
+                        )
+                    );
+                    break;
+
                 default:
                     $this->addWithInfo(
                         'text',
@@ -237,6 +256,17 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                 self::getDefaultLanguage(),
             ),
         );
+
+        foreach (
+            CRM_Mutualaid_Settings::getContactFields(
+                false,
+                false
+            ) as $field_name => $field_label
+        ) {
+            $defaults[$field_name] = CRM_Mutualaid_Settings::get(
+                $field_name . '_default'
+            );
+        }
 
         return $defaults;
     }

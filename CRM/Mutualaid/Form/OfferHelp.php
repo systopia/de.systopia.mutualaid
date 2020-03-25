@@ -115,6 +115,38 @@ class CRM_Mutualaid_Form_OfferHelp extends CRM_Mutualaid_Form
     }
 
     /**
+     * Sets default values for form elements.
+     *
+     * @return array|NULL
+     */
+    public function setDefaultValues()
+    {
+        $defaults = parent::setDefaultValues();
+
+        // Set default values from settings.
+        foreach (
+            CRM_Mutualaid_Settings::getContactCustomFields(
+                true,
+                false,
+                'mutualaid_offers_help'
+            ) as $field_name
+        ) {
+            $default_value = CRM_Mutualaid_Settings::get($field_name . '_default');
+
+            switch ($field_name) {
+                // Convert distance into configured unit.
+                case 'max_distance':
+                    $default_value /= CRM_Mutualaid_Settings::get('distance_unit');
+                    break;
+            }
+
+            $defaults[$field_name] = $default_value;
+        }
+
+        return $defaults;
+    }
+
+    /**
      * Validates form values.
      *
      * @return bool
