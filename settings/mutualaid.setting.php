@@ -161,6 +161,7 @@ $mutualaid_settings = array(
 );
 $weight = 200;
 foreach (CRM_Mutualaid_Settings::getContactFields(false) as $field_name => $field_label) {
+    // Enabled/Disabled setting.
     $mutualaid_settings[E::SHORT_NAME . '_' . $field_name . '_enabled'] = array(
         'name' => E::SHORT_NAME . '_' . $field_name . '_enabled',
         'type' => 'Boolean',
@@ -172,6 +173,23 @@ foreach (CRM_Mutualaid_Settings::getContactFields(false) as $field_name => $fiel
         'is_contact' => 0,
         'description' => E::ts(
             'Whether the contact field %1 is enabled for being displayed on forms of this extension.',
+            [1 => $field_label]
+        ),
+        'settings_pages' => ['mutualaid' => ['weight' => $weight++]],
+    );
+
+    // Mandatory setting.
+    $mutualaid_settings[E::SHORT_NAME . '_' . $field_name . '_required'] = array(
+        'name' => E::SHORT_NAME . '_' . $field_name . '_required',
+        'type' => 'Boolean',
+        'default' => true,
+        'html_type' => 'radio',
+        'quick_form_type' => 'YesNo',
+        'title' => E::ts('Make field %1 mandatory', [1 => $field_label]),
+        'is_domain' => 1,
+        'is_contact' => 0,
+        'description' => E::ts(
+            'Whether the contact field %1 is required when being displayed on forms of this extension.',
             [1 => $field_label]
         ),
         'settings_pages' => ['mutualaid' => ['weight' => $weight++]],

@@ -138,6 +138,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
         foreach (
             $active_contact_fields as $field_name => $field_label
         ) {
+            $required = CRM_Mutualaid_Settings::get($field_name . '_required');
             switch ($field_name) {
                 case 'country':
                     // Add country field with option values.
@@ -146,7 +147,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                         'country',
                         E::ts($field_label),
                         CRM_Mutualaid_Settings::getCountries(),
-                        false,
+                        $required,
                         array(
                             'class' => 'crm-select2 crm-form-select2 huge',
                         )
@@ -164,7 +165,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                             'state_province',
                             E::ts($field_label),
                             CRM_Mutualaid_Settings::getStateProvinces($default_country),
-                            false,
+                            $required,
                             array(
                                 'class' => 'crm-select2 crm-form-select2 huge',
                             )
@@ -188,7 +189,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                             'county',
                             E::ts($field_label),
                             CRM_Mutualaid_Settings::getCounties($default_state_province),
-                            false,
+                            $required,
                             array(
                                 'class' => 'crm-select2 crm-form-select2 huge',
                             )
@@ -201,7 +202,7 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
                         $field_name,
                         E::ts($field_label),
                         array(),
-                        true
+                        $required
                     );
                     break;
             }
