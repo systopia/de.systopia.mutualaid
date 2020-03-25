@@ -116,12 +116,15 @@ function civicrm_api3_mutual_aid_Request($params)
 
         // Send confirmation e-mail when configured.
         if ($template_id = CRM_Mutualaid_Settings::get('email_confirmation_template')) {
+            $from = CRM_Core_BAO_Domain::getNameAndEmail(FALSE, TRUE);
             $result = civicrm_api3(
                 'MessageTemplate',
                 'send',
                 array(
                     'id' => $template_id,
                     'contact_id' => $contact_id,
+                    'to_email' => $params['email'],
+                    'from' => reset(CRM_Core_BAO_Domain::getNameAndEmail(FALSE, TRUE)),
                 )
             );
         }
