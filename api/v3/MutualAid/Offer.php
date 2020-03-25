@@ -127,7 +127,7 @@ function civicrm_api3_mutual_aid_Offer($params)
                     'id' => $template_id,
                     'contact_id' => $contact_id,
                     'to_email' => $params['email'],
-                    'from' => reset(CRM_Core_BAO_Domain::getNameAndEmail(FALSE, TRUE)),
+                    'from' => reset($from),
                 )
             );
         }
