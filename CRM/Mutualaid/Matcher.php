@@ -511,6 +511,8 @@ class CRM_Mutualaid_Matcher
             CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX min_latitude(min_latitude)");
             CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX max_longitude(max_longitude)");
             CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX min_longitude(min_longitude)");
+            CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX max_distance(max_distance)");
+            CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX open_spots(open_spots)");
             foreach ($help_types as $help_type => $help_name) {
                 $help_type_value = (int) $help_type;
                 CRM_Core_DAO::executeQuery("ALTER TABLE `{$helper_table_name}` ADD INDEX offers_help_{$help_type_value}(offers_help_{$help_type_value})");
