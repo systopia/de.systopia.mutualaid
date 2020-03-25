@@ -42,8 +42,27 @@ class CRM_Mutialaid_MatcherTest extends CRM_Mutualaid_TestBase
     parent::tearDown();
   }
 
-  public function testSimpleMatch()
+    /**
+     * Tests the simples match
+     */
+  public function testSimplestMatch()
   {
+      $help_offer = $this->createHelpOffer(['types' => [1]]);
+      $help_request = $this->createHelpRequest(['types' => [1]]);
+      $this->runMatcher();
 
+      $this->assertRequestIsMatched($help_request['contact_id'], $help_offer['contact_id'], [1]);
   }
+
+    /**
+     * Tests a simple match, but with 100km distance
+     */
+    public function testLongRangeMatch()
+    {
+        $help_offer = $this->createHelpOffer(['types' => [1], 'radius' => 100000]);
+        $help_request = $this->createHelpRequest(['types' => [1]]);
+        $this->runMatcher();
+
+        $this->assertRequestIsMatched($help_request['contact_id'], $help_offer['contact_id'], [1]);
+    }
 }
