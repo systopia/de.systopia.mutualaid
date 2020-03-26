@@ -93,6 +93,20 @@ function civicrm_api3_mutual_aid_Request($params)
             )
         );
 
+        // Special handling for country, state_province and county IDs.
+        if (array_key_exists('country', $contact_data)) {
+            $contact_data['country_id'] = $contact_data['country'];
+            unset($contact_data['country']);
+        }
+        if (array_key_exists('state_province', $contact_data)) {
+            $contact_data['state_province_id'] = $contact_data['state_province'];
+            unset($contact_data['state_province']);
+        }
+        if (array_key_exists('county', $contact_data)) {
+            $contact_data['county_id'] = $contact_data['county'];
+            unset($contact_data['county']);
+        }
+
         // Identify/create contact using XCM with mutualaid profile.
         $contact_data['xcm_profile'] = 'mutualaid';
         $xcm_result = civicrm_api3('Contact', 'getorcreate', $contact_data);
