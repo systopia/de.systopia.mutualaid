@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-03-26 11:30+0100\n"
+"POT-Creation-Date: 2020-03-26 11:59+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -16,58 +16,54 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Admin/Form/Mutualaid.php
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form.php
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Settings.php
+#: CRM/Admin/Form/Mutualaid.php CRM/Mutualaid/Form.php
+#: CRM/Mutualaid/Settings.php
 msgid "- None -"
 msgstr "- Keines -"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "Offer Help"
 msgstr "Hilfsangebot"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "I am offering help for"
 msgstr "Ich kann helfen bei"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "Select what kind of help you are offering."
 msgstr "Wähle, wobei Du helfen kannst."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "I am offering help for max."
 msgstr "Ich biete Hilfe für maximal"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "persons"
 msgstr "Person(en)"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "I am offering help in a max. proximity of"
 msgstr "Ich biete Hilfe in einem maximalen Umkreis von"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
 msgid "Notes/Comments"
 msgstr "Anmerkungen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
 msgid "Terms and Conditions"
 msgstr "Bedingungen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
 msgid ""
 "I understand and accept the terms and conditions for using this service."
 msgstr ""
 "Ich verstehe und akzeptiere die Bedingungen für die Nutzung dieses Services."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid "Offer help"
 msgstr "Hilfe anbieten"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
 "Please provide an integer value for the maximum number of persons you would "
 "like to offer help for."
@@ -75,7 +71,7 @@ msgstr ""
 "Bitte geben Sie eine gültige Zahl für die maximale Anzahl an Personen ein, "
 "die Sie unterstützen können."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
 "Please provide a numeric value for the maximum distance you would like to "
 "offer help in."
@@ -83,26 +79,34 @@ msgstr ""
 "Bitte geben Sie eine gültige Zahl ein für die maximale Entfernung in der Sie "
 "Hilfe anbieten können."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php
 msgid ""
 "Your offer has been submitted. You will receive an e-mail confirmation "
 "shortly."
 msgstr ""
 "Ihr Angebot wurde übermittelt. Sie erhalten in Kürze eine E-Mail-Bestätigung."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Request Help"
 msgstr "Hilfegesuch absenden"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/RequestHelp.php
 msgid "I am requesting help for"
 msgstr "Ich benötige Hilfe bei"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Select what kind of help you are requesting."
 msgstr "Wählen Sie die Art der benötigten Hilfe aus."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form/RequestHelp.php
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Personal contact possible"
+msgstr "Persönlicher Kontakt möglich"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "I am eligible for being contacted personally."
+msgstr "Ich darf persönlich kontaktiert werden."
+
+#: CRM/Mutualaid/Form/RequestHelp.php
 msgid ""
 "Your request has been submitted. You will receive an e-mail confirmation "
 "shortly."
@@ -110,39 +114,39 @@ msgstr ""
 "Ihre Anfrage wurde übermittelt. Sie erhalten in Kürze eine E-mail-"
 "Benachrichtigung."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Form.php
+#: CRM/Mutualaid/Form.php
 msgid "Languages spoken"
 msgstr "Beherrschte Sprachen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Page/MatchNow.php
+#: CRM/Mutualaid/Page/MatchNow.php
 msgid "Matched %2 help offers to help requests in %1 seconds."
 msgstr "%2 Hilfsangebote zu Hilfsanfragen in %1 Sekunden zugeordnet."
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Page/MatchNow.php
+#: CRM/Mutualaid/Page/MatchNow.php
 msgid "Matching Completed"
 msgstr "Zuordnung abgeschlossen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Settings.php
+#: CRM/Mutualaid/Settings.php
 msgid "E-Mail Address"
 msgstr "E-Mail-Adresse"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Settings.php
+#: CRM/Mutualaid/Settings.php
 msgid "Primary Phone"
 msgstr "Bevorzugte Telefonnummer"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Settings.php
+#: CRM/Mutualaid/Settings.php
 msgid "Secondary Phone"
 msgstr "weitere Telefonnumer"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Settings.php
+#: CRM/Mutualaid/Settings.php
 msgid "Website"
 msgstr "Website"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader/Base.php
+#: CRM/Mutualaid/Upgrader/Base.php
 msgid "Upgrade %1 to revision %2"
 msgstr "Aktualisiere %1 auf Revision %2"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader.php
+#: CRM/Mutualaid/Upgrader.php
 msgid ""
 "Your system doesn't have a GeoCoder service configured. A GeoCoder can "
 "assign geo coordinates to a given address.<br/>"
@@ -150,7 +154,7 @@ msgstr ""
 "In CiviCRM ist derzeit kein Dienstleister für Geokodierung konfiguriert. "
 "Dieser wird benötigt, um eingegebenen Adressen Geokoordinatenzuzuordnen.<br/>"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader.php
+#: CRM/Mutualaid/Upgrader.php
 msgid ""
 "This is really important for this extension, since it is needed to calculate "
 "the distance between two people.<br/>"
@@ -158,11 +162,11 @@ msgstr ""
 "Dies ist für diese Erweiterung erforderlich, um die Entfernung zwischen zwei "
 "Personen berechnen zu können.<br/>"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader.php
+#: CRM/Mutualaid/Upgrader.php
 msgid "Please configure your GeoCoder <a href=\"%1\">HERE</a>.<br/>"
 msgstr "Bitte konfigurieren Sie die Geokodierung <a href=\"%1\">hier</a>.<br/>"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader.php
+#: CRM/Mutualaid/Upgrader.php
 msgid ""
 "If you don't want to use the built-in ones we recommend <a href="
 "\"%1\">OpenStreetMap</a>.<br/>"
@@ -170,44 +174,43 @@ msgstr ""
 "Falls Sie die integrierten Services für Geokodierung nicht nutzen möchten "
 "empfehlen wir die Nutzung von <a href=\"%1\">OpenStreetMap</a>.<br/>"
 
-#: /home/jens/repositories/de.systopia.mutualaid/CRM/Mutualaid/Upgrader.php
+#: CRM/Mutualaid/Upgrader.php
 msgid "No GeoCoder configured"
 msgstr "Kein Service für Geokodierung konfiguriert"
 
-#: /home/jens/repositories/de.systopia.mutualaid/api/v3/MutualAid/Offer.php
-#: /home/jens/repositories/de.systopia.mutualaid/api/v3/MutualAid/Request.php
+#: api/v3/MutualAid/Offer.php api/v3/MutualAid/Request.php
 msgid "No help types active."
 msgstr "Keine Hilfstypen aktiv."
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Mutual Help"
 msgstr "Nachbarschaftshilfe"
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Unconfirmed Matches"
 msgstr "Unbestätigte Zuordnungen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Help Offer Form"
 msgstr "Formular \"Biete Hilfe\""
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Help Request Form"
 msgstr "Formular \"Benötige Hilfe\""
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Configuration"
 msgstr "Konfiguration"
 
-#: /home/jens/repositories/de.systopia.mutualaid/mutualaid.php
+#: mutualaid.php
 msgid "Match Now"
 msgstr "Jetzt zuordnen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Languages enabled"
 msgstr "Sprachen aktivieren"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "If enabled, languages spoken will be collected from people offering and "
 "requesting help, and taken into account when matching requests with offers."
@@ -215,11 +218,11 @@ msgstr ""
 "Falls aktiviert werden beherrschte Sprachen der Hilfesuchenden und Helfenden "
 "abgefragt und bei der Zuordnung berücksichtigt."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Comments enabled"
 msgstr "Kommentare aktiviert"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "If enabled, comments will be collected from people offering and requesting "
 "help."
@@ -227,23 +230,23 @@ msgstr ""
 "Falls aktiviert wird Hilfesuchenden und Helfenden die Möglichkeit gegeben, "
 "einen Kommenar hinzuzufügen."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Meters"
 msgstr "Meter"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Kilometers"
 msgstr "Kilometer"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Miles"
 msgstr "Meilen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Distance unit"
 msgstr "Maßeinheit für Entfernung"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Unit for distance values, used for collecting max. distance in forms and for "
 "calculating proximity."
@@ -251,55 +254,55 @@ msgstr ""
 "Maßeinheit die für die Abfrage der maximalen \"Hilfsentfernung\" sowie die "
 "Zuordnung von Personen genutzt wird."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Terms & Conditions"
 msgstr "Nutzungsbedingungen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "HTML content containing Terms and Conditions to display on forms."
 msgstr ""
 "HTML-formatierte Nutzungsbedingungen die im öffentlichen Formular angezeigt "
 "werden."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "E-Mail Confirmation Template"
 msgstr "Vorlage für Bestätigungs-E-Mail"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "- Do not send confirmation e-mails -"
 msgstr "- Keine Bestätigungs-E-Mail versenden -"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Maximum helpers per requesting person"
 msgstr "Maximale Anzahl Helfender pro Hilfesuchender Person"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Maximum number of persons providing help per person requesting help."
 msgstr "Maximale Anzahl Helfender pro hilfesuchender Person."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Matching Weight: Help Types"
 msgstr "Gewichtung: Art der Unterstützung"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Weight for matching help types when calculating matches between persons."
 msgstr ""
 "Gewichtung der Art der benötigten Hilfe bei der Zuordnung von Personen."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Matching Weight: Distance"
 msgstr "Gewichtung: Entfernung"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Weight for distance when calculating matches between persons."
 msgstr "Gewichtung der Entfernung der Personen bei der Zuordnung."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Matching Weight: Workload"
 msgstr "Gewichtung: Auslastung"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Weight for workload of persons providing help when calculating matches "
 "between persons."
@@ -307,21 +310,21 @@ msgstr ""
 "Gewichtung der Auslastung der Helfenden (Anzahl der unterstützten Personen) "
 "bei der Zuordnung."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Matching Weight: Small Distance Preference"
 msgstr "Gewichtung: Kurze Entfernung"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Weight for preference of persons providing help in small distances when "
 "calculating matches between persons."
 msgstr "Gewichtung kurzer Entfernungen bei der Zuordnung von Personen."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Enable field %1"
 msgstr "Feld %1 aktivieren"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Whether the contact field %1 is enabled for being displayed on forms of this "
 "extension."
@@ -329,11 +332,11 @@ msgstr ""
 "Ob das Kontaktfeld %1 für die Anzeige in Formularen dieser Erweiterung "
 "aktiviert ist."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Make field %1 mandatory"
 msgstr "Feld %1 erforderlich machen"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "Whether the contact field %1 is required when being displayed on forms of "
 "this extension."
@@ -341,11 +344,11 @@ msgstr ""
 "Ob das Kontaktfeld %1 erforderlich ist, wenn es in Formularen dieser "
 "Erweiterung angezeigt wird."
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid "Default value for field %1"
 msgstr "Vorgabewert für Feld %1"
 
-#: /home/jens/repositories/de.systopia.mutualaid/settings/mutualaid.setting.php
+#: settings/mutualaid.setting.php
 msgid ""
 "The default value being used as preset for the field or the option, if the "
 "field is not active."
