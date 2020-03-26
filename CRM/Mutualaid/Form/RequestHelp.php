@@ -33,14 +33,12 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
         $this->addContactFormFields();
 
         if (count(CRM_Mutualaid_Settings::getHelpTypes()) > 1) {
-            // TODO: This needs a default for the "General" option, since it's
-            //       required.
             $this->addWithInfo(
               'select',
               'help_needed',
               E::ts('I am requesting help for'),
               CRM_Mutualaid_Settings::getHelpTypes(),
-              true,
+              CRM_Mutualaid_Settings::get('help_needed_required'),
               array(
                 'class' => 'crm-select2 crm-form-select2 huge',
                 'multiple' => 'multiple',
@@ -50,6 +48,16 @@ class CRM_Mutualaid_Form_RequestHelp extends CRM_Mutualaid_Form
                   'Select what kind of help you are requesting.'
                 ),
               )
+            );
+        }
+
+        if (CRM_Mutualaid_Settings::get('personal_contact_enabled')) {
+            $this->addWithInfo(
+                'checkbox',
+                'personal_contact',
+                E::ts('Personal contact possible'),
+                E::ts('I am eligible for being contacted personally.'),
+                CRM_Mutualaid_Settings::get('personal_contact_required')
             );
         }
 
