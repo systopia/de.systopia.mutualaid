@@ -35,18 +35,21 @@ use CRM_Mutualaid_ExtensionUtil as E;
  *
  * @group headless
  */
-class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface, TransactionalInterface {
+class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements HeadlessInterface, HookInterface,
+                                                                            TransactionalInterface
+{
     use Api3TestTrait {
         callAPISuccess as protected traitCallAPISuccess;
     }
 
+    static $home_location = ['geo_code_1' => 50.9542182, 'geo_code_2' => 6.9094389];
+
+    // geo_code_1 = latitude, geo_code_2 = longitude
     /** @var CRM_Core_Transaction current transaction */
     protected $transaction = null;
 
-    // geo_code_1 = latitude, geo_code_2 = longitude
-    static $home_location = ['geo_code_1' => 50.9542182, 'geo_code_2' => 6.9094389];
-
-    public function setUpHeadless() {
+    public function setUpHeadless()
+    {
         // Civi\Test has many helpers, like install(), uninstall(), sql(), and sqlFile().
         // See: https://docs.civicrm.org/dev/en/latest/testing/phpunit/#civitest
         return \Civi\Test::headless()
@@ -55,19 +58,50 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
             ->apply();
     }
 
-    public function setUp() {
+    public function setUp()
+    {
         parent::setUp();
         // cleanup (shouldn't be necessary
-        CRM_Core_DAO::executeQuery("DELETE FROM civicrm_relationship WHERE relationship_type_id = %1",
-                                   [1 => [CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(), 'Integer']]);
+        CRM_Core_DAO::executeQuery(
+            "DELETE FROM civicrm_relationship WHERE relationship_type_id = %1",
+            [1 => [CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(), 'Integer']]
+        );
         CRM_Core_DAO::executeQuery("DELETE FROM civicrm_address");
         $this->transaction = new CRM_Core_Transaction();
     }
 
-    public function tearDown() {
+    public function tearDown()
+    {
         $this->transaction->rollback();
         $this->transaction = null;
         parent::tearDown();
+    }
+
+    /**
+     * Create a new help offer
+     *
+     * @param array $params
+     *      various parameters for creation
+     */
+    public function createHelpOffer($params = [])
+    {
+        // create contact + address
+        if (empty($params['contact_id'])) {
+            $params['contact_id'] = $this->createContact($params)['id'];
+            $this->createAddress($params);
+        }
+
+        // create help offer
+        $help_data = [
+            'id'                                           => $params['contact_id'],
+            'mutualaid_offers_help.mutualaid_help_offered' => CRM_Utils_Array::value('types', $params, [1]),
+            'mutualaid_offers_help.mutualaid_max_persons'  => CRM_Utils_Array::value('max_persons', $params, 10),
+            'mutualaid_offers_help.mutualaid_max_distance' => CRM_Utils_Array::value('max_distance', $params, 1000),
+        ];
+        CRM_Mutualaid_CustomData::resolveCustomFields($help_data);
+        $this->traitCallAPISuccess('Contact', 'create', $help_data);
+
+        return ['contact_id' => $params['contact_id']];
     }
 
     /**
@@ -98,7 +132,8 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
      * @param array $params
      *      various parameters for address creation
      */
-    public function createAddress($params = []) {
+    public function createAddress($params = [])
+    {
         if (empty($params['contact_id'])) {
             $params['contact_id'] = $this->createContact()['id'];
         }
@@ -109,7 +144,7 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
             $params['city'] = sha1(random_bytes(10));
         }
         if (empty($params['postal_code'])) {
-            $params['postal_code'] = rand(10000,99999);
+            $params['postal_code'] = rand(10000, 99999);
         }
         if (empty($params['radius'])) {
             $params['radius'] = 500; //500m
@@ -122,34 +157,44 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
         }
 
         $this->traitCallAPISuccess('Address', 'create', $params);
-
     }
 
     /**
-     * Create a new help offer
+     * Generate a new random location based on the given one + radius
      *
      * @param array $params
-     *      various parameters for creation
+     *   will store the geocodes here
+     *
+     * @param array $location
+     *  geo_code_1/geo_code_2 location data
+     *
+     * @param int $radius
+     *   radius in meters
      */
-    public function createHelpOffer($params = [])
+    public function generateLocation(&$params, $location, $radius)
     {
-        // create contact + address
-        if (empty($params['contact_id'])) {
-            $params['contact_id'] = $this->createContact($params)['id'];
-            $this->createAddress($params);
+        $radius           = (float)$radius;
+        $LATITUDE_FACTOR  = 111000.1;
+        $LONGITUDE_FACTOR = 73000.1;
+        $center           = [(float)$location['geo_code_2'], (float)$location['geo_code_1']];
+        for ($i = 0; $i < 100; $i++) {
+            // try generating a new location
+            $test         = $center[0] - $radius / $LONGITUDE_FACTOR + (mt_rand() / mt_getrandmax(
+                    ) * 2.0 * $radius / $LONGITUDE_FACTOR);
+            $new_location = [
+                $center[0] - $radius / $LONGITUDE_FACTOR + (mt_rand() / mt_getrandmax(
+                    ) * 2.0 * $radius / $LONGITUDE_FACTOR),
+                $center[1] - $radius / $LATITUDE_FACTOR + (mt_rand() / mt_getrandmax(
+                    ) * 2.0 * $radius / $LATITUDE_FACTOR),
+            ];
+            if ($radius > CRM_Mutualaid_Matcher::calculateDistance($center, $new_location)) {
+                // this is a good one
+                $params['geo_code_1'] = $new_location[1];
+                $params['geo_code_2'] = $new_location[0];
+                return;
+            }
         }
-
-        // create help offer
-        $help_data = [
-            'id'                                           => $params['contact_id'],
-            'mutualaid_offers_help.mutualaid_help_offered' => CRM_Utils_Array::value('types', $params, [1]),
-            'mutualaid_offers_help.mutualaid_max_persons'  => CRM_Utils_Array::value('max_persons', $params, 10),
-            'mutualaid_offers_help.mutualaid_max_distance' => CRM_Utils_Array::value('max_distance', $params, 1000),
-        ];
-        CRM_Mutualaid_CustomData::resolveCustomFields($help_data);
-        $this->traitCallAPISuccess('Contact', 'create', $help_data);
-
-        return ['contact_id' => $params['contact_id']];
+        $this->fail("Failed to create a random point within the radious - check the algorithm!");
     }
 
     /**
@@ -191,13 +236,17 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
      */
     public function assertRequestIsMatched($help_requested_contact_id, $help_offered_contact_id, $help_types)
     {
-        $relationships = $this->traitCallAPISuccess('Relationship', 'get', [
-            'contact_id_a'     => $help_offered_contact_id,
-            'contact_id_b'     => $help_requested_contact_id,
-            'activity_type_id' => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
-            'status_id'        => ['IN' => CRM_Mutualaid_Settings::getUnconfirmedHelpStatusList()],
-            'option.limit'     => 0,
-        ]);
+        $relationships = $this->traitCallAPISuccess(
+            'Relationship',
+            'get',
+            [
+                'contact_id_a'     => $help_offered_contact_id,
+                'contact_id_b'     => $help_requested_contact_id,
+                'activity_type_id' => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
+                'status_id'        => ['IN' => CRM_Mutualaid_Settings::getUnconfirmedHelpStatusList()],
+                'option.limit'     => 0,
+            ]
+        );
         $this->assertNotEmpty($relationships['count'], "no active help relationship found");
         foreach ($relationships['values'] as $relationship) {
             CRM_Mutualaid_CustomData::labelCustomFields($relationship);
@@ -207,39 +256,5 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
             }
         }
         $this->fail("no active help relationship with the given help types found");
-    }
-
-    /**
-     * Generate a new random location based on the given one + radius
-     *
-     * @param array $params
-     *   will store the geocodes here
-     *
-     * @param array $location
-     *  geo_code_1/geo_code_2 location data
-     *
-     * @param int $radius
-     *   radius in meters
-     */
-    public function generateLocation(&$params, $location, $radius) {
-        $radius = (float) $radius;
-        $LATITUDE_FACTOR  = 111000.1;
-        $LONGITUDE_FACTOR = 73000.1;
-        $center = [(float)$location['geo_code_2'], (float)$location['geo_code_1']];
-        for ($i = 0; $i < 100; $i++) {
-            // try generating a new location
-            $test = $center[0] - $radius / $LONGITUDE_FACTOR + (mt_rand() / mt_getrandmax() * 2.0 * $radius / $LONGITUDE_FACTOR);
-            $new_location = [
-                $center[0] - $radius / $LONGITUDE_FACTOR + (mt_rand() / mt_getrandmax() * 2.0 * $radius / $LONGITUDE_FACTOR),
-                $center[1] - $radius / $LATITUDE_FACTOR  + (mt_rand() / mt_getrandmax() * 2.0 * $radius / $LATITUDE_FACTOR),
-            ];
-            if ($radius > CRM_Mutualaid_Matcher::calculateDistance($center, $new_location)) {
-                // this is a good one
-                $params['geo_code_1'] = $new_location[1];
-                $params['geo_code_2'] = $new_location[0];
-                return;
-            }
-        }
-        $this->fail("Failed to create a random point within the radious - check the algorithm!");
     }
 }
