@@ -447,7 +447,7 @@ class CRM_Mutualaid_Matcher
                 $token = "CONCAT(0x01, '{$help_type_value}', 0x01)";
                 $HELP_OFFERED_SELECT_LIST[] = "(LOCATE({$token}, help_offered.{$HELP_OFFERED_TYPE}) > 0) AS offers_help_{$help_type_value}";
             }
-            $HELP_OFFERED_SELECTS = implode(';\n              ', $HELP_OFFERED_SELECT_LIST);
+            $HELP_OFFERED_SELECTS = implode(",\n              ", $HELP_OFFERED_SELECT_LIST);
             if (!empty($HELP_OFFERED_SELECTS)) {
               $HELP_OFFERED_SELECTS .= ',';
             }
