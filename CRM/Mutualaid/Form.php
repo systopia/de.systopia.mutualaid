@@ -199,10 +199,13 @@ class CRM_Mutualaid_Form extends CRM_Core_Form
 
                 case 'prefix_id':
                 case 'suffix_id':
-                    $options = CRM_Contact_BAO_Contact::buildOptions($field_name);
+                    $options = array();
                     if (!$required) {
-                        array_unshift($options, E::ts('- None -'));
+                        $options[0] = E::ts('- None -');
                     }
+                    $options += CRM_Contact_BAO_Contact::buildOptions(
+                        $field_name
+                    );
                     $this->addWithInfo(
                         'select',
                         $field_name,
