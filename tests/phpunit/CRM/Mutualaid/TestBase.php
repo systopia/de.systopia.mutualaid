@@ -257,4 +257,27 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
         }
         $this->fail("no active help relationship with the given help types found");
     }
+
+    /**
+     * Verify that the given help relationship has been established
+     *
+     * @param integer $help_requested_contact_id
+     * @param integer $help_offered_contact_id
+     */
+    public function assertRequestIsNotMatched($help_requested_contact_id, $help_offered_contact_id)
+    {
+        $relationships = $this->traitCallAPISuccess(
+            'Relationship',
+            'get',
+            [
+                'contact_id_a'     => $help_offered_contact_id,
+                'contact_id_b'     => $help_requested_contact_id,
+                'activity_type_id' => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
+                'status_id'        => ['IN' => CRM_Mutualaid_Settings::getUnconfirmedHelpStatusList()],
+                'option.limit'     => 0,
+            ]
+        );
+        $this->assertEmpty($relationships['count'], "A match has been found, but there shouldn't be one");
+    }
+
 }

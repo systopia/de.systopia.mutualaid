@@ -92,10 +92,22 @@ class CRM_Mutialaid_MatcherTest extends CRM_Mutualaid_TestBase
      */
     public function testLongRangeMatch()
     {
-        $help_offer   = $this->createHelpOffer(['types' => [1], 'radius' => 100000]);
-        $help_request = $this->createHelpRequest(['types' => [1]]);
+        $help_offer   = $this->createHelpOffer(['types' => [1], 'max_distance' => 110000]);
+        $help_request = $this->createHelpRequest(['types' => [1], 'radius' => 100000]);
         $this->runMatcher();
 
         $this->assertRequestIsMatched($help_request['contact_id'], $help_offer['contact_id'], [1]);
+    }
+
+    /**
+     * Test if a match is not happening due to the range
+     */
+    public function testOutOfRangeMatch()
+    {
+        $help_offer   = $this->createHelpOffer(['types' => [1], 'max_distance' => 1]);
+        $help_request = $this->createHelpRequest(['types' => [1], 'radius' => 100000]);
+        $this->runMatcher();
+
+        $this->assertRequestIsNotMatched($help_request['contact_id'], $help_offer['contact_id']);
     }
 }
