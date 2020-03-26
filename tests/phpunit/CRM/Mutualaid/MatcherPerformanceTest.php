@@ -25,7 +25,7 @@ use CRM_Mutualaid_ExtensionUtil as E;
  *
  * @group headless
  */
-class CRM_Mutialaid_MatcherPerformanceTest extends CRM_Mutualaid_TestBase
+class CRM_Mutualaid_MatcherPerformanceTest extends CRM_Mutualaid_TestBase
 {
     use Api3TestTrait {
         callAPISuccess as protected traitCallAPISuccess;

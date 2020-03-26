@@ -104,6 +104,7 @@ class CRM_Mutualaid_Matcher
               'contact_id' => $request->contact_id,
               'location' => [$request->longitude, $request->latitude],
               'types' => CRM_Utils_Array::explodePadded($request->help_needed),
+              'types_assigned' => CRM_Utils_Array::explodePadded($request->help_assigned),
               'languages' => CRM_Utils_Array::explodePadded($request->languages),
             ];
 
@@ -231,6 +232,11 @@ class CRM_Mutualaid_Matcher
         // TODO: work with unconfirmed requests, when implemented properly
         // TODO: extend existing, communicated help?
 
+        // help types should what's needed AND offered...
+        $help_types = array_intersect($helper['offers_help'], $help_request['types']);
+        // ...except to the ones that are already covered
+        $help_types = array_diff($help_types, $help_request['types_assigned']);
+
         // create a new relationship
         $new_relationship = [
             'relationship_type_id'         => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
@@ -238,7 +244,7 @@ class CRM_Mutualaid_Matcher
             'contact_id_b'                 => $help_request['contact_id'],
             'start_date'                   => date('YmdHis'),
             'mutualaid.help_status'        => 1, // assigned
-            'mutualaid.help_type_provided' => array_intersect($helper['offers_help'], $help_request['types'])
+            'mutualaid.help_type_provided' => $help_types
         ];
         CRM_Mutualaid_CustomData::resolveCustomFields($new_relationship);
         civicrm_api3('Relationship', 'create', $new_relationship);
@@ -362,17 +368,19 @@ class CRM_Mutualaid_Matcher
             // each individual clause is true, if $help_type requested AND assigned
             $help_type_value = (int) $help_type;
             $token = "CONCAT(0x01, '{$help_type_value}', 0x01)";
-            $REQUESTS_ALREADY_MATCHED_BY_ASSIGNMENTS[] =
+            $REQUEST_TYPE_ALREADY_MATCHED_BY_ASSIGNMENTS[] =
                 //     help type not requested       OR            help is assigned and already covers requested type
                 "(LOCATE({$token}, help_needed) = 0) OR ((help_assigned IS NOT NULL) AND (LOCATE({$token}, help_assigned) > 0))";
         }
-        $ALL_REQUESTS_ALREADY_MATCHED_BY_ASSIGNMENTS = '(' . implode(') AND (', $REQUESTS_ALREADY_MATCHED_BY_ASSIGNMENTS) . ')';
+        $ALL_REQUESTS_ALREADY_MATCHED_BY_ASSIGNMENTS = '(' . implode(') AND (', $REQUEST_TYPE_ALREADY_MATCHED_BY_ASSIGNMENTS) . ')';
 
         return "
           SELECT
             contact.id                                               AS contact_id,
-            CONCAT(help_assigned_data.{$HELP_ASSIGNED_TYPES_COLUMN}) AS help_assigned,
-            help_requested.{$HELP_NEEDED_COLUMN}                  AS help_needed,
+            CONCAT(help_assigned.id)                                 AS assigned_ids,
+            CONCAT(help_assigned_data.id)                                 AS assignedata_ids,
+            CONCAT(IF(help_assigned_data.{$HELP_ASSIGNED_TYPES_COLUMN} IS NULL, '', help_assigned_data.{$HELP_ASSIGNED_TYPES_COLUMN})) AS help_assigned,
+            help_requested.{$HELP_NEEDED_COLUMN}                     AS help_needed,
             languages_spoken.{$LANGUAGES_SPOKEN_COLUMN}              AS languages,
             address.geo_code_1                                       AS latitude,
             address.geo_code_2                                       AS longitude

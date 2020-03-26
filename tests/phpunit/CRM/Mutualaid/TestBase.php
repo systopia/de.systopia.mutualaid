@@ -62,10 +62,7 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
     {
         parent::setUp();
         // cleanup (shouldn't be necessary
-        CRM_Core_DAO::executeQuery(
-            "DELETE FROM civicrm_relationship WHERE relationship_type_id = %1",
-            [1 => [CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(), 'Integer']]
-        );
+        $this->purgeAllHelperRelationships();
         CRM_Core_DAO::executeQuery("DELETE FROM civicrm_address");
         $this->transaction = new CRM_Core_Transaction();
     }
@@ -75,6 +72,15 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
         $this->transaction->rollback();
         $this->transaction = null;
         parent::tearDown();
+    }
+
+
+    public function purgeAllHelperRelationships()
+    {
+        CRM_Core_DAO::executeQuery(
+            "DELETE FROM civicrm_relationship WHERE relationship_type_id = %1",
+            [1 => [CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(), 'Integer']]
+        );
     }
 
     /**
@@ -280,4 +286,67 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
         $this->assertEmpty($relationships['count'], "A match has been found, but there shouldn't be one");
     }
 
+    /**
+     * Create a new help provided relationship
+     *
+     * @param integer $help_offer_contact_id
+     *      contact ID of the helper
+     * @param integer $help_request_contact_id
+     *      contact ID of the person being helped
+     * @param string $status_id
+     *      status of the relationship
+     * @param array $params
+     *      additional parameters
+     */
+    public function createHelperRelationship($help_offer_contact_id, $help_request_contact_id, $status_id = '1', $params = [])
+    {
+        $params['contact_id_a'] = $help_offer_contact_id;
+        $params['contact_id_b'] = $help_request_contact_id;
+        $params['mutualaid.help_status'] = $status_id;
+        $params['relationship_type_id'] = CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID();
+
+        if (empty($params['mutualaid.help_type_provided'])) {
+            $params['mutualaid.help_type_provided'] = [1];
+        }
+        CRM_Mutualaid_CustomData::resolveCustomFields($params);
+
+        $relationship = $this->traitCallAPISuccess('Relationship','create', $params);
+    }
+
+    /**
+     * Get a list of relationships
+     *
+     * @param integer $help_offer_contact_id
+     *      contact ID of the helper
+     * @param integer $help_request_contact_id
+     *      contact ID of the person being helped
+     * @param array $types
+     *      list of help types
+     *
+     * @return array
+     *   list of relationship data
+     */
+    public function getHelperRelationships($help_offer_contact_id, $help_request_contact_id, $types = null)
+    {
+        if (empty($types)) {
+            $types = CRM_Mutualaid_Settings::getUnconfirmedHelpStatusList();
+        }
+        $result = $this->traitCallAPISuccess(
+            'Relationship',
+            'get',
+            [
+                'contact_id_a'     => $help_offer_contact_id,
+                'contact_id_b'     => $help_request_contact_id,
+                'activity_type_id' => CRM_Mutualaid_Settings::getHelpProvidedRelationshipTypeID(),
+                'status_id'        => ['IN' => $types],
+                'option.limit'     => 0,
+            ]
+        );
+        $relationships = [];
+        foreach ($result['values'] as $relationship) {
+            CRM_Mutualaid_CustomData::labelCustomFields($relationship);
+            $relationships[$relationship['id']] = $relationship;
+        }
+        return $relationships;
+    }
 }

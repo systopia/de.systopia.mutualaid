@@ -55,6 +55,30 @@ class CRM_Mutialaid_MatcherTest extends CRM_Mutualaid_TestBase
     }
 
     /**
+     * Tests the simples match
+     */
+    public function testNoRematch()
+    {
+        $help_offer   = $this->createHelpOffer(['types' => [1]]);
+        $help_request = $this->createHelpRequest(['types' => [1]]);
+
+        // make sure there is no relationships
+        $relationships = $this->getHelperRelationships($help_offer['contact_id'], $help_request['contact_id'], [1]);
+        $this->assertEquals(0, count($relationships), "There shouldn't already be a relationship.");
+
+        // create a confirmed relationship with the two
+        $this->createHelperRelationship($help_offer['contact_id'], $help_request['contact_id'], 2);
+        $relationships = $this->getHelperRelationships($help_offer['contact_id'], $help_request['contact_id'], [1]);
+        $this->assertEquals(1, count($relationships), "There should be a relationship.");
+
+        // run matcher
+        $this->runMatcher();
+        $relationships = $this->getHelperRelationships($help_offer['contact_id'], $help_request['contact_id'], [1]);
+        $this->assertEquals(1, count($relationships), "There should still only be one relationship.");
+    }
+
+
+    /**
      * Tests the calculateDistance function
      */
     public function testDistanceCalculation()
