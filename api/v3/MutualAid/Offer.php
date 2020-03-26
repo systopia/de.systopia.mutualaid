@@ -59,7 +59,7 @@ function civicrm_api3_mutual_aid_Offer($params)
 
         // Set defaults when empty/unset.
         $relevant_fields = array_merge(
-            CRM_Mutualaid_Settings::getContactFields(true, true),
+            CRM_Mutualaid_Settings::getContactFields(true, true, true),
             CRM_Mutualaid_Settings::getContactCustomFields(
                 true,
                 false,
@@ -87,7 +87,7 @@ function civicrm_api3_mutual_aid_Offer($params)
         }
 
         // Prepare data for XCM: Filter for contact data params.
-        $contact_fields = CRM_Mutualaid_Settings::getFields();
+        $contact_fields = CRM_Mutualaid_Settings::getFields(true, true, true);
         $contact_data = array_intersect_key(
             $params,
             array_fill_keys(

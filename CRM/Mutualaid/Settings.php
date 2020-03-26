@@ -134,10 +134,14 @@ class CRM_Mutualaid_Settings
      *   A list of fields activated to be shown on forms, as set in the
      *   extension configuration.
      */
-    public static function getFields($only_keys = true, $resolve_custom_fields = true)
+    public static function getFields(
+        $only_keys = true,
+        $resolve_custom_fields = true,
+        $include_location_dependencies = false
+    )
     {
         $available_fields = array_merge(
-            self::getContactFields($only_keys),
+            self::getContactFields($only_keys, false, $include_location_dependencies),
             self::getContactCustomFields($only_keys, $resolve_custom_fields)
         );
 
@@ -153,7 +157,11 @@ class CRM_Mutualaid_Settings
      *   An array of active individual contact field, address field and extra
      *   field names understood by XCM.
      */
-    public static function getContactFields($only_keys = true, $only_active = false)
+    public static function getContactFields(
+        $only_keys = true,
+        $only_active = false,
+        $include_location_dependencies = false
+    )
     {
         // Retrieve all available individual contact fields.
         $contact_fields = CRM_Core_BAO_Setting::valueOptions(
@@ -211,6 +219,27 @@ class CRM_Mutualaid_Settings
             // Filter for fields activated in extension configuration.
             foreach (array_keys($fields) as $field_name) {
                 if (!CRM_Mutualaid_Settings::get($field_name . '_enabled')) {
+                    // Do not remove inactive fields state_province and country,
+                    // when field county or state_province is active, since they
+                    // are hierarchically dependent.
+                    if ($include_location_dependencies) {
+                        if (
+                        (
+                            array_key_exists('county', $fields)
+                            && (
+                                $field_name == 'state_province'
+                                || $field_name == 'country'
+                            )
+                        )
+                        || (
+                            array_key_exists('state_province', $fields)
+                            && $field_name == 'country'
+                        )
+                        ) {
+                            continue;
+                        }
+                    }
+
                     unset($fields[$field_name]);
                 }
             }
