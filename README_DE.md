@@ -19,7 +19,7 @@ Die Geocodingfunktion muss in CiviCRM konfiguriert sein - Informationen dazu fin
 
 
 ## Konfiguration
-1. Navigiere zur Seite ... und Wähle die Felder für die Onlineformulare aus
+1. Navigiere zur Konfigurationsseite (Nachbarschaftshilfe >Konfiguration) und konfiguriere die Felder für die Onlineformulare inkl Standardwerte etc.
 2. Falls Du eine Bestätigungsemail versenden möchtest, richte eine E-Mail-Vorlage ein und wähle sie auf der Konfigurationsseite aus
 3. Gib einen Text für die Datenschutzbestimmungen ein, der in Deinen Onlineformularen eingeblendet wird.
 4. Verlinke auf Deine Onlineformulare mithilfe der statischen URLs für das "ich benötige Hilfe" und das "ich kann Hilfe anbieten" Formular
@@ -32,7 +32,7 @@ Die Geocodingfunktion muss in CiviCRM konfiguriert sein - Informationen dazu fin
 
 
 ## Beschreibung und Nutzung
-Immer wenn der Zuordnungsalgorhytmus automatisch oder manuell ausgeführt wird, findet er die passendsten Verknüpfungen zwischen Hilfesuchenden und Helferinnen und legt zwischen diesen eine Beziehung vom Typ "..." an. Die Zuordnung basiert auf räumlicher Nähe sowie (falls verwendet) die Anzahl der übereinstimmenden Hilfskategorien und beherrschter Sprachen der beiden Personen. Falls Hilfskategorien und Sprachen im Formular verwendet werden, muss es für beides zumindest eine Übereinstimmung geben.
+Immer wenn der Zuordnungsalgorhytmus automatisch oder manuell ausgeführt wird, findet er die passendsten Verknüpfungen zwischen Hilfesuchenden und Helferinnen und legt zwischen diesen eine Beziehung vom Typ "Mutual Aid" bzw. "Nachbarschaftshilfe" an. Die Zuordnung basiert auf räumlicher Nähe sowie (falls verwendet) die Anzahl der übereinstimmenden Hilfskategorien und beherrschter Sprachen der beiden Personen. Falls Hilfskategorien und Sprachen im Formular verwendet werden, muss es für beides zumindest eine Übereinstimmung geben.
 
 Die Beziehung bekommt zunächst den Status"Prüfung erforderlich" (benutzerdefiniertes Feld). Jedes Mal wenn der Algorhytmus ausgeführt wird können Beziehungen mit diesem Status mit besseren Zuordnunegn überschrieben werden (allerdings nicht Beziehungen mit anderen Status).
 
