@@ -35,6 +35,7 @@ class CRM_Mutialaid_MatcherTest extends CRM_Mutualaid_TestBase
     public function setUp()
     {
         parent::setUp();
+        $this->setEnabledMatchingTypes([1]);
     }
 
     public function tearDown()
@@ -133,5 +134,22 @@ class CRM_Mutialaid_MatcherTest extends CRM_Mutualaid_TestBase
         $this->runMatcher();
 
         $this->assertRequestIsNotMatched($help_request['contact_id'], $help_offer['contact_id']);
+    }
+
+    /**
+     * Tests the simples match
+     */
+    public function testMultiTypeMatch()
+    {
+        $this->setEnabledMatchingTypes([2,3]);
+        $help_offer1  = $this->createHelpOffer(['types' => [2]]);
+        $help_offer2  = $this->createHelpOffer(['types' => [3]]);
+        $help_request = $this->createHelpRequest(['types' => [2,3]]);
+
+        // run the matcher
+        $this->runMatcher();
+
+        $this->assertRequestIsMatched($help_request['contact_id'], $help_offer1['contact_id'], [2]);
+        $this->assertRequestIsMatched($help_request['contact_id'], $help_offer2['contact_id'], [3]);
     }
 }

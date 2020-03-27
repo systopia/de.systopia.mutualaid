@@ -354,12 +354,18 @@ class CRM_Mutualaid_Settings
      *   set to false, all properties of the option values will be returned,
      *   keyed by their ID.
      *
+     * @param bool $cached
+     *   if passed as true, the cached values are not used
+     *
      * @return array
      *   An array of all available help types.
      */
-    public static function getHelpTypes($associate = true)
+    public static function getHelpTypes($associate = true, $cached = false)
     {
         static $help_types = null; // cache result
+        if (!$cached) {
+            $help_types = null;
+        }
 
         if ($help_types === null) {
             $help_types = [];

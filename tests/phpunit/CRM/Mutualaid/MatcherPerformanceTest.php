@@ -35,6 +35,7 @@ class CRM_Mutualaid_MatcherPerformanceTest extends CRM_Mutualaid_TestBase
     public function setUp()
     {
         parent::setUp();
+        $this->setEnabledMatchingTypes([1]);
     }
 
     public function tearDown()

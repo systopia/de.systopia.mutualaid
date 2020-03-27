@@ -242,6 +242,7 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
      */
     public function assertRequestIsMatched($help_requested_contact_id, $help_offered_contact_id, $help_types)
     {
+        $help_types_unmatched = $help_types;
         $relationships = $this->traitCallAPISuccess(
             'Relationship',
             'get',
@@ -257,11 +258,18 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
         foreach ($relationships['values'] as $relationship) {
             CRM_Mutualaid_CustomData::labelCustomFields($relationship);
             $relationship_help_type = $relationship['mutualaid.help_type_provided'];
-            if (array_values($help_types) == array_values($relationship_help_type)) {
+            foreach (array_keys($help_types_unmatched) as $help_type_index) {
+                $help_type = $help_types_unmatched[$help_type_index];
+                if (in_array($help_type, $relationship_help_type)) {
+                    // is matched, remove from list
+                    unset($help_types_unmatched[$help_type_index]);
+                }
+            }
+            if (empty($help_types_unmatched)) {
                 return;
             }
         }
-        $this->fail("no active help relationship with the given help types found");
+        $this->fail("Help types " . implode('/', $help_types_unmatched) . ' have not been matched');
     }
 
     /**
@@ -348,5 +356,57 @@ class CRM_Mutualaid_TestBase extends \PHPUnit\Framework\TestCase implements Head
             $relationships[$relationship['id']] = $relationship;
         }
         return $relationships;
+    }
+
+    /**
+     * Set a certain option value ID activity status
+     *
+     * @param integer $option_value_id
+     *      option value ID (not value!)
+     *
+     * @param integer $active
+     *      0 or 1
+     */
+    public function setOptionValueActive($option_value_id, $active) {
+        civicrm_api3('OptionValue', 'create', [
+            'id'        => $option_value_id,
+            'is_active' => $active
+        ]);
+    }
+
+    /**
+     * Set the enabled matching types
+     *
+     * @param array $types
+     *    list of matching type values that should be enabled
+     */
+    public function setEnabledMatchingTypes($types)
+    {
+        // disable all others
+        $all_values = civicrm_api3('OptionValue', 'get', [
+            'option_group_id' => 'mutualaid_help_types',
+            'value'           => ['NOT IN' => $types],
+            'option.limit'    => 0,
+            'return'          => 'id'
+        ]);
+        foreach ($all_values['values'] as $value) {
+            $this->setOptionValueActive($value['id'], 0);
+        }
+
+        // enable the given ones
+        $values2enable = civicrm_api3('OptionValue', 'get', [
+            'option_group_id' => 'mutualaid_help_types',
+            'value'           => ['IN' => $types],
+            'is_active'       => 0,
+            'option.limit'    => 0,
+            'return'          => 'id'
+        ]);
+        foreach ($values2enable['values'] as $value) {
+            $this->setOptionValueActive($value['id'], 1);
+        }
+
+        // verify the result
+        $help_types = array_keys(CRM_Mutualaid_Settings::getHelpTypes(true, false));
+        $this->assertEquals($types, $help_types, "enabling the help types failed");
     }
 }
