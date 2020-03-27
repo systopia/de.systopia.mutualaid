@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mutualaid\n"
-"POT-Creation-Date: 2020-03-26 11:59+0100\n"
+"POT-Creation-Date: 2020-03-27 10:32+0100\n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -318,4 +318,129 @@ msgstr ""
 msgid ""
 "The default value being used as preset for the field or the option, if the "
 "field is not active."
+msgstr ""
+
+#: resources/custom_group_individual_languages.php
+msgid ""
+"Languages (MutualAid)"
+msgstr ""
+
+#: resources/custom_group_individual_languages.php
+msgid ""
+"Speaks Languages"
+msgstr ""
+
+#: resources/custom_group_individual_needs_help.php
+msgid ""
+"Help Needed (Mutual Aid)"
+msgstr ""
+
+#: resources/custom_group_individual_needs_help.php
+msgid ""
+"Personal Contact Possible"
+msgstr ""
+
+#: resources/custom_group_individual_needs_help.php
+msgid ""
+"Help Needed"
+msgstr ""
+
+#: resources/custom_group_individual_offers_help.php
+msgid ""
+"Help Offered (Mutual Aid)"
+msgstr ""
+
+#: resources/custom_group_individual_offers_help.php
+msgid ""
+"Help offered for max. Persons"
+msgstr ""
+
+#: resources/custom_group_individual_offers_help.php
+msgid ""
+"Help offered within"
+msgstr ""
+
+#: resources/custom_group_relationship_mutualaid.php
+msgid ""
+"Mutual Aid"
+msgstr ""
+
+#: resources/custom_group_relationship_mutualaid.php
+msgid ""
+"Help Type"
+msgstr ""
+
+#: resources/custom_group_relationship_mutualaid.php
+msgid ""
+"Language"
+msgstr ""
+
+#: resources/custom_group_relationship_mutualaid.php
+msgid ""
+"Help Status"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Mutual Aid - Help Status"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Assigned"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Confirmed"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Communicated"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Completed"
+msgstr ""
+
+#: resources/option_group_help_status.php
+msgid ""
+"Cancelled"
+msgstr ""
+
+#: resources/option_group_help_types.php
+msgid ""
+"Mutual Aid - Help Types"
+msgstr ""
+
+#: resources/option_group_help_types.php
+msgid ""
+"Any"
+msgstr ""
+
+#: resources/option_group_help_types.php
+msgid ""
+"Shopping"
+msgstr ""
+
+#: resources/option_group_help_types.php
+msgid ""
+"Walk the Dog"
+msgstr ""
+
+#: resources/option_group_help_types.php
+msgid ""
+"Pick up Parcels"
+msgstr ""
+
+#: resources/relationship_types.php
+msgid ""
+"Provides Mutual Aid for"
+msgstr ""
+
+#: resources/relationship_types.php
+msgid ""
+"Is provided Mutual Aid by"
 msgstr ""
