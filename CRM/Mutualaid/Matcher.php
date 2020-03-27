@@ -103,28 +103,42 @@ class CRM_Mutualaid_Matcher
             $request_data = [
               'contact_id' => $request->contact_id,
               'location' => [$request->longitude, $request->latitude],
-              'types' => CRM_Utils_Array::explodePadded($request->help_needed),
+              'types_requested' => CRM_Utils_Array::explodePadded($request->help_needed),
               'types_assigned' => CRM_Utils_Array::explodePadded($request->help_assigned),
               'languages' => CRM_Utils_Array::explodePadded($request->languages),
             ];
 
-            // identify potential helpers (apply hard criteria) using SQL query on the helper table
-            $potential_helpers = $this->getPotentialHelpers($request_data);
+            // calculate the types still required
+            $request_data['types'] = array_diff($request_data['types_requested'], $request_data['types_assigned']);
+            if (empty($request_data)) {
+                Civi::log()->debug("MutualAid: Empty help request ended up in open requests query results. Check algorithm");
+                continue;
+            }
 
-            // score potential helpers (apply soft criteria/scoring) and pick best match
-            $helper_data = $this->getBestMatchingHelper($request_data, $potential_helpers);
+            // try to match all help requests here
+            $current_request_completed = false;
+            while (!$current_request_completed) {
+                // identify potential helpers (apply hard criteria) using SQL query on the helper table
+                $potential_helpers = $this->getPotentialHelpers($request_data);
 
-            if ($helper_data) {
-                // there is a helper!
-                $this->stats['matched'] += 1;
-                $this->assignHelper($request_data, $helper_data);
-                $this->updateUnconfirmedRequestsWithMatch(
-                  $request_data,
-                  $helper_data
-                );
-            } else {
-                // sadly, no helper available for this request...
-                // TODO: anything to do here?
+                // score potential helpers (apply soft criteria/scoring) and pick best match
+                $helper_data = $this->getBestMatchingHelper($request_data, $potential_helpers);
+
+                if ($helper_data) {
+                    // there is a helper!
+                    $this->stats['matched'] += 1;
+                    $current_request_completed = $this->assignHelper($request_data, $helper_data);
+
+                    // update data
+                    $this->updateUnconfirmedRequestsWithMatch(
+                        $request_data,
+                        $helper_data
+                    );
+                } else {
+                    // sadly, no helper available for this request...
+                    $current_request_completed = true;
+                    // TODO: anything to do here?
+                }
             }
         }
 
@@ -227,15 +241,13 @@ class CRM_Mutualaid_Matcher
      * @param array $helper
      *      helper structure containing the fields 'contact_id', 'location', 'max_distance', 'max_spots', 'offers_help'
      */
-    protected function assignHelper($help_request, $helper)
+    protected function assignHelper(&$help_request, $helper)
     {
         // TODO: work with unconfirmed requests, when implemented properly
         // TODO: extend existing, communicated help?
 
-        // help types should what's needed AND offered...
+        // help types should be needed AND offered...
         $help_types = array_intersect($helper['offers_help'], $help_request['types']);
-        // ...except to the ones that are already covered
-        $help_types = array_diff($help_types, $help_request['types_assigned']);
 
         // create a new relationship
         $new_relationship = [
@@ -253,6 +265,10 @@ class CRM_Mutualaid_Matcher
         $helper_table = $this->getHelperTable();
         CRM_Core_DAO::executeQuery("UPDATE {$helper_table} SET open_spots = (open_spots) - 1 WHERE contact_id = {$helper['contact_id']};");
 
+        // remove the help types match from the request
+        $help_request['types'] = array_diff($help_request['types'], $help_types);
+        $help_request['types_assigned'] = array_merge($help_request['types_assigned'], $help_types);
+        return empty($help_request['types']);
     }
 
     /**
