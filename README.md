@@ -21,7 +21,7 @@ You need to have geocoding in CiviCRM set up - information on how to do that can
 
 
 ## Configuration
-1. Select the fields you would like to use in the forms by Navigating to ...
+1. Visit the configuration Page (Navigation-Menu >Mutual Aid >Configure), configure the fields you would like to use in the forms as well as if they should be mandatory and default values
 2. If you want the forms to send out emails, set up an email template
 3. Enter a text for the privacy agreement to be shown on your forms
 4. Link to your forms from anywhere by using the static URLs for the "require assistance form" and the "offer assistance form"
@@ -34,7 +34,7 @@ You need to have geocoding in CiviCRM set up - information on how to do that can
 
 
 ## Description & Usage
-Whenever the matching algorhytm is triggered by the cronjob or manually it will find the best match for each individual in the database which is looking for help and create a relationship of the type "..." between the two individuals. The matches are made based on proximity to each other and the number of matching help categories and (if applicable) spoken languages. If help categories and/or languages are used there needs to be at least one match for each. 
+Whenever the matching algorhytm is triggered by the cronjob or manually it will find the best match for each individual in the database which is looking for help and create a relationship of the type "Mutual Aid" between the two individuals. The matches are made based on proximity to each other and the number of matching help categories and (if applicable) spoken languages. If help categories and/or languages are used there needs to be at least one match for each. 
 
 The relationship will have the status "needs review" (custom field). Each time the algorhytm is executed it may replace relationships with the status "needs review" with better matches (but not relationships with other status'). 
 
