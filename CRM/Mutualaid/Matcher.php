@@ -105,8 +105,8 @@ class CRM_Mutualaid_Matcher
             $request_data = [
               'contact_id' => $request->contact_id,
               'location' => [$request->longitude, $request->latitude],
-              'types_requested' => CRM_Utils_Array::explodePadded($request->help_needed),
-              'types_assigned' => CRM_Utils_Array::explodePadded($request->help_assigned),
+              'types_requested' => $this->getHelpTypes($request->help_needed),
+              'types_assigned' => $this->getHelpTypes($request->help_assigned),
               'languages' => CRM_Utils_Array::explodePadded($request->languages),
             ];
 
@@ -295,6 +295,7 @@ class CRM_Mutualaid_Matcher
 
         // helps matched
         $HELPS_MATCHED = [];
+        $help_types = CRM_Mutualaid_Settings::getHelpTypes();
         foreach ($help_request['types'] as $help_type_id ) {
             $help_type_id = (int) $help_type_id;
             $HELPS_MATCHED[] = "offers_help_{$help_type_id}";
@@ -302,7 +303,6 @@ class CRM_Mutualaid_Matcher
         $AT_LEAST_ONE_OFFER_MATCHES = "(" . implode(') OR (', $HELPS_MATCHED). ")";
 
         // helps offered
-        $help_types = CRM_Mutualaid_Settings::getHelpTypes();
         $HELP_OFFERED_SELECT_LIST = [];
         foreach ($help_types as $help_type => $help_name) {
             $help_type_value = (int) $help_type;
@@ -337,7 +337,7 @@ class CRM_Mutualaid_Matcher
                 'open_spots'   => $potential_helper->open_spots,
                 'max_spots'    => $potential_helper->max_spots,
                 'location'     => [$potential_helper->longitude, $potential_helper->latitude],
-                'offers_help'  => explode(',', trim($potential_helper->offers_help, ',)'))
+                'offers_help'  => $this->getHelpTypes(explode(',', trim($potential_helper->offers_help, ',)')))
             ];
         }
 
@@ -614,6 +614,25 @@ class CRM_Mutualaid_Matcher
         }
         return $helper_max_distance_range;
     }
+
+    /**
+     * Restrict the given list of help type IDs to the currently allowed list
+     *
+     * @param array|string $help_type_ids
+     *   list of (padded) help type IDs
+     *
+     * @return array
+     *   list of help type IDs
+     */
+    public function getHelpTypes($help_type_ids)
+    {
+        if (is_string($help_type_ids)) {
+            $help_type_ids = CRM_Utils_Array::explodePadded($help_type_ids);
+        }
+        $help_types = CRM_Mutualaid_Settings::getHelpTypes();
+        return array_intersect($help_type_ids, array_keys($help_types));
+    }
+
 
     /**
      * Store the existing unconfirmed requests
