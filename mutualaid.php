@@ -193,7 +193,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
       'attributes' => [
         'label' => E::ts('Mutual Help'),
         'name' => 'MutualHelp',
-        'permission' => 'access CiviCRM',
+        'permission' => 'administer MutualAid',
         'url' => null,
         'icon' => 'crm-i fa-handshake-o',
         'weight' => 100,
@@ -216,7 +216,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
             'label' => E::ts("Unconfirmed Matches"),
             'name' => 'mutualhelp_unconfirmed',
             'url' => $mutualhelp_unconfirmed_url,
-            'permission' => 'access CiviCRM',
+            'permission' => 'administer MutualAid',
             'icon' => 'crm-i fa-list-alt',
             'operator' => 'OR',
             'separator' => 0,
@@ -235,7 +235,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
           'civicrm/mutualaid/offer-help',
           'reset=1'
         ),
-        'permission' => 'access CiviCRM',
+        'permission' => 'offer help',
         'icon' => 'crm-i fa-file-o',
         'operator' => 'OR',
         'separator' => 0,
@@ -252,7 +252,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
           'civicrm/mutualaid/request-help',
           'reset=1'
         ),
-        'permission' => 'access CiviCRM',
+        'permission' => 'request help',
         'icon' => 'crm-i fa-file-o',
         'operator' => 'OR',
         'separator' => 0,
@@ -269,7 +269,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
                 'civicrm/admin/setting/mutualaid',
                 'reset=1'
             ),
-            'permission' => 'administer CiviCRM',
+            'permission' => 'administer MutualAid',
             'icon' => 'crm-i fa-cog',
             'operator' => 'OR',
             'separator' => 0,
@@ -283,7 +283,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
             'label' => E::ts('Match Now'),
             'name' => 'mutualhelp_configuration',
             'url' => CRM_Utils_System::url('civicrm/mutualaid/matchnow'),
-            'permission' => 'access CiviCRM',
+            'permission' => 'administer MutualAid',
             'icon' => 'crm-i fa-users',
             'operator' => 'OR',
             'separator' => 0,
@@ -291,4 +291,27 @@ function mutualaid_civicrm_navigationMenu(&$menu)
     );
 
     _mutualaid_civix_navigationMenu($menu);
+}
+
+function mutualaid_civicrm_permission(&$permissions){
+  $prefix = E::ts('MutualAid') . ': ';
+
+  $permissions += [
+    'administer MutualAid' => [
+      $prefix . E::ts('Administer MutualAid'),
+      E::ts('Grants necessary permissions for administering MutualAid extension'),
+    ],
+  ];
+  $permissions += [
+    'request help' => [
+      $prefix . E::ts('Request help'),
+      E::ts('Request help via MutualAid extension'),
+    ],
+  ];
+  $permissions += [
+    'offer help' => [
+      $prefix . E::ts('Offer help'),
+      E::ts('Offer help for others via MutualAid extension'),
+    ],
+  ];
 }

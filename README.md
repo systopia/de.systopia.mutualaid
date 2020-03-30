@@ -12,7 +12,8 @@ This CiviCRM extension enables organisations to connect people in need with loca
 * uses CiviCRM's built in geocoding feature
 * a matching algorhytm that connects people in need with volunteers via a realtionship
 * pre-configured reports to find and review matched contacts
-* advanced contact matching using the [Extended Contact Matcher Extension](https://github.com/systopia/de.systopia.xcm) extension incl. a preconfigured profile 
+* advanced contact matching using the [Extended Contact Matcher Extension](https://github.com/systopia/de.systopia.xcm) extension incl. a preconfigured profile
+* Drupal only: 3 permissions: request for help, offer help for others, and administer MutualAid.
 
 ## Installation and Prerequisites
 You need a current CiviCRM instance and have admin priviliges. Add the extension to  CiviCRM via the UI or the regular extension installation routine described [here](https://docs.civicrm.org/sysadmin/en/latest/customize/extensions/#installing-a-new-extension). The extension has a dependency with the [Extended Contact Matcher Extension](https://github.com/systopia/de.systopia.xcm) which should be installed automatically when you install the Corona Aid Extension for CiviCRM.
@@ -25,7 +26,8 @@ You need to have geocoding in CiviCRM set up - information on how to do that can
 2. If you want the forms to send out emails, set up an email template
 3. Enter a text for the privacy agreement to be shown on your forms
 4. Link to your forms from anywhere by using the static URLs for the "require assistance form" and the "offer assistance form"
-5. Activate / configure the cronjob that triggers the matching mechanism 
+5. Activate / configure the cronjob that triggers the matching mechanism
+6. Drupal only: visit the permissions settings page and assign the MutualAid permissions to roles, i.e. 'request for help' for anonymous, "offer help' to authenticated users, and 'administer for MutualAid' to administrators.
 
 * [Optional] If you want to provide help categories for your forms, configure these in the according option group ...
 * [Optional] Create a landing page
@@ -34,9 +36,9 @@ You need to have geocoding in CiviCRM set up - information on how to do that can
 
 
 ## Description & Usage
-Whenever the matching algorhytm is triggered by the cronjob or manually it will find the best match for each individual in the database which is looking for help and create a relationship of the type "Mutual Aid" between the two individuals. The matches are made based on proximity to each other and the number of matching help categories and (if applicable) spoken languages. If help categories and/or languages are used there needs to be at least one match for each. 
+Whenever the matching algorhytm is triggered by the cronjob or manually it will find the best match for each individual in the database which is looking for help and create a relationship of the type "Mutual Aid" between the two individuals. The matches are made based on proximity to each other and the number of matching help categories and (if applicable) spoken languages. If help categories and/or languages are used there needs to be at least one match for each.
 
-The relationship will have the status "needs review" (custom field). Each time the algorhytm is executed it may replace relationships with the status "needs review" with better matches (but not relationships with other status'). 
+The relationship will have the status "needs review" (custom field). Each time the algorhytm is executed it may replace relationships with the status "needs review" with better matches (but not relationships with other status').
 
 You can find individuals in need and/or their matches using CiviCRM's built in search features or the preconfigured reports created by the extension. After reviewing the match (which may include contacting the individuals by phone or other means), you should set the relationship status to "confirmed", "communicated" or "cancelled". Once a relationship needs to be ended. you should set an end date to the relationship and change it's status to inactive (those are CiviCRM core features).
 
@@ -51,4 +53,4 @@ If you think that we should add a feature to this extension, please create a det
 ### Custom Forms
 We used CiviCRM native forms to make the extension as accessible as possible. In case you want to create your own form you can do so and submit all the information to CiviCRM via it's REST API. All actions such as form submissions and running the matching algorhytm are available via the API.  
 ### Automated communication
-Currently, you will manually need to review relationships, change their status and communicate with the individuals. In case you want to automate this process (e.g. send out an email to helpers including contact details of their match) you could probably do so by using [CiviRules](https://github.com/Kajakaran/org.civicoop.civirules) or other CiviCRM features / extensions. 
+Currently, you will manually need to review relationships, change their status and communicate with the individuals. In case you want to automate this process (e.g. send out an email to helpers including contact details of their match) you could probably do so by using [CiviRules](https://github.com/Kajakaran/org.civicoop.civirules) or other CiviCRM features / extensions.
