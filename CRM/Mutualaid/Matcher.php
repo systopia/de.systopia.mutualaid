@@ -97,7 +97,9 @@ class CRM_Mutualaid_Matcher
 
         // get a list (query) of all open requests
         $requests_sql = $this->getOpenRequestsQuery();
+        CRM_Core_DAO::disableFullGroupByMode();
         $request = CRM_Core_DAO::executeQuery($requests_sql);
+        CRM_Core_DAO::reenableFullGroupByMode();
         while ($request->fetch()) {
             // get the next request
             $request_data = [
@@ -525,8 +527,10 @@ class CRM_Mutualaid_Matcher
               ";
 
             // build the table
+            CRM_Core_DAO::disableFullGroupByMode();
             $this->helper_table = CRM_Utils_SQL_TempTable::build();
             $this->helper_table->createWithQuery($table_query);
+            CRM_Core_DAO::reenableFullGroupByMode();
 
             // add indexes
             $helper_table_name = $this->helper_table->getName();
