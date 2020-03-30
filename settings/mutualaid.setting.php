@@ -93,19 +93,6 @@ $mutualaid_settings = array(
         ),
         'settings_pages' => ['mutualaid' => ['weight' => $weight = 50]],
     ),
-    E::SHORT_NAME . '_max_helpers' => array(
-        'name' => E::SHORT_NAME . '_max_helpers',
-        'type' => 'Integer',
-        'default' => 1,
-        'html_type' => 'text',
-        'title' => E::ts('Maximum helpers per requesting person'),
-        'is_domain' => 1,
-        'is_contact' => 0,
-        'description' => E::ts(
-            'Maximum number of persons providing help per person requesting help.'
-        ),
-        'settings_pages' => ['mutualaid' => ['weight' => $weight = 70]],
-    ),
     E::SHORT_NAME . '_matching_weight_help_types' => array(
         'name' => E::SHORT_NAME . '_matching_weight_help_types',
         'type' => 'Integer',
