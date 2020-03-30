@@ -51,6 +51,8 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
      */
     public function postInstall()
     {
+        // make sure matcher job exists
+        $this->installScheduledJob();
     }
 
     /**
@@ -108,13 +110,16 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
      *
      * @return TRUE on success
      * @throws Exception
-     *
-     * public function upgrade_4200() {
-     * $this->ctx->log->info('Applying update 4200');
-     * CRM_Core_DAO::executeQuery('UPDATE foo SET bar = "whiz"');
-     * CRM_Core_DAO::executeQuery('DELETE FROM bang WHERE willy = wonka(2)');
-     * return TRUE;
-     * } // */
+     */
+     public function upgrade_0110()
+     {
+         $this->ctx->log->info('Applying update 0110');
+
+         // make sure matcher job exists
+         $this->installScheduledJob();
+
+         return true;
+     }
 
 
     /**
@@ -227,6 +232,28 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
             );
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Install a scheduled job for the help request matching
+     */
+    public function installScheduledJob()
+    {
+        // install matcher scheduled job
+        $existing_job_count = civicrm_api3('Job', 'getcount', [
+            'api_entity' => 'MutualAid',
+            'api_action' => 'match'
+        ]);
+        if (empty($existing_job_count)) {
+            civicrm_api3('Job', 'create', [
+                'name'          => E::ts("Match MutualAid Requests"),
+                'description'   => E::ts("Will match open help requests to help offers. Unconfirmed help assignments might be changed or deleted."),
+                'run_frequency' => 'Daily',
+                'api_entity'    => 'MutualAid',
+                'api_action'    => 'match',
+                'is_active'     => 0,
+            ]);
         }
     }
 }
