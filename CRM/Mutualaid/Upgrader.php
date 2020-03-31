@@ -105,8 +105,15 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
     {
     }
 
+
+
+    /*************************************************************************
+     *****                           UPGRADER                             ****
+     *************************************************************************/
+
     /**
-     * Example: Run a couple simple queries.
+     * Upgrade to 1.1:
+     *   add scheduled job
      *
      * @return TRUE on success
      * @throws Exception
@@ -121,6 +128,29 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
          return true;
      }
 
+    /**
+     * Upgrade to 1.1-1:
+     *   rebuild menu
+     *
+     * @return TRUE on success
+     * @throws Exception
+     */
+    public function upgrade_0111()
+    {
+        $this->ctx->log->info('Applying update 0111');
+
+        // rebuild menu
+        CRM_Core_Invoke::rebuildMenuAndCaches();
+
+        return true;
+    }
+
+
+
+
+    /*************************************************************************
+     *****                       HELPER FUNCTIONS                         ****
+     *************************************************************************/
 
     /**
      * Install a new report (unless already there)
