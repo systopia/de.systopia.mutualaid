@@ -206,7 +206,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
 
     // add reports
     $mutualhelp_unconfirmed_url = CRM_Mutualaid_Upgrader::getReportURL(
-      'mutualhelp_unconfirmed'
+      'mutualaid_unconfirmed'
     );
     if ($mutualhelp_unconfirmed_url) {
         _mutualaid_civix_insert_navigation_menu(
@@ -214,7 +214,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
           'MutualHelp',
           [
             'label' => E::ts("Unconfirmed Matches"),
-            'name' => 'mutualhelp_unconfirmed',
+            'name' => 'mutualaid_unconfirmed',
             'url' => $mutualhelp_unconfirmed_url,
             'permission' => 'access CiviCRM',
             'icon' => 'crm-i fa-list-alt',
