@@ -236,7 +236,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
           'reset=1'
         ),
         'permission' => 'access CiviCRM',
-        'icon' => 'crm-i fa-file-o',
+        'icon' => 'crm-i fa-external-link',
         'operator' => 'OR',
         'separator' => 0,
       ]
@@ -253,7 +253,7 @@ function mutualaid_civicrm_navigationMenu(&$menu)
           'reset=1'
         ),
         'permission' => 'access CiviCRM',
-        'icon' => 'crm-i fa-file-o',
+        'icon' => 'crm-i fa-external-link',
         'operator' => 'OR',
         'separator' => 0,
       ]
