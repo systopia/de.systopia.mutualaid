@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-03-27 10:28+0100\n"
+"POT-Creation-Date: 2020-04-02 11:44+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -85,6 +85,71 @@ msgid ""
 "shortly."
 msgstr ""
 "Ihr Angebot wurde übermittelt. Sie erhalten in Kürze eine E-Mail-Bestätigung."
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "MutualAid - Missing Data"
+msgstr "Nachbarschaftshilfe - Fehlende Daten"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+msgid "MutualAid: List requests/offers with missing information"
+msgstr "Nachbarschaftshilfe: Hilfsgesuche/-angebote mit unzureichenden Daten"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Contact Name"
+msgstr "Kontaktname"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Issues"
+msgstr "Probleme"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+#, fuzzy
+#| msgid "First name"
+msgid "First Name"
+msgstr "Vorname"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Name"
+msgstr "Nachname"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "State/Province"
+msgstr "Bundesland"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Country"
+msgstr "Land"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "No geo coordinates"
+msgstr "Keine Geokoordination"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help distance empty"
+msgstr "Die maximale Helferdistanz ist leer"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help count empty"
+msgstr "Die maximale Anzahl der Hilfseinsätze ist leer"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Offers disabled help types"
+msgstr "Bietet Hilfstypen an"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Requests disabled help types"
+msgstr "Anfage für deaktivierte Hilfstypen an"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Unknown issue '%1'"
+msgstr "Unbekanntes Problem '%1'"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "View Contact Summary for this Contact."
+msgstr ""
 
 #: CRM/Mutualaid/Form/RequestHelp.php
 msgid "Request Help"
@@ -178,6 +243,16 @@ msgstr ""
 msgid "No GeoCoder configured"
 msgstr "Kein Service für Geokodierung konfiguriert"
 
+#: CRM/Mutualaid/Upgrader.php
+msgid "Match MutualAid Requests"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Will match open help requests to help offers. Unconfirmed help assignments "
+"might be changed or deleted."
+msgstr ""
+
 #: api/v3/MutualAid/Offer.php api/v3/MutualAid/Request.php
 msgid "No help types active."
 msgstr "Keine Hilfstypen aktiv."
@@ -189,6 +264,12 @@ msgstr "Nachbarschaftshilfe"
 #: mutualaid.php
 msgid "Unconfirmed Matches"
 msgstr "Unbestätigte Zuordnungen"
+
+#: mutualaid.php
+#, fuzzy
+#| msgid "Matching Completed"
+msgid "Matching Issues"
+msgstr "Zuordnung abgeschlossen"
 
 #: mutualaid.php
 msgid "Help Offer Form"
@@ -273,14 +354,6 @@ msgid "- Do not send confirmation e-mails -"
 msgstr "- Keine Bestätigungs-E-Mail versenden -"
 
 #: settings/mutualaid.setting.php
-msgid "Maximum helpers per requesting person"
-msgstr "Maximale Anzahl Helfender pro Hilfesuchender Person"
-
-#: settings/mutualaid.setting.php
-msgid "Maximum number of persons providing help per person requesting help."
-msgstr "Maximale Anzahl Helfender pro hilfesuchender Person."
-
-#: settings/mutualaid.setting.php
 msgid "Matching Weight: Help Types"
 msgstr "Gewichtung: Art der Unterstützung"
 
@@ -356,116 +429,136 @@ msgstr ""
 "Die Standardeinstellung, die als Vorgabewert für das Feld oder die Option "
 "(falls das Feld nicht aktiv ist) verwendet wird."
 
-#: resources/custom_group_individual_languages.php
+#: resources/custom_group_individual_languages.json
 msgid "Languages (MutualAid)"
 msgstr "Sprachen (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_languages.php
+#: resources/custom_group_individual_languages.json
 msgid "Speaks Languages"
 msgstr "Spricht"
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid "Help Needed (Mutual Aid)"
 msgstr "Hilfe Angefragt (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid "Personal Contact Possible"
 msgstr "Persönlicher Kontakt Möglich"
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid "Help Needed"
 msgstr "Hilfsgesuch"
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid "Help Offered (Mutual Aid)"
 msgstr "Hilfe Angeboten (Nachbarschaftshilfe)"
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid "Help offered for max. Persons"
 msgstr "Hilfe für maximal (Personen)"
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid "Help offered within"
 msgstr "Hilfe im Radius von"
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 #, fuzzy
 #| msgid "Mutual Help"
 msgid "Mutual Aid"
 msgstr "Nachbarschaftshilfe"
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid "Help Type"
 msgstr "Hilfsart"
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid "Language"
 msgstr "Sprache"
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid "Help Status"
 msgstr "Status"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Mutual Aid - Help Status"
 msgstr "Nachbarschaftshilfe - Hilfestatus"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Assigned"
 msgstr "Systemvorschlag"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Confirmed"
 msgstr "Bestätigt"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Communicated"
 msgstr "Vermittelt"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Completed"
 msgstr "Abgeschlossen"
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid "Cancelled"
 msgstr "Abgebrochen"
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid "Mutual Aid - Help Types"
 msgstr "Hilfsarten (Nachbarschaftshilfe)"
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid "Any"
 msgstr "Hilfe"
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid "Shopping"
 msgstr "Einkaufen"
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid "Walk the Dog"
 msgstr "Hund Ausführen"
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid "Pick up Parcels"
 msgstr "Päckchen Abholen"
 
-#: resources/relationship_types.php
+#: resources/relationship_types.json
 msgid "Provides Mutual Aid for"
 msgstr "Hilft (Nachbarschaftshilfe)"
 
-#: resources/relationship_types.php
+#: resources/relationship_types.json
 msgid "Is provided Mutual Aid by"
 msgstr "Wird geholfen von (Nachbarschaftshilfe)"
 
+#: resources/report_issues.json
+msgid "Matching Issues (Mutual Help)"
+msgstr "Matching-Probleme (Nachbarschaftshilfe)"
+
+#: resources/report_issues.json
+msgid "<html><head><title>Matching Issues</title></head><body>"
+msgstr "<html><head><title>Matching Probleme</title></head><body>"
+
+#: resources/report_unconfirmed.json
+msgid "Unconfirmed Matches (Mutual Help)"
+msgstr "Unbestätigte Zuordnungen (Mutual Help)"
+
+#: resources/report_unconfirmed.json
+msgid "These matches still need to be confirmed"
+msgstr "Diese Matches müssen nun noch bestätigt werden"
+
+#: resources/report_unconfirmed.json
+msgid "<html><head><title>Unconfirmed Matches</title></head><body>"
+msgstr "<html><head><title>Matching-Vorschläge</title></head><body>"
+
+#~ msgid "Maximum helpers per requesting person"
+#~ msgstr "Maximale Anzahl Helfender pro Hilfesuchender Person"
+
+#~ msgid "Maximum number of persons providing help per person requesting help."
+#~ msgstr "Maximale Anzahl Helfender pro hilfesuchender Person."
+
 #~ msgid "You picked color \"%1\""
 #~ msgstr "Farbe \"%1\" ausgewählt"
-
-#~ msgid "First name"
-#~ msgstr "Vorname"
-
-#~ msgid "Last name"
-#~ msgstr "Nachname"
 
 #~ msgid "Phone (Landline)"
 #~ msgstr "Telefon (Festnetz)"
@@ -484,6 +577,3 @@ msgstr "Wird geholfen von (Nachbarschaftshilfe)"
 
 #~ msgid "City"
 #~ msgstr "Ort"
-
-#~ msgid "Country"
-#~ msgstr "Land"
