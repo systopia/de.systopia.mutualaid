@@ -24,7 +24,7 @@
   "tagid_value": [],
   "gid_op": "in",
   "gid_value": [],
-  "description": "MutualAid: List requests/offers with missing information",
+  "ts_description": "MutualAid: List requests/offers with missing information",
   "email_subject": "",
   "email_to": "",
   "email_cc": "",

@@ -1,125 +1,150 @@
 
-#: resources/custom_group_individual_languages.php
+#: resources/custom_group_individual_languages.json
 msgid ""
 "Languages (MutualAid)"
 msgstr ""
 
-#: resources/custom_group_individual_languages.php
+#: resources/custom_group_individual_languages.json
 msgid ""
 "Speaks Languages"
 msgstr ""
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid ""
 "Help Needed (Mutual Aid)"
 msgstr ""
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid ""
 "Personal Contact Possible"
 msgstr ""
 
-#: resources/custom_group_individual_needs_help.php
+#: resources/custom_group_individual_needs_help.json
 msgid ""
 "Help Needed"
 msgstr ""
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid ""
 "Help Offered (Mutual Aid)"
 msgstr ""
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid ""
 "Help offered for max. Persons"
 msgstr ""
 
-#: resources/custom_group_individual_offers_help.php
+#: resources/custom_group_individual_offers_help.json
 msgid ""
 "Help offered within"
 msgstr ""
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid ""
 "Mutual Aid"
 msgstr ""
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid ""
 "Help Type"
 msgstr ""
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid ""
 "Language"
 msgstr ""
 
-#: resources/custom_group_relationship_mutualaid.php
+#: resources/custom_group_relationship_mutualaid.json
 msgid ""
 "Help Status"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Mutual Aid - Help Status"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Assigned"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Confirmed"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Communicated"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Completed"
 msgstr ""
 
-#: resources/option_group_help_status.php
+#: resources/option_group_help_status.json
 msgid ""
 "Cancelled"
 msgstr ""
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid ""
 "Mutual Aid - Help Types"
 msgstr ""
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid ""
 "Any"
 msgstr ""
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid ""
 "Shopping"
 msgstr ""
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid ""
 "Walk the Dog"
 msgstr ""
 
-#: resources/option_group_help_types.php
+#: resources/option_group_help_types.json
 msgid ""
 "Pick up Parcels"
 msgstr ""
 
-#: resources/relationship_types.php
+#: resources/relationship_types.json
 msgid ""
 "Provides Mutual Aid for"
 msgstr ""
 
-#: resources/relationship_types.php
+#: resources/relationship_types.json
 msgid ""
 "Is provided Mutual Aid by"
+msgstr ""
+
+#: resources/report_issues.json
+msgid ""
+"Matching Issues (Mutual Help)"
+msgstr ""
+
+#: resources/report_issues.json
+msgid ""
+"<html><head><title>Matching Issues</title></head><body>"
+msgstr ""
+
+#: resources/report_unconfirmed.json
+msgid ""
+"Unconfirmed Matches (Mutual Help)"
+msgstr ""
+
+#: resources/report_unconfirmed.json
+msgid ""
+"These matches still need to be confirmed"
+msgstr ""
+
+#: resources/report_unconfirmed.json
+msgid ""
+"<html><head><title>Unconfirmed Matches</title></head><body>"
 msgstr ""
