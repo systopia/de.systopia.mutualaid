@@ -16,7 +16,7 @@ msgstr ""
 
 #: resources/custom_group_individual_needs_help.json
 msgid ""
-"Personal Contact Possible"
+"Physical Contact Possible"
 msgstr ""
 
 #: resources/custom_group_individual_needs_help.json
