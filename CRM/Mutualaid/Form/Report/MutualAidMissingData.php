@@ -300,8 +300,7 @@ class CRM_Mutualaid_Form_Report_MutualAidMissingData extends CRM_Report_Form
                     foreach ($issues as $issue_code) {
                         switch ($issue_code) {
                             case '':
-                                continue;
-
+                                break;
                             case 'nocoord':
                                 $labeled_issues[] = E::ts("No geo coordinates");
                                 break;
