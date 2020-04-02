@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-04-02 13:42+0200\n"
+"POT-Creation-Date: 2020-04-02 16:08+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -182,6 +182,19 @@ msgstr ""
 #: CRM/Mutualaid/Form.php
 msgid "Languages spoken"
 msgstr "Beherrschte Sprachen"
+
+#: CRM/Mutualaid/Matcher.php
+msgid ""
+"Assigning helper [%1] to request [%2] didn't work, error was: %3.<br/>Maybe "
+"try to assign this manually..."
+msgstr ""
+"Die Zuordnung von Hilfsangebot von Kontakt  [%1] zum Hilfsgesuch von Kontakt "
+"[%2] ist fehlgeschlagen. Der Feher war: %3.<br/>Sie könnten versuchen, diese "
+"Zuweisen manuell vorzunehmen..."
+
+#: CRM/Mutualaid/Matcher.php
+msgid "Matching Error"
+msgstr "Fehler bei der Zuordnung"
 
 #: CRM/Mutualaid/Page/MatchNow.php
 msgid "Matched %2 help offers to help requests in %1 seconds."
@@ -460,8 +473,6 @@ msgid "Help offered within"
 msgstr "Hilfe im Radius von"
 
 #: resources/custom_group_relationship_mutualaid.json
-#, fuzzy
-#| msgid "Mutual Help"
 msgid "Mutual Aid"
 msgstr "Nachbarschaftshilfe"
 

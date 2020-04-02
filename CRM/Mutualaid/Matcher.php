@@ -275,12 +275,13 @@ class CRM_Mutualaid_Matcher
             //   let's make sure it doesn't break matching
             Civi::log()->warning("Assigning helper [{$helper['contact_id']}] to request [{$help_request['contact_id']}] didn't work: " . $ex->getMessage());
             CRM_Core_Session::setStatus(
-                E::ts("Assigning helper [%1] to request [%2] didn't work, error was: %3. Maybe try to assign manually.", [
+                E::ts("Assigning helper [%1] to request [%2] didn't work, error was: %3.<br/>Maybe try to assign this manually...", [
                     1 => $helper['contact_id'],
                     2 => $help_request['contact_id'],
                     3 => $ex->getMessage()
                 ]),
                 E::ts("Matching Error"));
+            $this->stats['matched'] -= 1;
         }
 
 
