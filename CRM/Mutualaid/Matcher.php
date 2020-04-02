@@ -261,11 +261,28 @@ class CRM_Mutualaid_Matcher
             'mutualaid.help_type_provided' => $help_types
         ];
         CRM_Mutualaid_CustomData::resolveCustomFields($new_relationship);
-        civicrm_api3('Relationship', 'create', $new_relationship);
 
-        // reduce open spots
-        $helper_table = $this->getHelperTable();
-        CRM_Core_DAO::executeQuery("UPDATE {$helper_table} SET open_spots = (open_spots) - 1 WHERE contact_id = {$helper['contact_id']};");
+        try {
+            // create relationship
+            civicrm_api3('Relationship', 'create', $new_relationship);
+
+            // reduce open spots
+            $helper_table = $this->getHelperTable();
+            CRM_Core_DAO::executeQuery("UPDATE {$helper_table} SET open_spots = (open_spots) - 1 WHERE contact_id = {$helper['contact_id']};");
+
+        } catch (Exception $ex) {
+            // FIXME: it looks like this can happen in some edge-cases. Until this is analysed and fixed,
+            //   let's make sure it doesn't break matching
+            Civi::log()->warning("Assigning helper [{$helper['contact_id']}] to request [{$help_request['contact_id']}] didn't work: " . $ex->getMessage());
+            CRM_Core_Session::setStatus(
+                E::ts("Assigning helper [%1] to request [%2] didn't work, error was: %3. Maybe try to assign manually.", [
+                    1 => $helper['contact_id'],
+                    2 => $help_request['contact_id'],
+                    3 => $ex->getMessage()
+                ]),
+                E::ts("Matching Error"));
+        }
+
 
         // remove the help types match from the request
         $help_request['types'] = array_diff($help_request['types'], $help_types);
