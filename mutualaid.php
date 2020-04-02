@@ -224,6 +224,26 @@ function mutualaid_civicrm_navigationMenu(&$menu)
         );
     }
 
+    // add reports
+    $mutualhelp_issues_url = CRM_Mutualaid_Upgrader::getReportURL(
+        'mutualaid_issues'
+    );
+    if ($mutualhelp_issues_url) {
+        _mutualaid_civix_insert_navigation_menu(
+            $menu,
+            'MutualHelp',
+            [
+                'label' => E::ts("Matching Issues"),
+                'name' => 'mutualaid_issues',
+                'url' => $mutualhelp_issues_url,
+                'permission' => 'access CiviCRM',
+                'icon' => 'crm-i fa-exclamation-triangle',
+                'operator' => 'OR',
+                'separator' => 0,
+            ]
+        );
+    }
+
     // add form links
     _mutualaid_civix_insert_navigation_menu(
       $menu,

@@ -73,6 +73,12 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
             E::path('resources/report_unconfirmed.json')
           )
         );
+        $this->installReport(
+            'mutualaid_issues',
+            file_get_contents(
+                E::path('resources/report_issues.json')
+            )
+        );
 
         // finally: run some tests
         $geo_coder = Civi::settings()->get('geoProvider');
@@ -141,6 +147,31 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
 
         // rebuild menu
         CRM_Core_Invoke::rebuildMenuAndCaches();
+
+        return true;
+    }
+
+    /**
+     * Upgrade to 1.1-1:
+     *   rebuild menu
+     *
+     * @return TRUE on success
+     * @throws Exception
+     */
+    public function upgrade_0112()
+    {
+        $this->ctx->log->info('Applying update 0111');
+
+        // rebuild menu to add managed entity
+        CRM_Core_Invoke::rebuildMenuAndCaches();
+
+        // add report
+        $this->installReport(
+            'mutualaid_issues',
+            file_get_contents(
+                E::path('resources/report_issues.json')
+            )
+        );
 
         return true;
     }

@@ -5,7 +5,7 @@
   "ts_description": "These matches still need to be confirmed",
   "permission": "access CiviReport",
   "is_active": 1,
-  "ts_header": "<html><head><title>CiviCRM Report</title></head><body>",
+  "ts_header": "<html><head><title>Unconfirmed Matches</title></head><body>",
   "ts_footer": "</body></html>",
   "form_values": {
     "fields": {
