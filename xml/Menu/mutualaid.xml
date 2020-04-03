@@ -4,14 +4,14 @@
     <path>civicrm/mutualaid/request-help</path>
     <page_callback>CRM_Mutualaid_Form_RequestHelp</page_callback>
     <title>RequestHelp</title>
-    <access_arguments>profile create</access_arguments>
+    <access_arguments>request help</access_arguments>
     <is_public>1</is_public>
   </item>
   <item>
     <path>civicrm/mutualaid/offer-help</path>
     <page_callback>CRM_Mutualaid_Form_OfferHelp</page_callback>
     <title>OfferHelp</title>
-    <access_arguments>profile create</access_arguments>
+    <access_arguments>offer help</access_arguments>
     <is_public>1</is_public>
   </item>
   <item>
@@ -19,7 +19,7 @@
     <page_callback>CRM_Admin_Form_Mutualaid</page_callback>
     <title>Mutual Aid Coordination Settings</title>
     <adminGroup>System Settings</adminGroup>
-    <access_arguments>administer CiviCRM</access_arguments>
+    <access_arguments>administer MutualAid</access_arguments>
     <desc>Configure the MutualAid System</desc>
     <adminGroup>Communications</adminGroup>
     <icon>admin/duplicate_matching.png</icon>
@@ -28,6 +28,6 @@
     <path>civicrm/mutualaid/matchnow</path>
     <page_callback>CRM_Mutualaid_Page_MatchNow</page_callback>
     <title>Match MutualAid requests to offers</title>
-    <access_arguments>access CiviCRM</access_arguments>
+    <access_arguments>administer MutualAid</access_arguments>
   </item>
 </menu>
