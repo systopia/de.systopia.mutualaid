@@ -77,7 +77,7 @@ class CRM_Admin_Form_Mutualaid extends CRM_Admin_Form_Generic
                     array(
                         'text' => E::ts('- None -'),
                         'attr' => array(
-                            'value' => 0,
+                            'value' => '',
                         ),
                     )
                 );

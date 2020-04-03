@@ -296,7 +296,7 @@ class CRM_Mutualaid_Settings
     {
         $countries = array();
         if ($include_none) {
-            $countries[0] = E::ts('- None -');
+            $countries[''] = E::ts('- None -');
         }
         $countries += CRM_Admin_Form_Setting_Localization::getAvailableCountries();
 
@@ -307,7 +307,7 @@ class CRM_Mutualaid_Settings
     {
         $state_provinces = array();
         if ($include_none) {
-            $state_provinces[0] = E::ts('- None -');
+            $state_provinces[''] = E::ts('- None -');
         }
 
         if (!isset($country_id)) {
@@ -329,7 +329,7 @@ class CRM_Mutualaid_Settings
     {
         $counties = array();
         if ($include_none) {
-            $counties[0] = E::ts('- None -');
+            $counties[''] = E::ts('- None -');
         }
 
         if (!isset($state_province_id)) {
