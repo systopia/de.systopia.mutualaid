@@ -176,6 +176,25 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
         return true;
     }
 
+    /**
+     * Upgrade to 1.2
+     *   let users know about permissions
+     *
+     * @return TRUE on success
+     * @throws Exception
+     */
+    public function upgrade_0120()
+    {
+        $this->ctx->log->info('Applying update 0120');
+
+        CRM_Core_Session::setStatus(
+            E::ts("MutualAid now has separate permissions for submitting help requests/offers and administration. Be sure to grant these permissions the right users/roles, before you continue!"),
+            E::ts("Grant Permissions Now!"),
+            'warn'
+        );
+
+        return true;
+    }
 
 
 
