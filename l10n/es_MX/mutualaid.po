@@ -1,0 +1,526 @@
+# Copyright CiviCRM LLC (c) 2004-2015
+# This file is distributed under the same license as the CiviCRM package.
+# If you contribute heavily to a translation and deem your work copyrightable,
+# make sure you license it to CiviCRM LLC under Academic Free License 3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: mutualaid\n"
+"POT-Creation-Date: 2020-04-02 16:08+0200\n"
+"Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_MX\n"
+
+#: CRM/Admin/Form/Mutualaid.php CRM/Mutualaid/Form.php
+#: CRM/Mutualaid/Settings.php
+msgid "- None -"
+msgstr ""
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "Offer Help"
+msgstr "Ofrecer Ayuda"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help for"
+msgstr "Ofrezco ayuda para"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "Select what kind of help you are offering."
+msgstr "Selecciona que tipo de ayuda esta ofreciendo"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help for max."
+msgstr "Ofrezco ayuda para max."
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "persons"
+msgstr "personas"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help in a max. proximity of"
+msgstr "Ofrezco ayuda con proximidad maxima de"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid "Notes/Comments"
+msgstr "Commentarios"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid "Terms and Conditions"
+msgstr "Términos"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid ""
+"I understand and accept the terms and conditions for using this service."
+msgstr "Entiendo y acepto los términos y condiciones por usar éste servicio."
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "Offer help"
+msgstr "Ofrecer ayuda"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Please provide an integer value for the maximum number of persons you would "
+"like to offer help for."
+msgstr ""
+"Por favor ingrese la cantidad máxima de personas a la cual le puede brindar "
+"ayuda"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Please provide a numeric value for the maximum distance you would like to "
+"offer help in."
+msgstr "Por favor ingrese la distancia máxima en la cual  puede brindar ayuda"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Your offer has been submitted. You will receive an e-mail confirmation "
+"shortly."
+msgstr ""
+"Su oferta ha sido recibido. Recibirá un correo de confirmación  en breve."
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "MutualAid - Missing Data"
+msgstr "Ayuda entre Vecinos - Falta de Datos"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+msgid "MutualAid: List requests/offers with missing information"
+msgstr "Ayuda entre Vecinos: Falta de Datos"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Contact Name"
+msgstr "Nombre de Contacto"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Issues"
+msgstr "Problemas"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "First Name"
+msgstr "Nombre"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Last Name"
+msgstr "Apellido"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "State/Province"
+msgstr "Estado/Provincia"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Country"
+msgstr "País"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "No geo coordinates"
+msgstr "Falta de coordinadas"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help distance empty"
+msgstr "Falta de distancia máxima"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help count empty"
+msgstr "Falta de cantidad máxima"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Offers disabled help types"
+msgstr "Ofrecimiento de tipos de ayuda desactivados"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Requests disabled help types"
+msgstr "Peticion de tipos de ayuda desactivados"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Unknown issue '%1'"
+msgstr ""
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "View Contact Summary for this Contact."
+msgstr ""
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Request Help"
+msgstr "Solicitar Ayuda"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "I am requesting help for"
+msgstr "Solicito ayuda para"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Select what kind of help you are requesting."
+msgstr "Seleccione el tipo de ayuda que necesita"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Personal contact possible"
+msgstr ""
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "I am eligible for being contacted personally."
+msgstr ""
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid ""
+"Your request has been submitted. You will receive an e-mail confirmation "
+"shortly."
+msgstr ""
+
+#: CRM/Mutualaid/Form.php
+msgid "Languages spoken"
+msgstr ""
+
+#: CRM/Mutualaid/Matcher.php
+msgid ""
+"Assigning helper [%1] to request [%2] didn't work, error was: %3.<br/>Maybe "
+"try to assign this manually..."
+msgstr ""
+
+#: CRM/Mutualaid/Matcher.php
+msgid "Matching Error"
+msgstr ""
+
+#: CRM/Mutualaid/Page/MatchNow.php
+msgid "Matched %2 help offers to help requests in %1 seconds."
+msgstr ""
+
+#: CRM/Mutualaid/Page/MatchNow.php
+msgid "Matching Completed"
+msgstr ""
+
+#: CRM/Mutualaid/Settings.php
+msgid "E-Mail Address"
+msgstr "Correo Electrónico"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Primary Phone"
+msgstr "Teléfono principal"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Secondary Phone"
+msgstr "Teléfono secundario"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Website"
+msgstr "Página Web"
+
+#: CRM/Mutualaid/Upgrader/Base.php
+msgid "Upgrade %1 to revision %2"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Your system doesn't have a GeoCoder service configured. A GeoCoder can "
+"assign geo coordinates to a given address.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"This is really important for this extension, since it is needed to calculate "
+"the distance between two people.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Please configure your GeoCoder <a href=\"%1\">HERE</a>.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"If you don't want to use the built-in ones we recommend <a href="
+"\"%1\">OpenStreetMap</a>.<br/>"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "No GeoCoder configured"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Match MutualAid Requests"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Will match open help requests to help offers. Unconfirmed help assignments "
+"might be changed or deleted."
+msgstr ""
+
+#: api/v3/MutualAid/Offer.php api/v3/MutualAid/Request.php
+msgid "No help types active."
+msgstr ""
+
+#: mutualaid.php
+msgid "Mutual Help"
+msgstr "Ayuda entre Vecinos"
+
+#: mutualaid.php
+msgid "Unconfirmed Matches"
+msgstr "Asignaciones no Confirmadas"
+
+#: mutualaid.php
+msgid "Matching Issues"
+msgstr "Problemas de Asignación"
+
+#: mutualaid.php
+msgid "Help Offer Form"
+msgstr "Formulario Ofrecimiento de Ayuda"
+
+#: mutualaid.php
+msgid "Help Request Form"
+msgstr "Formulario Petición de Ayuda"
+
+#: mutualaid.php
+msgid "Configuration"
+msgstr "Configuración"
+
+#: mutualaid.php
+msgid "Match Now"
+msgstr "Asignar"
+
+#: settings/mutualaid.setting.php
+msgid "Languages enabled"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"If enabled, languages spoken will be collected from people offering and "
+"requesting help, and taken into account when matching requests with offers."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Comments enabled"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"If enabled, comments will be collected from people offering and requesting "
+"help."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Meters"
+msgstr "Metros"
+
+#: settings/mutualaid.setting.php
+msgid "Kilometers"
+msgstr "Kilometros"
+
+#: settings/mutualaid.setting.php
+msgid "Miles"
+msgstr "Millas"
+
+#: settings/mutualaid.setting.php
+msgid "Distance unit"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Unit for distance values, used for collecting max. distance in forms and for "
+"calculating proximity."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Terms & Conditions"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "HTML content containing Terms and Conditions to display on forms."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "E-Mail Confirmation Template"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "- Do not send confirmation e-mails -"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Help Types"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for matching help types when calculating matches between persons."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Distance"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Weight for distance when calculating matches between persons."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Workload"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for workload of persons providing help when calculating matches "
+"between persons."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Small Distance Preference"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for preference of persons providing help in small distances when "
+"calculating matches between persons."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Enable field %1"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Whether the contact field %1 is enabled for being displayed on forms of this "
+"extension."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Make field %1 mandatory"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Whether the contact field %1 is required when being displayed on forms of "
+"this extension."
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid "Default value for field %1"
+msgstr ""
+
+#: settings/mutualaid.setting.php
+msgid ""
+"The default value being used as preset for the field or the option, if the "
+"field is not active."
+msgstr ""
+
+#: resources/custom_group_individual_languages.json
+msgid "Languages (MutualAid)"
+msgstr "Idiomas (Ayuda entre Vecinos)"
+
+#: resources/custom_group_individual_languages.json
+msgid "Speaks Languages"
+msgstr "Habla Idiomas"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Help Needed (Mutual Aid)"
+msgstr "Ayuda Solicitada (Ayuda entre Vecinos)"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Physical Contact Possible"
+msgstr "Contacto Directo Personal"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Help Needed"
+msgstr "Ayuda Solicitada"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help Offered (Mutual Aid)"
+msgstr "Ayuda Ofrecida (Ayuda entre Vecinos)"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help offered for max. Persons"
+msgstr "Cantidad máxima der personas"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help offered within"
+msgstr "Distancia máxima"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Mutual Aid"
+msgstr "Ayuda entre Vecionos"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Help Type"
+msgstr "Tipo de Ayuda"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Language"
+msgstr "Idioma"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Help Status"
+msgstr "Estatus"
+
+#: resources/option_group_help_status.json
+msgid "Mutual Aid - Help Status"
+msgstr "Ayuda entre Vecinos - Estatus de Ayuda"
+
+#: resources/option_group_help_status.json
+msgid "Assigned"
+msgstr "Asignado"
+
+#: resources/option_group_help_status.json
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#: resources/option_group_help_status.json
+msgid "Communicated"
+msgstr "Comunicado"
+
+#: resources/option_group_help_status.json
+msgid "Completed"
+msgstr "Finalizado"
+
+#: resources/option_group_help_status.json
+msgid "Cancelled"
+msgstr "Cancelado"
+
+#: resources/option_group_help_types.json
+msgid "Mutual Aid - Help Types"
+msgstr "Ayuda entre Vecinos - Tipos de Ayuda"
+
+#: resources/option_group_help_types.json
+msgid "Any"
+msgstr "Lo que sea"
+
+#: resources/option_group_help_types.json
+msgid "Shopping"
+msgstr "Compras"
+
+#: resources/option_group_help_types.json
+msgid "Walk the Dog"
+msgstr "Pasear al perro"
+
+#: resources/option_group_help_types.json
+msgid "Pick up Parcels"
+msgstr "Recoger Paqueteria"
+
+#: resources/relationship_types.json
+msgid "Provides Mutual Aid for"
+msgstr "Da Ayuda a"
+
+#: resources/relationship_types.json
+msgid "Is provided Mutual Aid by"
+msgstr "Recibe ayuda de"
+
+#: resources/report_issues.json
+msgid "Matching Issues (Mutual Help)"
+msgstr "Problemas de Asignación"
+
+#: resources/report_issues.json
+msgid "<html><head><title>Matching Issues</title></head><body>"
+msgstr "<html><head><title>Problemas de Asignación</title></head><body>"
+
+#: resources/report_unconfirmed.json
+msgid "Unconfirmed Matches (Mutual Help)"
+msgstr "Asignaciones no Confirmadas"
+
+#: resources/report_unconfirmed.json
+msgid "These matches still need to be confirmed"
+msgstr "Éstas asignaciones aún tienen que ser confirmadas"
+
+#: resources/report_unconfirmed.json
+msgid "<html><head><title>Unconfirmed Matches</title></head><body>"
+msgstr "<html><head><title>Asignaciones no Confirmadas</title></head><body>"
