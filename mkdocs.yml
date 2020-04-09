@@ -1,0 +1,21 @@
+site_name: Corona Aid
+repo_url: https://github.com/systopia/de.systopia.mutualaid
+theme: material
+
+pages:
+- Introduction: index.md
+- Installation and Configuration: installation.md
+- Usage: usage.md 
+- Further use: further-use.md
+
+markdown_extensions:
+  - attr_list
+  - admonition
+  - def_list
+  - codehilite
+  - toc(permalink=true)
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tilde
+  - pymdownx.betterem
+  - pymdownx.mark
