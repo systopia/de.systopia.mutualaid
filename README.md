@@ -53,4 +53,4 @@ If you think that we should add a feature to this extension, please create a det
 ### Custom Forms
 We used CiviCRM native forms to make the extension as accessible as possible. In case you want to create your own form you can do so and submit all the information to CiviCRM via it's REST API. All actions such as form submissions and running the matching algorhytm are available via the API.  
 ### Automated communication
-Currently, you will manually need to review relationships, change their status and communicate with the individuals. In case you want to automate this process (e.g. send out an email to helpers including contact details of their match) you could probably do so by using [CiviRules](https://github.com/Kajakaran/org.civicoop.civirules) or other CiviCRM features / extensions.
+Currently, you will manually need to review relationships, change their status and communicate with the individuals. In case you want to automate this process (e.g. send out an email to helpers including contact details of their match) you could probably do so by using [CiviRules](https://civicrm.org/extensions/civirules) or other CiviCRM features / extensions.
