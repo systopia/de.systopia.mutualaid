@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: mutualaid\n"
-"POT-Creation-Date: 2020-04-02 16:08+0200\n"
+"POT-Creation-Date: 2020-05-12 11:24+0200\n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,7 +53,7 @@ msgid ""
 "I understand and accept the terms and conditions for using this service."
 msgstr ""
 
-#: CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php mutualaid.php
 msgid "Offer help"
 msgstr ""
 
@@ -231,6 +231,17 @@ msgid "No GeoCoder configured"
 msgstr ""
 
 #: CRM/Mutualaid/Upgrader.php
+msgid ""
+"MutualAid now has separate permissions for submitting help requests/offers "
+"and administration. Be sure to grant these permissions the right users/"
+"roles, before you continue!"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Grant Permissions Now!"
+msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
 msgid "Match MutualAid Requests"
 msgstr ""
 
@@ -270,6 +281,30 @@ msgstr ""
 
 #: mutualaid.php
 msgid "Match Now"
+msgstr ""
+
+#: mutualaid.php
+msgid "MutualAid"
+msgstr ""
+
+#: mutualaid.php
+msgid "Administer MutualAid"
+msgstr ""
+
+#: mutualaid.php
+msgid "Grants necessary permissions for administering MutualAid extension"
+msgstr ""
+
+#: mutualaid.php
+msgid "Request help"
+msgstr ""
+
+#: mutualaid.php
+msgid "Request help via MutualAid extension"
+msgstr ""
+
+#: mutualaid.php
+msgid "Offer help for others via MutualAid extension"
 msgstr ""
 
 #: settings/mutualaid.setting.php
