@@ -1,0 +1,582 @@
+# Copyright CiviCRM LLC (c) 2004-2015
+# This file is distributed under the same license as the CiviCRM package.
+# If you contribute heavily to a translation and deem your work copyrightable,
+# make sure you license it to CiviCRM LLC under Academic Free License 3.0.
+msgid ""
+msgstr ""
+"Project-Id-Version: mutualaid\n"
+"POT-Creation-Date: 2020-04-02 16:08+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: CRM/Admin/Form/Mutualaid.php CRM/Mutualaid/Form.php
+#: CRM/Mutualaid/Settings.php
+msgid "- None -"
+msgstr "- üres -"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "Offer Help"
+msgstr "Önkéntesi regisztráció"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help for"
+msgstr "Segítek"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "Select what kind of help you are offering."
+msgstr "Válassz, miben akarsz segíteni."
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help for max."
+msgstr "Max ennyi főnek tudok segíteni."
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "persons"
+msgstr "fő"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid "I am offering help in a max. proximity of"
+msgstr "E távolságon belül segítek"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid "Notes/Comments"
+msgstr "Megjegyzések"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid "Terms and Conditions"
+msgstr "Felhasználási feltételek"
+
+#: CRM/Mutualaid/Form/OfferHelp.php CRM/Mutualaid/Form/RequestHelp.php
+msgid ""
+"I understand and accept the terms and conditions for using this service."
+msgstr "Megértettem és elfogadom az oldal használati feltételeit."
+
+#: CRM/Mutualaid/Form/OfferHelp.php mutualaid.php
+msgid "Offer help"
+msgstr "Segítséget nyújt"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Please provide an integer value for the maximum number of persons you would "
+"like to offer help for."
+msgstr "Hány fő számára szeretnél segítséget nyújtani? (maximum)"
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Please provide a numeric value for the maximum distance you would like to "
+"offer help in."
+msgstr ""
+"Legfejlebb mekkora távolságról vállalod a segítségnyújtást (maximum szám)."
+
+#: CRM/Mutualaid/Form/OfferHelp.php
+msgid ""
+"Your offer has been submitted. You will receive an e-mail confirmation "
+"shortly."
+msgstr "A felajánlást rögzítettük, és elküldtünk egy megerősítő e-mailt is."
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "MutualAid - Missing Data"
+msgstr "MutualAid - hiányzó adatok"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.mgd.php
+msgid "MutualAid: List requests/offers with missing information"
+msgstr ""
+"MutualAid: támogatási igények és segítői felajánlások hiányos adatokkal"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Contact Name"
+msgstr "A kapcsolat neve"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Issues"
+msgstr "Ügyek"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "First Name"
+msgstr "Keresztnév"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Last Name"
+msgstr "Vezetéknév"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "State/Province"
+msgstr "Megye"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Country"
+msgstr "Ország"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "No geo coordinates"
+msgstr "Nincsenek földrajzi koordináták"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help distance empty"
+msgstr "A segítségnyújtás legnagyobb távolsága nincs megadva"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Maximum help count empty"
+msgstr "Üres a segítségnyújtások legnagyobb száma"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Offers disabled help types"
+msgstr "Segít fogyatékkal élőknek is"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Requests disabled help types"
+msgstr "Fogyatékkal élő kér segítséget"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "Unknown issue '%1'"
+msgstr "Ismeretlen ügy %1"
+
+#: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
+msgid "View Contact Summary for this Contact."
+msgstr "A személy összegző adatai."
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Request Help"
+msgstr "Támogatás igénylése"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "I am requesting help for"
+msgstr "Támogatást kérek ebben"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Select what kind of help you are requesting."
+msgstr "Válaszd ki, milyen támogatást kérsz."
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "Personal contact possible"
+msgstr "Kereshetnek személyesen is"
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid "I am eligible for being contacted personally."
+msgstr "Igen, személyesen is felkereshetnek."
+
+#: CRM/Mutualaid/Form/RequestHelp.php
+msgid ""
+"Your request has been submitted. You will receive an e-mail confirmation "
+"shortly."
+msgstr ""
+"A támogatási kérést rögzítettük, és elküldtünk egy megerősítő e-mailt is."
+
+#: CRM/Mutualaid/Form.php
+msgid "Languages spoken"
+msgstr "Beszélt nyelvek"
+
+#: CRM/Mutualaid/Matcher.php
+msgid ""
+"Assigning helper [%1] to request [%2] didn't work, error was: %3.<br/>Maybe "
+"try to assign this manually..."
+msgstr ""
+"Az önkéntes [%1] kijelölése a %2 támogatási igényhez a következő hibát "
+"okozta: %3.<br/>Kézi kijelölés javasolt."
+
+#: CRM/Mutualaid/Matcher.php
+msgid "Matching Error"
+msgstr "Összerendezési hiba"
+
+#: CRM/Mutualaid/Page/MatchNow.php
+msgid "Matched %2 help offers to help requests in %1 seconds."
+msgstr "%2 támogatás összerendelése a segítségkérésekhez %1 másodperc alatt."
+
+#: CRM/Mutualaid/Page/MatchNow.php
+msgid "Matching Completed"
+msgstr "Összerendelés kész"
+
+#: CRM/Mutualaid/Settings.php
+msgid "E-Mail Address"
+msgstr "E-mail cím"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Primary Phone"
+msgstr "Telefon"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Secondary Phone"
+msgstr "Második telefon"
+
+#: CRM/Mutualaid/Settings.php
+msgid "Website"
+msgstr "Honlap"
+
+#: CRM/Mutualaid/Upgrader/Base.php
+msgid "Upgrade %1 to revision %2"
+msgstr "%1 frissítése a %2 változatra"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Your system doesn't have a GeoCoder service configured. A GeoCoder can "
+"assign geo coordinates to a given address.<br/>"
+msgstr ""
+"A rendszerben nincs olyan GeoCoder beállítva, amellyel a címhez földrajzi "
+"koordinátát rendelhetünk.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"This is really important for this extension, since it is needed to calculate "
+"the distance between two people.<br/>"
+msgstr ""
+"Ezt a rendszer a segítségnyújtás távolságának megbecsléséhez használja.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Please configure your GeoCoder <a href=\"%1\">HERE</a>.<br/>"
+msgstr "Állítsd be a GeoCoder-t <a href=“%1”>itt</a>.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"If you don't want to use the built-in ones we recommend <a href="
+"\"%1\">OpenStreetMap</a>.<br/>"
+msgstr "Javasolt az <a href=“%1”>OpenStreetMap</a> használata.<br/>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "No GeoCoder configured"
+msgstr "Nincs GeoCoder beállítva"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Match MutualAid Requests"
+msgstr "Támogatási igények összerendelése"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"Will match open help requests to help offers. Unconfirmed help assignments "
+"might be changed or deleted."
+msgstr ""
+"A támogatási igényeket és a felajánlásokat rendeli össze. A lezáratlan "
+"összerendelések később még megváltoztathatók vagy törölhetők."
+
+#: api/v3/MutualAid/Offer.php api/v3/MutualAid/Request.php
+msgid "No help types active."
+msgstr "Nincs aktív segítségnyújtási lehetőség."
+
+#: mutualaid.php
+msgid "Mutual Help"
+msgstr "Személyes támogatás"
+
+#: mutualaid.php
+msgid "Unconfirmed Matches"
+msgstr "Összerendelési javaslatok"
+
+#: mutualaid.php
+msgid "Matching Issues"
+msgstr "Problémás összerendelések"
+
+#: mutualaid.php
+msgid "Help Offer Form"
+msgstr "Önkéntesi regisztráció"
+
+#: mutualaid.php
+msgid "Help Request Form"
+msgstr "Támogatás igénylése"
+
+#: mutualaid.php
+msgid "Configuration"
+msgstr "MutualAid beállítások"
+
+#: mutualaid.php
+msgid "Match Now"
+msgstr "Összerendelés indítása"
+
+#: settings/mutualaid.setting.php
+msgid "Languages enabled"
+msgstr "Idegen nyelv"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"If enabled, languages spoken will be collected from people offering and "
+"requesting help, and taken into account when matching requests with offers."
+msgstr ""
+"Ha aktív, az idegennyelv-tudást is megadhatják a segítséget kérő és "
+"felajánló emberek, és a nyelvtudást az összerendelésben is figyelembe veszik."
+
+#: settings/mutualaid.setting.php
+msgid "Comments enabled"
+msgstr "Kommentek engedélyezése"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"If enabled, comments will be collected from people offering and requesting "
+"help."
+msgstr "A támogatást kérők és segítők kommentelési lehetőségét aktiválja."
+
+#: settings/mutualaid.setting.php
+msgid "Meters"
+msgstr "méter"
+
+#: settings/mutualaid.setting.php
+msgid "Kilometers"
+msgstr "km"
+
+#: settings/mutualaid.setting.php
+msgid "Miles"
+msgstr "mérföld"
+
+#: settings/mutualaid.setting.php
+msgid "Distance unit"
+msgstr "Távolság mértékegysége"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Unit for distance values, used for collecting max. distance in forms and for "
+"calculating proximity."
+msgstr ""
+"A távolságot mérő egység, a segítő és a támogató közti távolság mérésében "
+"használt."
+
+#: settings/mutualaid.setting.php
+msgid "Terms & Conditions"
+msgstr "Felhasználási feltételek"
+
+#: settings/mutualaid.setting.php
+msgid "HTML content containing Terms and Conditions to display on forms."
+msgstr ""
+"Felhasználási feltételek (HTML-ben), amelyek az űrlapokon jelennek meg."
+
+#: settings/mutualaid.setting.php
+msgid "E-Mail Confirmation Template"
+msgstr "Megerősítő e-mail sablonja"
+
+#: settings/mutualaid.setting.php
+msgid "- Do not send confirmation e-mails -"
+msgstr "- Ne küldjön megerősítő e-maileket -"
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Help Types"
+msgstr "Összerendelés súlyozása: segítségnyújtás fajtái"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for matching help types when calculating matches between persons."
+msgstr ""
+"A segítségnyújtási módok súlya az összerendelési szempontok súlyozásában."
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Distance"
+msgstr "Összerendelés súlyozása: távolság"
+
+#: settings/mutualaid.setting.php
+msgid "Weight for distance when calculating matches between persons."
+msgstr "A távolság súlya az összerendelési szempontok súlyozásában."
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Workload"
+msgstr "Összerendelés súlyozása: munkabírás"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for workload of persons providing help when calculating matches "
+"between persons."
+msgstr "A munkabírás súlya az összerendelési szempontok súlyozásában."
+
+#: settings/mutualaid.setting.php
+msgid "Matching Weight: Small Distance Preference"
+msgstr "Összerendelés súlyozása: csak kis távolságban"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Weight for preference of persons providing help in small distances when "
+"calculating matches between persons."
+msgstr ""
+"A kis távolságban nyújtott segítség súlya az összerendelési szempontok "
+"súlyozásában."
+
+#: settings/mutualaid.setting.php
+msgid "Enable field %1"
+msgstr "Legyen a(z) %1 aktív"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Whether the contact field %1 is enabled for being displayed on forms of this "
+"extension."
+msgstr "A %1 kapcsolati mező megjelenlen-e az űrlapokon."
+
+#: settings/mutualaid.setting.php
+msgid "Make field %1 mandatory"
+msgstr "Legyen a(z) %1 mező kötelező"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"Whether the contact field %1 is required when being displayed on forms of "
+"this extension."
+msgstr ""
+"A %1 kapcsolati mező legyen-e kötelező, amikor az űrlapokon megjelenik."
+
+#: settings/mutualaid.setting.php
+msgid "Default value for field %1"
+msgstr "A(z) %1 mező alapértelmezett értéke"
+
+#: settings/mutualaid.setting.php
+msgid ""
+"The default value being used as preset for the field or the option, if the "
+"field is not active."
+msgstr "A beállított érték lesz az alapértelmezett, ha a mező nem aktív."
+
+#: resources/custom_group_individual_languages.json
+msgid "Languages (MutualAid)"
+msgstr "Idegen nyelvek"
+
+#: resources/custom_group_individual_languages.json
+msgid "Speaks Languages"
+msgstr "Idegen nyelvek"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Help Needed (Mutual Aid)"
+msgstr "Támogatási igény"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Physical Contact Possible"
+msgstr "Személyes kapcsolatot vállal"
+
+#: resources/custom_group_individual_needs_help.json
+msgid "Help Needed"
+msgstr "Támogatási igény"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help Offered (Mutual Aid)"
+msgstr "Segítségnyújtás"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help offered for max. Persons"
+msgstr "Segítség legfeljebb ennyi főhöz"
+
+#: resources/custom_group_individual_offers_help.json
+msgid "Help offered within"
+msgstr "Segítség e távolságon belül"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Mutual Aid"
+msgstr "Személyes támogatás"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Help Type"
+msgstr "Segítségnyújtás módja"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Language"
+msgstr "Idegen nyelv"
+
+#: resources/custom_group_relationship_mutualaid.json
+msgid "Help Status"
+msgstr "Segítségnyújtás státusza"
+
+#: resources/option_group_help_status.json
+msgid "Mutual Aid - Help Status"
+msgstr "Segítségnyújtás státusza"
+
+#: resources/option_group_help_status.json
+msgid "Assigned"
+msgstr "Hozzárendelt"
+
+#: resources/option_group_help_status.json
+msgid "Confirmed"
+msgstr "Megerősített"
+
+#: resources/option_group_help_status.json
+msgid "Communicated"
+msgstr "Ismertetett"
+
+#: resources/option_group_help_status.json
+msgid "Completed"
+msgstr "Befejezve"
+
+#: resources/option_group_help_status.json
+msgid "Cancelled"
+msgstr "Törölve"
+
+#: resources/option_group_help_types.json
+msgid "Mutual Aid - Help Types"
+msgstr "Segítségnyújtás fajtái"
+
+#: resources/option_group_help_types.json
+msgid "Any"
+msgstr "Bármi"
+
+#: resources/option_group_help_types.json
+msgid "Shopping"
+msgstr "Bevásárlás"
+
+#: resources/option_group_help_types.json
+msgid "Walk the Dog"
+msgstr "Kutyasétáltatás"
+
+#: resources/option_group_help_types.json
+msgid "Pick up Parcels"
+msgstr "Csomag felvétele"
+
+#: resources/relationship_types.json
+msgid "Provides Mutual Aid for"
+msgstr "Személyesen segít"
+
+#: resources/relationship_types.json
+msgid "Is provided Mutual Aid by"
+msgstr "Személyes segítség"
+
+#: resources/report_issues.json
+msgid "Matching Issues (Mutual Help)"
+msgstr "Összerendelési problémák"
+
+#: resources/report_issues.json
+msgid "<html><head><title>Matching Issues</title></head><body>"
+msgstr "<html><head><title>Összerendelési problémák</title></head><body>"
+
+#: resources/report_unconfirmed.json
+msgid "Unconfirmed Matches (Mutual Help)"
+msgstr "Lezáratlan összerendelések"
+
+#: resources/report_unconfirmed.json
+msgid "These matches still need to be confirmed"
+msgstr "Ezen összerendeléseket még meg kell erősíteni"
+
+#: resources/report_unconfirmed.json
+msgid "<html><head><title>Unconfirmed Matches</title></head><body>"
+msgstr "<html><head><title>Lezáraltan összerendelések</title></head><body>"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid ""
+"MutualAid now has separate permissions for submitting help requests/offers "
+"and administration. Be sure to grant these permissions the right users/"
+"roles, before you continue!"
+msgstr ""
+"A MutualAid mostantól külön jogosultságot definiál a támogatási kérések, az "
+"önkéntesi regisztráció és a MutualAid adminisztrálására. Használat előtt "
+"állítsd be a felhasználók számára ezeket a jogosultságokat!"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Grant Permissions Now!"
+msgstr "Jogosultságok beállítása most!"
+
+#: mutualaid.php
+msgid "MutualAid"
+msgstr ""
+
+#: mutualaid.php
+msgid "Administer MutualAid"
+msgstr "MutualAid adminisztrációja"
+
+#: mutualaid.php
+msgid "Grants necessary permissions for administering MutualAid extension"
+msgstr "A MutualAid adminisztrációjához szükséges jogosultságok"
+
+#: mutualaid.php
+msgid "Request help"
+msgstr "Támogatási igény"
+
+#: mutualaid.php
+msgid "Request help via MutualAid extension"
+msgstr "Támogatás igényléséhez szükséges jogosultságok"
+
+#: mutualaid.php
+msgid "Offer help for others via MutualAid extension"
+msgstr ""
+"Jogosultság a segítség nyújtásához használt űrlap és kapcsolódó funkciók "
+"használatához"
