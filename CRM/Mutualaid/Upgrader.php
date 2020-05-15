@@ -196,6 +196,34 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
         return true;
     }
 
+    /**
+     * Upgrade to 1.2.1
+     *   add dashboard
+     *
+     * @return TRUE on success
+     * @throws Exception
+     */
+    public function upgrade_0121()
+    {
+        $this->ctx->log->info('Applying update 0121');
+
+        civicrm_api3(
+            'Dashboard',
+            'create',
+            [
+                'name'           => 'mutualaid_dashboard',
+                'label'          => E::ts("MutualAid Dashboard"),
+                'url'            => 'civicrm/mutualaid/dashlet',
+                'permission'     => 'access CiviCRM',
+                'fullscreen_url' => 'civicrm/mutualaid/dashlet',
+                'cache_minutes'  => 7200,
+                'is_active'      => 1,
+            ]
+        );
+
+        return true;
+    }
+
 
 
     /*************************************************************************
