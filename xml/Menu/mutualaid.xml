@@ -30,4 +30,10 @@
     <title>Match MutualAid requests to offers</title>
     <access_arguments>administer MutualAid</access_arguments>
   </item>
+  <item>
+    <path>civicrm/mutualaid/dashlet</path>
+    <page_callback>CRM_Mutualaid_Page_Dashlet</page_callback>
+    <title>Mutual Aid Dashboard</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
 </menu>
