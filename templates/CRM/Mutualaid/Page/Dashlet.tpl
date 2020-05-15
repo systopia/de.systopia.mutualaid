@@ -1,3 +1,18 @@
+{*-------------------------------------------------------+
+| SYSTOPIA Mutual Aid Extension                          |
+| Copyright (C) 2020 SYSTOPIA                            |
+| Author: Nicol (@vingle)
++--------------------------------------------------------+
+| This program is released as free software under the    |
+| Affero GPL license. You can redistribute it and/or     |
+| modify it under the terms of this license which you    |
+| can read by viewing the included agpl.txt or online    |
+| at www.gnu.org/licenses/agpl.html. Removal of this     |
+| copyright header is strictly prohibited without        |
+| written permission from the original author(s).        |
++-------------------------------------------------------*}
+
+{crmScope extensionKey='de.systopia.mutualaid'}
 <div id="civicrm-mutual-aid" style="overflow: auto;">
 	<div class="crm-block crm-content-block">
 		<div id="help"><em>{ts}For feedback and support with CiviCRM Mutual Aid please check <a href="https://github.com/systopia/de.systopia.mutualaid">Github</a> or <a href="https://chat.civicrm.org/civicrm/channels/covid-19">Mattermost</a>{/ts}.</em></div>
@@ -24,10 +39,11 @@
 		<h3>{ts}Connect{/ts} <i class="crm-i fa-chain float-right"></i></h3>
 			<table><tbody>
 				<tr><td width="8"><i class="crm-i fa-arrows-h"></i></td><td><a href="{crmURL p='civicrm/mutualaid/matchnow' q="reset=1"}">{ts}Match requests and offers{/ts}</a></td></tr>
-				<tr><td width="8"><i class="crm-i fa-chain"></i></td><td><a href="{crmURL p='civicrm/report/instance/38' q="reset=1"}">{ts}Unconfirmed matches{/ts}</a></td></tr>
-				<tr><td width="8"><i class="crm-i fa-chain-broken"></i></td><td><a href="{crmURL p='civicrm/report/instance/39' q="reset=1"}">{ts}Unmatched requests{/ts}</a></td></tr>
+				<tr><td width="8"><i class="crm-i fa-chain"></i></td><td><a href="{$unconfirmed_report_url}">{ts}Unconfirmed matches{/ts}</a></td></tr>
+				<tr><td width="8"><i class="crm-i fa-chain-broken"></i></td><td><a href="{$issues_report_url}">{ts}Unmatched requests{/ts}</a></td></tr>
 				<!--<tr><td width="8"><i class="crm-i fa-check-square-o" style="opacity: 0.35"></i></td><td><a style="opacity: 0.35">Confirmed matches</a></td></tr>
 				<tr><td width="8"><i class="crm-i fa-map"></i></td><td><a href="{crmURL p='civicrm/contact/search/advanced' q="_qf_Map_display=true&qfKey=X"}">Map of offers & requests</a></td></tr>-->
 			</tbody></table>
 	</div>
 </div>
+{/crmScope}
