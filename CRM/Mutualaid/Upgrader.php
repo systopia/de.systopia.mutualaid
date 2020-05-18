@@ -80,6 +80,9 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
             )
         );
 
+        // install dashboard
+        $this->installDashboard();
+
         // finally: run some tests
         $geo_coder = Civi::settings()->get('geoProvider');
         if (empty($geo_coder)) {
@@ -196,6 +199,22 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
         return true;
     }
 
+    /**
+     * Upgrade to 1.2.1
+     *   add dashboard
+     *
+     * @return TRUE on success
+     * @throws Exception
+     */
+    public function upgrade_0121()
+    {
+        $this->ctx->log->info('Applying update 0121');
+
+        $this->installDashboard();
+
+        return true;
+    }
+
 
 
     /*************************************************************************
@@ -247,6 +266,31 @@ class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
             }
         }
         civicrm_api3('ReportInstance', 'create', $report_data);
+    }
+
+    /**
+     * Installs the dashboard page as a dashlet
+     */
+    protected function installDashboard()
+    {
+        // check if dashboard is installed
+        $dashboard_installed = civicrm_api3('Dashboard', 'getcount', ['name' => 'mutualaid_dashboard']);
+        if (!$dashboard_installed) {
+            // dashboard not installed -> do it now
+            civicrm_api3(
+                'Dashboard',
+                'create',
+                [
+                    'name'           => 'mutualaid_dashboard',
+                    'label'          => E::ts("MutualAid Dashboard"),
+                    'url'            => 'civicrm/mutualaid/dashlet',
+                    'permission'     => 'access CiviCRM',
+                    'fullscreen_url' => 'civicrm/mutualaid/dashlet',
+                    'cache_minutes'  => 7200,
+                    'is_active'      => 1,
+                ]
+            );
+        }
     }
 
     /**

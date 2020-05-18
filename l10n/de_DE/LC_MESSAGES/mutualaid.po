@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: de.systopia.mutualaid\n"
-"POT-Creation-Date: 2020-04-02 16:08+0200\n"
+"POT-Creation-Date: 2020-05-15 19:56+0200\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: CiviCRM Translators <civicrm-translators@lists.civicrm.org>\n"
@@ -59,7 +59,7 @@ msgid ""
 msgstr ""
 "Ich verstehe und akzeptiere die Bedingungen für die Nutzung dieses Services."
 
-#: CRM/Mutualaid/Form/OfferHelp.php
+#: CRM/Mutualaid/Form/OfferHelp.php mutualaid.php
 msgid "Offer help"
 msgstr "Hilfe anbieten"
 
@@ -104,14 +104,10 @@ msgid "Issues"
 msgstr "Probleme"
 
 #: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
-#, fuzzy
-#| msgid "First name"
 msgid "First Name"
 msgstr "Vorname"
 
 #: CRM/Mutualaid/Form/Report/MutualAidMissingData.php
-#, fuzzy
-#| msgid "Last name"
 msgid "Last Name"
 msgstr "Nachname"
 
@@ -196,6 +192,10 @@ msgstr ""
 msgid "Matching Error"
 msgstr "Fehler bei der Zuordnung"
 
+#: CRM/Mutualaid/Page/Dashlet.php CRM/Mutualaid/Upgrader.php
+msgid "MutualAid Dashboard"
+msgstr "Nachbarschaftshilfe Dashboard"
+
 #: CRM/Mutualaid/Page/MatchNow.php
 msgid "Matched %2 help offers to help requests in %1 seconds."
 msgstr "%2 Hilfsangebote zu Hilfsanfragen in %1 Sekunden zugeordnet."
@@ -257,8 +257,19 @@ msgid "No GeoCoder configured"
 msgstr "Kein Service für Geokodierung konfiguriert"
 
 #: CRM/Mutualaid/Upgrader.php
-msgid "Match MutualAid Requests"
+msgid ""
+"MutualAid now has separate permissions for submitting help requests/offers "
+"and administration. Be sure to grant these permissions the right users/"
+"roles, before you continue!"
 msgstr ""
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Grant Permissions Now!"
+msgstr "Berechtigungen jetzt erteilen!"
+
+#: CRM/Mutualaid/Upgrader.php
+msgid "Match MutualAid Requests"
+msgstr "Anfragen der Nachbarschaftshilfe Zuweisen"
 
 #: CRM/Mutualaid/Upgrader.php
 msgid ""
@@ -284,11 +295,11 @@ msgstr "Zuordnungsprobleme"
 
 #: mutualaid.php
 msgid "Help Offer Form"
-msgstr "Formular \"Biete Hilfe\""
+msgstr "Formular: Biete Hilfe"
 
 #: mutualaid.php
 msgid "Help Request Form"
-msgstr "Formular \"Benötige Hilfe\""
+msgstr "Formular: Benötige Hilfe"
 
 #: mutualaid.php
 msgid "Configuration"
@@ -297,6 +308,30 @@ msgstr "Konfiguration"
 #: mutualaid.php
 msgid "Match Now"
 msgstr "Jetzt zuordnen"
+
+#: mutualaid.php
+msgid "MutualAid"
+msgstr "Nachbarschaftshilfe"
+
+#: mutualaid.php
+msgid "Administer MutualAid"
+msgstr "Nachbarschaftshilfe Verwalten"
+
+#: mutualaid.php
+msgid "Grants necessary permissions for administering MutualAid extension"
+msgstr "Berechtigung zur Verwaltung der Nachbarschaftshilfe Extension"
+
+#: mutualaid.php
+msgid "Request help"
+msgstr "Hilfegesuch"
+
+#: mutualaid.php
+msgid "Request help via MutualAid extension"
+msgstr "Hilfegesuch via Nachbarschaftshilfe Extension"
+
+#: mutualaid.php
+msgid "Offer help for others via MutualAid extension"
+msgstr ""
 
 #: settings/mutualaid.setting.php
 msgid "Languages enabled"
@@ -439,6 +474,89 @@ msgid ""
 msgstr ""
 "Die Standardeinstellung, die als Vorgabewert für das Feld oder die Option "
 "(falls das Feld nicht aktiv ist) verwendet wird."
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid ""
+"For feedback and support with CiviCRM Mutual Aid please check <a href="
+"\"https://github.com/systopia/de.systopia.mutualaid\">Github</a> or <a href="
+"\"https://chat.civicrm.org/civicrm/channels/covid-19\">Mattermost</a>"
+msgstr ""
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Configure and setup"
+msgstr "Konfiguration"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Mapping/Geocoding setup"
+msgstr "Einrichtung von Kartierung und Geocodierung"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "General configuration"
+msgstr "Allgemeine Konfiguration"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Specify help categories"
+msgstr "Hilfskategorien Konfigurieren"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Create default emails"
+msgstr "E-Mail Vorlagen"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Gather"
+msgstr "Aufnahme"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Import data"
+msgstr "Datenimport"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Add individual"
+msgstr "Person Anlegen"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Help offer form"
+msgstr "Formular: Biete Hilfe"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Help request form"
+msgstr "Formular: Benötige Hilfe"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Communicate"
+msgstr "Kommunizieren"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Find people"
+msgstr "Menschen Finden"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Advanced search"
+msgstr "Erweiterte Suche"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Manage contact groups"
+msgstr "Kontaktgruppen verwalten"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Send bulk email"
+msgstr "E-Mail Massenversand"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Connect"
+msgstr "Zuordnen"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Match requests and offers"
+msgstr "Hilfsangebote und -Gesuche verbinden"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Unconfirmed matches"
+msgstr "Unbestätigte Zuordnungen"
+
+#: templates/CRM/Mutualaid/Page/Dashlet.tpl
+msgid "Unmatched requests"
+msgstr "Nicht zugewiesene Anfragen"
 
 #: resources/custom_group_individual_languages.json
 msgid "Languages (MutualAid)"
