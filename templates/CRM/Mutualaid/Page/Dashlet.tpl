@@ -30,12 +30,6 @@
 				<tr><td width="8"><i class="crm-i fa-life-ring"></i></td><td><a href="{crmURL p='civicrm/mutualaid/offer-help' q="reset=1"}">{ts}Help offer form{/ts}</a></td></tr>
 				<tr><td width="8"><i class="crm-i fa-microphone"></i></td><td><a href="{crmURL p='civicrm/mutualaid/request-help' q="reset=1"}">{ts}Help request form{/ts}</a></td></tr>
 			</tbody></table>
-		<h3>{ts}Communicate{/ts} <i class="crm-i fa-comments-o float-right"></i></h3>
-			<table><tbody>
-				<tr><td width="8"><i class="crm-i fa-search"></i></td><td><a href="{crmURL p='civicrm/contact/search' q="reset=1"}">{ts}Find people{/ts}</a> (<a href="{crmURL p='civicrm/contact/search/advanced' q="reset=1"}">{ts}Advanced search{/ts}</a>)</td></tr>
-				<tr><td width="8"><i class="crm-i fa-users"></i></td><td><a href="{crmURL p='civicrm/group' q="reset=1"}">{ts}Manage contact groups{/ts}</a></td></tr>
-				<tr><td width="8"><i class="crm-i fa-sign-in"></i></td><td><a href="{crmURL p='civicrm/mailing/send' q="reset=1"}">{ts}Send bulk email{/ts}</td></tr>
-			</tbody></table>
 		<h3>{ts}Connect{/ts} <i class="crm-i fa-chain float-right"></i></h3>
 			<table><tbody>
 				<tr><td width="8"><i class="crm-i fa-arrows-h"></i></td><td><a href="{crmURL p='civicrm/mutualaid/matchnow' q="reset=1"}">{ts}Match requests and offers{/ts}</a></td></tr>
@@ -43,6 +37,12 @@
 				<tr><td width="8"><i class="crm-i fa-chain-broken"></i></td><td><a href="{$issues_report_url}">{ts}Unmatched requests{/ts}</a></td></tr>
 				<!--<tr><td width="8"><i class="crm-i fa-check-square-o" style="opacity: 0.35"></i></td><td><a style="opacity: 0.35">Confirmed matches</a></td></tr>
 				<tr><td width="8"><i class="crm-i fa-map"></i></td><td><a href="{crmURL p='civicrm/contact/search/advanced' q="_qf_Map_display=true&qfKey=X"}">Map of offers & requests</a></td></tr>-->
+			</tbody></table>
+		<h3>{ts}Communicate{/ts} <i class="crm-i fa-comments-o float-right"></i></h3>
+			<table><tbody>
+				<tr><td width="8"><i class="crm-i fa-search"></i></td><td><a href="{crmURL p='civicrm/contact/search' q="reset=1"}">{ts}Find people{/ts}</a> (<a href="{crmURL p='civicrm/contact/search/advanced' q="reset=1"}">{ts}Advanced search{/ts}</a>)</td></tr>
+				<tr><td width="8"><i class="crm-i fa-users"></i></td><td><a href="{crmURL p='civicrm/group' q="reset=1"}">{ts}Manage contact groups{/ts}</a></td></tr>
+				<tr><td width="8"><i class="crm-i fa-sign-in"></i></td><td><a href="{crmURL p='civicrm/mailing/send' q="reset=1"}">{ts}Send bulk email{/ts}</td></tr>
 			</tbody></table>
 	</div>
 </div>
