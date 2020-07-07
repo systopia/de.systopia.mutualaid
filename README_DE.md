@@ -2,6 +2,8 @@
 ## Einführung
 Die Coronakrise und die damit einhergehende Schutzmaßnahmen wie soziale Distanzierung und Quarantäne stellen uns alle vor große Herausforderungen. Wir alle müssen Bedürftigen Menschen helfen und CiviCRM ist die optimale Plattform diese Hilfe zu organisieren und Hilfsbedürftige mit Freiwilligen in verbindung zu setzen.
 
+Es gibt ein Video (auf Englisch) das das Konzept beschreibt [HIER](https://www.youtube.com/watch?v=2rOMhjvZQ6Y&t=100) und ein weiteres Video mit Demo und Diskussion (auch auf Englisch) [HIER](https://www.youtube.com/watch?v=MMQy8coG9Qo). Beide Videos wurden im Rahmen des [CiviCRM COVID-19 Response LIVE Event](https://civicrm.org/events/live/covid-19) aufgezeichnet.
+
 ## Ziele und Funktionen
 Diese CiviCRM Erweiterung ermöglicht Organisationen, Hilfesuchende und Helfende miteinander in Verbindung zu setzen. Sie stellt konfigurierbare Onlineformulare für Hilfesuchende und Helfende zur Verfügung und verfügt über einen Algorhytmus, der diese Personen basierend auf räumlicher Nähe und weiteren Faktoren miteinander verknüpft. Die wichtigsten Funktionen sind: 
 
