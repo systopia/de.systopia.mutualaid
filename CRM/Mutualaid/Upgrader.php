@@ -19,7 +19,7 @@ use CRM_Mutualaid_ExtensionUtil as E;
 /**
  * Collection of upgrade steps.
  */
-class CRM_Mutualaid_Upgrader extends CRM_Mutualaid_Upgrader_Base
+class CRM_Mutualaid_Upgrader extends CRM_Extension_Upgrader_Base
 {
 
     /**
