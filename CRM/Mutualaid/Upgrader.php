@@ -99,7 +99,7 @@ class CRM_Mutualaid_Upgrader extends CRM_Extension_Upgrader_Base
               ) .
               E::ts(
                 "If you don't want to use the built-in ones we recommend <a href=\"%1\">OpenStreetMap</a>.<br/>",
-                [1 => 'https://github.com/bjendres/de.systopia.osm/releases/latest']
+                [1 => 'https://github.com/systopia/de.systopia.osm/releases/latest']
               ),
               E::ts("No GeoCoder configured"),
               'warn'

@@ -6,7 +6,7 @@ You need a current CiviCRM instance and have admin privileges.
 
 You need to have geocoding in CiviCRM set up - information on how to do that can be found [here](https://docs.civicrm.org/user/en/latest/initial-set-up/mapping/).
 
-If you don't want to use Google Maps, you will need to install the [Open Street Map geocoder](https://github.com/bjendres/de.systopia.osm/releases) extension.
+If you don't want to use Google Maps, you will need to install the [Open Street Map geocoder](https://github.com/systopia/de.systopia.osm/releases) extension.
 
 You should also have the CiviReport component enabled (/civicrm/admin/setting/component?reset=1). Any of your staff that is supposed to work with the features in CiviCRM needs appropriate permissions for viewing & editing contacts, accessing reports, etc.
 
